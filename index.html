@@ -247,6 +247,61 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
 .ic{display:inline-block;width:14px;height:14px;flex-shrink:0;vertical-align:middle}
 .feat-ck,.p-ck,.p3-ck,.fmt-ck{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;flex-shrink:0;margin-top:0px;color:var(--bk)}
 .p-card.feat .p-ck,.fmt:last-child .fmt-ck{color:#fff}
+
+/* ═══════════════════ MOBILE ═══════════════════ */
+html,body{overflow-x:hidden}
+@media(pointer:coarse),(hover:none){.cursor,.cursor-ring{display:none!important}}
+@media(max-width:900px){
+  .nav-links,.nav-btn{display:none}
+  .nav-burger{display:flex;margin-left:auto}
+  .w{padding:0 20px}
+  .hc{padding:48px 20px 40px}
+  .sec{padding:56px 0}
+  .sec-sm{padding:32px 0}
+  .g2{grid-template-columns:1fr;gap:36px}
+  /* hero — ДАРЭ stays large, 4 letters */
+  .h-name{font-size:clamp(68px,18vw,120px)!important;line-height:.9}
+  .h-sub{font-size:15px}
+  .h-foot{flex-direction:column;gap:20px;align-items:flex-start}
+  .h-coord{text-align:left}
+  .h-stats{display:flex;flex-direction:column;gap:12px;border:none}
+  .hs{padding:0;border:none!important}
+  .hs-v{font-size:22px}
+  /* service grid */
+  .svc-grid{grid-template-columns:1fr 1fr}
+  /* why grid */
+  .why-grid{grid-template-columns:1fr}
+  .wi{border-right:none!important}
+  .wi:nth-last-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1)!important}
+  .wi:last-child{border-bottom:none!important}
+  /* contacts */
+  .c-strip{grid-template-columns:1fr 1fr}
+  .c-item{border-right:none!important;border-bottom:1px solid rgba(255,255,255,.1)}
+  .c-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.1)!important}
+  .c-item:last-child{border-bottom:none}
+  /* footer */
+  .ft-g{grid-template-columns:1fr 1fr;gap:28px}
+  .ft-bot{flex-direction:column;gap:8px}
+  /* cta */
+  .cta-sec{padding:72px 0}
+  .disp{font-size:clamp(32px,9vw,56px)!important}
+  .btns{flex-direction:column;align-items:center}
+  /* clients marquee */
+  .m-logo{padding:0 24px;height:44px}
+  .m-logo img{height:26px}
+}
+@media(max-width:480px){
+  .h-name{font-size:clamp(56px,16vw,96px)!important}
+  .svc-grid{grid-template-columns:1fr}
+  .ft-g{grid-template-columns:1fr}
+  .c-strip{grid-template-columns:1fr}
+  .c-item{border-right:none!important}
+  .c-item:nth-child(odd){border-right:none!important}
+}
+
+/* logos monochrome */
+.m-logo img{filter:brightness(0);opacity:.45;transition:opacity .25s,filter .25s}
+.m-logo:hover img{opacity:.85;filter:brightness(0)}
 </style>
 </head>
 <body>
@@ -394,7 +449,7 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
       <div class="m-logo"><img src="./clients/Gold Ibiza 1.svg" alt="Gold Ibiza"></div>
       <div class="m-logo"><img src="./clients/IC Real estate 1.svg" alt="IC Real Estate"></div>
       <div class="m-logo"><img src="./clients/Private Sector.svg" alt="Private Sector"></div>
-      <div class="m-logo"><img src="./clients/ИНКАР-слоган-белый+желтый@10x.png" alt="ИНКАР" style="filter:invert(1) brightness(.7)"></div>
+      <div class="m-logo"><img src="./clients/ИНКАР-слоган-белый+желтый@10x.png" alt="ИНКАР"></div>
       <!-- duplicate -->
       <div class="m-logo"><img src="./clients/X5 Club Logo.svg" alt="X5"></div>
       <div class="m-logo"><img src="./clients/Meds.svg" alt="Meds"></div>
@@ -407,7 +462,7 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
       <div class="m-logo"><img src="./clients/Gold Ibiza 1.svg" alt="Gold Ibiza"></div>
       <div class="m-logo"><img src="./clients/IC Real estate 1.svg" alt="IC Real Estate"></div>
       <div class="m-logo"><img src="./clients/Private Sector.svg" alt="Private Sector"></div>
-      <div class="m-logo"><img src="./clients/ИНКАР-слоган-белый+желтый@10x.png" alt="ИНКАР" style="filter:invert(1) brightness(.7)"></div>
+      <div class="m-logo"><img src="./clients/ИНКАР-слоган-белый+желтый@10x.png" alt="ИНКАР"></div>
     </div>
   </div>
 </div>
