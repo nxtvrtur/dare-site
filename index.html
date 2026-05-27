@@ -57,8 +57,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both}
 .h-tag::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
 /* Big animated ДАРЭ */
-.h-name{font-family:var(--fa);font-size:clamp(88px,14vw,210px);font-weight:normal;letter-spacing:-.02em;line-height:.88;color:#fff;margin:32px 0 28px;display:flex;overflow:hidden}
-.h-letter{display:inline-block;will-change:transform;animation:letterRise 1s cubic-bezier(.16,1,.3,1) calc(var(--i)*.07s + .08s) both}
+.h-name{font-family:var(--fa);font-size:clamp(88px,14vw,210px);font-weight:normal;letter-spacing:-.02em;line-height:.9;color:#fff;margin:32px 0 28px;display:flex}
+.h-letter-w{display:inline-block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em;line-height:1.05}
+.h-letter{display:block;will-change:transform;animation:letterRise 1s cubic-bezier(.16,1,.3,1) calc(var(--i)*.07s + .08s) both}
 @keyframes letterRise{from{transform:translateY(115%)}to{transform:translateY(0)}}
 .h-sub{font-size:clamp(15px,1.4vw,20px);color:rgba(255,255,255,.35);font-weight:300;letter-spacing:.02em;max-width:520px;line-height:1.65;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .42s both}
 .h-foot{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between;align-items:flex-end;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .55s both}
@@ -169,45 +170,83 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
 .ft-bot{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between}
 .ft-bot span{font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.05em}
 
-/* ════════════ MOBILE ════════════ */
+
+/* ════════════════ MOBILE 900px ════════════════ */
 @media(max-width:900px){
   .nav-links,.nav-btn{display:none}
   .nav-burger{display:flex;margin-left:auto}
   .w{padding:0 20px}
-  .sec{padding:64px 0}
-  .sec-sm{padding:40px 0}
+  .hc{padding:40px 20px 36px}
+  .sec{padding:60px 0}
+  .sec-sm{padding:36px 0}
+  .g2{grid-template-columns:1fr;gap:36px}
   /* hero */
-  .hc{padding:48px 20px 40px}
-  .h-name{font-size:clamp(72px,18vw,120px)}
-  .h-stats{gap:24px}
-  .hs-v{font-size:22px}
-  .h-foot{flex-direction:column;align-items:flex-start;gap:20px}
+  .h-name{font-size:clamp(72px,18vw,130px) !important;line-height:.9}
+  .h-foot{flex-direction:column;gap:20px;align-items:flex-start}
   .h-coord{text-align:left}
-  /* grid */
-  .g2{grid-template-columns:1fr;gap:40px}
-  .svc-grid{grid-template-columns:1fr 1fr}
-  .why-grid{grid-template-columns:1fr}
-  .wi{border-right:none !important}
-  .wi:nth-last-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1) !important}
-  .wi:last-child{border-bottom:none !important}
-  /* clients */
-  .m-logo{padding:0 28px}
-  /* about */
-  .about-stat{margin-top:0}
-  /* cta */
-  .cta-sec{padding:72px 0}
-  .c-strip{grid-template-columns:1fr}
-  .c-item{border-right:none !important;border-bottom:1px solid rgba(255,255,255,.1)}
-  .c-item:last-child{border-bottom:none}
+  .h-stats{display:flex;flex-direction:column;gap:16px;border:none}
+  .hs{padding:0;border:none !important}
+  .h-sub{font-size:15px}
+  .h-stats{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(255,255,255,.1)}
+  .hs{padding:16px 18px;border-right:1px solid rgba(255,255,255,.08) !important;border-bottom:1px solid rgba(255,255,255,.08)}
+  .hs:nth-child(2n){border-right:none !important}
+  .hs:last-child:nth-child(odd){grid-column:1/-1}
+  /* grids */
+  .price-grid3,.price-grid{grid-template-columns:1fr}
+  .p3-card{border-right:none !important;border-bottom:1.5px solid var(--bk)}
+  .p3-card:last-child{border-bottom:none}
+  .price-grid .p-card{border-right:none !important;border-bottom:1.5px solid var(--bk)}
+  .channels{grid-template-columns:repeat(3,1fr) !important}
+  .ch{border-right:1.5px solid var(--bk) !important;border-bottom:1.5px solid var(--bk)}
+  .ch:nth-child(3n){border-right:none !important}
+  .ch:nth-last-child(-n+2){border-bottom:none}
+  .formats{grid-template-columns:1fr !important}
+  .fmt{border-right:none !important;border-bottom:1.5px solid var(--bk)}
+  .fmt:last-child{border-bottom:none}
+  .case-stats{grid-template-columns:1fr 1fr}
+  .antifrod .af-body{grid-template-columns:1fr !important}
+  .af-head{flex-direction:column;gap:10px !important;align-items:flex-start !important}
+  .af-head-sub{margin-left:0 !important}
+  .proc-item{grid-template-columns:44px 1fr}
+  .tl-item{grid-template-columns:90px 1fr}
   /* footer */
-  .ft-g{grid-template-columns:1fr 1fr;gap:32px}
+  .ft-g{grid-template-columns:1fr 1fr;gap:28px}
   .ft-bot{flex-direction:column;gap:8px}
+  /* contacts */
+  .c-strip{grid-template-columns:1fr 1fr}
+  .c-item{border-right:none !important;border-bottom:1px solid rgba(255,255,255,.1)}
+  .c-item:nth-child(2n-1){border-right:1px solid rgba(255,255,255,.1) !important}
+  .c-item:last-child,.c-item:nth-last-child(-n+2):nth-child(2n-1){border-bottom:none}
+  /* funnel table */
+  .funnel-tbl{font-size:12px}
+  .dynamics-tbl{font-size:12px}
+  .geo-grid{grid-template-columns:1fr 1fr !important}
+  .price-solo{flex-direction:column;gap:0}
+  .ps-price{border-right:none !important;border-bottom:1.5px solid var(--bk) !important}
 }
-@media(max-width:480px){
-  .svc-grid{grid-template-columns:1fr}
-  .h-name{font-size:clamp(60px,20vw,96px)}
+@media(max-width:600px){
+  .channels{grid-template-columns:repeat(2,1fr) !important}
+  .ch:nth-child(3n){border-right:1.5px solid var(--bk) !important}
+  .ch:nth-child(2n){border-right:none !important}
+  .case-stats{grid-template-columns:1fr}
+  .c-strip{grid-template-columns:1fr}
+  .c-item{border-right:none !important}
+  .c-item:nth-child(2n-1){border-right:none !important}
+  .c-item:last-child{border-bottom:none}
+  .geo-grid{grid-template-columns:1fr !important}
+  .formats{grid-template-columns:1fr !important}
   .ft-g{grid-template-columns:1fr}
+  .cta-sec{padding:72px 0}
+  .disp{font-size:clamp(32px,10vw,56px) !important}
+  .h-stats{grid-template-columns:1fr}
+  .hs:nth-child(2n){border-right:none !important}
+  .hs:nth-child(odd){border-right:none !important}
 }
+
+/* ── ICONS ── */
+.ic{display:inline-block;width:14px;height:14px;flex-shrink:0;vertical-align:middle}
+.feat-ck,.p-ck,.p3-ck,.fmt-ck{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;flex-shrink:0;margin-top:0px;color:var(--bk)}
+.p-card.feat .p-ck,.fmt:last-child .fmt-ck{color:#fff}
 </style>
 </head>
 <body>
@@ -264,7 +303,7 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
     <div class="h-tag">Маркетинговое агентство · Владивосток · 2025</div>
     <div>
       <div class="h-name">
-        <span class="h-letter" style="--i:0">Д</span><span class="h-letter" style="--i:1">А</span><span class="h-letter" style="--i:2">Р</span><span class="h-letter" style="--i:3">Э</span>
+        <span class="h-letter-w"><span class="h-letter" style="--i:0">Д</span></span><span class="h-letter-w"><span class="h-letter" style="--i:1">А</span></span><span class="h-letter-w"><span class="h-letter" style="--i:2">Р</span></span><span class="h-letter-w"><span class="h-letter" style="--i:3">Э</span></span>
       </div>
       <p class="h-sub">Системный рост бизнеса — контекст, SEO, репутация, сайты, ИИ-автоматизация и готовые лиды.</p>
     </div>
@@ -291,49 +330,49 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
         <div class="svc-n">01</div>
         <div class="svc-name">Яндекс.Директ</div>
         <div class="svc-desc">CPA 2 000–2 300 ₽. Поиск + РСЯ. Антифрод бесплатно. Тарифы 15 / 25 / 40k.</div>
-        <div class="svc-arr">↗</div>
+        <div class="svc-arr"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </a>
       <a href="seo.html" class="svc-card">
         <div class="svc-n">02</div>
         <div class="svc-name">SEO-продвижение</div>
         <div class="svc-desc">Органический трафик и ТОП. Три тарифа: 50 / 62 / 72k. Аудит бесплатно.</div>
-        <div class="svc-arr">↗</div>
+        <div class="svc-arr"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </a>
       <a href="serm.html" class="svc-card">
         <div class="svc-n">03</div>
         <div class="svc-name">SERM / ORM</div>
         <div class="svc-desc">Управление репутацией. Чистая выдача. Работа с негативом. 70k/мес.</div>
-        <div class="svc-arr">↗</div>
+        <div class="svc-arr"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </a>
       <a href="sites.html" class="svc-card">
         <div class="svc-n">04</div>
         <div class="svc-name">Разработка сайтов</div>
         <div class="svc-desc">Лендинг 35k · WordPress 100k · Bitrix от 250k. Figma перед вёрсткой.</div>
-        <div class="svc-arr">↗</div>
+        <div class="svc-arr"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </a>
       <a href="ai.html" class="svc-card">
         <div class="svc-n">05</div>
         <div class="svc-name">ИИ-Менеджер</div>
         <div class="svc-desc">Продажи 24/7 в Telegram, Авито, WhatsApp, VK. Лиды в CRM мгновенно.</div>
-        <div class="svc-arr">↗</div>
+        <div class="svc-arr"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </a>
       <a href="leads.html" class="svc-card">
         <div class="svc-n">06</div>
         <div class="svc-name">Готовые лиды</div>
         <div class="svc-desc">Тёплые квалифицированные клиенты. 1 500–3 000 ₽ / лид. Конверсия 6.7%.</div>
-        <div class="svc-arr">↗</div>
+        <div class="svc-arr"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </a>
       <a href="farpost.html" class="svc-card">
         <div class="svc-n">07</div>
         <div class="svc-name">Фарпост</div>
         <div class="svc-desc">Площадка №1 ДВ. 840 звонков/мес. CPA 1 200 ₽. Автозагрузка XML.</div>
-        <div class="svc-arr">↗</div>
+        <div class="svc-arr"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </a>
       <a href="outreach.html" class="svc-card">
         <div class="svc-n">08</div>
         <div class="svc-name">Email Outreach</div>
         <div class="svc-desc">Холодный B2B-аутрич напрямую ЛПР. ~80k за 3 мес. CPL ~1 778 ₽.</div>
-        <div class="svc-arr">↗</div>
+        <div class="svc-arr"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </a>
     </div>
   </div>
@@ -350,7 +389,7 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
       <div class="m-logo"><img src="./clients/Alfa Estate.svg" alt="Alfa Estate"></div>
       <div class="m-logo"><img src="./clients/KSDV 1.svg" alt="KSDV"></div>
       <div class="m-logo"><img src="./clients/Vitwins.svg" alt="Vitwins"></div>
-      <div class="m-logo"><img src="./clients/RefiRF.svg" alt="RefiRF"></div>
+      <div class="m-logo"><img src="./clients/RefiRF.svg" alt="RefiRF" style="background:var(--bk);padding:5px 10px"></div>
       <div class="m-logo"><img src="./clients/Transformaciya 1.svg" alt="Трансформация"></div>
       <div class="m-logo"><img src="./clients/Gold Ibiza 1.svg" alt="Gold Ibiza"></div>
       <div class="m-logo"><img src="./clients/IC Real estate 1.svg" alt="IC Real Estate"></div>
@@ -363,7 +402,7 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
       <div class="m-logo"><img src="./clients/Alfa Estate.svg" alt="Alfa Estate"></div>
       <div class="m-logo"><img src="./clients/KSDV 1.svg" alt="KSDV"></div>
       <div class="m-logo"><img src="./clients/Vitwins.svg" alt="Vitwins"></div>
-      <div class="m-logo"><img src="./clients/RefiRF.svg" alt="RefiRF"></div>
+      <div class="m-logo"><img src="./clients/RefiRF.svg" alt="RefiRF" style="background:var(--bk);padding:5px 10px"></div>
       <div class="m-logo"><img src="./clients/Transformaciya 1.svg" alt="Трансформация"></div>
       <div class="m-logo"><img src="./clients/Gold Ibiza 1.svg" alt="Gold Ibiza"></div>
       <div class="m-logo"><img src="./clients/IC Real estate 1.svg" alt="IC Real Estate"></div>

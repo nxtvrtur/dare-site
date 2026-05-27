@@ -28,7 +28,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .hc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;max-width:1240px;margin:0 auto;padding:80px 40px 60px;width:100%}
 .h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px;margin-bottom:28px}
 .h-tag::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
-.h-name{font-size:clamp(52px,8vw,110px);font-weight:900;letter-spacing:-.05em;line-height:.88;color:#fff;margin-bottom:28px}
+.h-name{font-family:var(--fa);font-size:clamp(52px,8vw,120px);font-weight:normal;letter-spacing:-.02em;line-height:.9;color:#fff;margin-bottom:28px}
 .h-sub{font-size:clamp(15px,1.3vw,19px);color:rgba(255,255,255,.38);font-weight:300;letter-spacing:.02em;max-width:600px;line-height:1.65;margin-bottom:40px}
 .h-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.1)}
 .hs{padding:20px 32px;border-right:1px solid rgba(255,255,255,.08)}
@@ -106,28 +106,86 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
 .reveal-left{opacity:0;transform:translateX(-28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
 .reveal-left.visible{opacity:1;transform:none}
 
-/* ════════════ MOBILE ════════════ */
+
+/* ════════════════ MOBILE 900px ════════════════ */
 @media(max-width:900px){
   .nav-links,.nav-btn{display:none}
   .nav-burger{display:flex;margin-left:auto}
-  .w,.hc{padding-left:20px;padding-right:20px}
-  .sec{padding:64px 0}.sec-sm{padding:40px 0}
-  .g2{grid-template-columns:1fr;gap:40px}
-  .h-name{font-size:clamp(52px,14vw,88px)}
-  .h-stats{flex-wrap:wrap;gap:0}
-  .hs{padding:14px 20px}
+  .w{padding:0 20px}
+  .hc{padding:40px 20px 36px}
+  .sec{padding:60px 0}
+  .sec-sm{padding:36px 0}
+  .g2{grid-template-columns:1fr;gap:36px}
+  /* hero */
+  .h-name{font-size:clamp(40px,12vw,72px) !important;line-height:.92}
+  .h-sub{font-size:15px}
+  .h-stats{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(255,255,255,.1)}
+  .hs{padding:16px 18px;border-right:1px solid rgba(255,255,255,.08) !important;border-bottom:1px solid rgba(255,255,255,.08)}
+  .hs:nth-child(2n){border-right:none !important}
+  .hs:last-child:nth-child(odd){grid-column:1/-1}
+  /* grids */
   .price-grid3,.price-grid{grid-template-columns:1fr}
-  .proc-item{grid-template-columns:48px 1fr}
-  .ft-g{grid-template-columns:1fr 1fr;gap:32px}
+  .p3-card{border-right:none !important;border-bottom:1.5px solid var(--bk)}
+  .p3-card:last-child{border-bottom:none}
+  .price-grid .p-card{border-right:none !important;border-bottom:1.5px solid var(--bk)}
+  .channels{grid-template-columns:repeat(3,1fr) !important}
+  .ch{border-right:1.5px solid var(--bk) !important;border-bottom:1.5px solid var(--bk)}
+  .ch:nth-child(3n){border-right:none !important}
+  .ch:nth-last-child(-n+2){border-bottom:none}
+  .formats{grid-template-columns:1fr !important}
+  .fmt{border-right:none !important;border-bottom:1.5px solid var(--bk)}
+  .fmt:last-child{border-bottom:none}
+  .case-stats{grid-template-columns:1fr 1fr}
+  .antifrod .af-body{grid-template-columns:1fr !important}
+  .af-head{flex-direction:column;gap:10px !important;align-items:flex-start !important}
+  .af-head-sub{margin-left:0 !important}
+  .proc-item{grid-template-columns:44px 1fr}
+  .tl-item{grid-template-columns:90px 1fr}
+  /* footer */
+  .ft-g{grid-template-columns:1fr 1fr;gap:28px}
   .ft-bot{flex-direction:column;gap:8px}
-  .c-strip{grid-template-columns:1fr}
+  /* contacts */
+  .c-strip{grid-template-columns:1fr 1fr}
   .c-item{border-right:none !important;border-bottom:1px solid rgba(255,255,255,.1)}
+  .c-item:nth-child(2n-1){border-right:1px solid rgba(255,255,255,.1) !important}
+  .c-item:last-child,.c-item:nth-last-child(-n+2):nth-child(2n-1){border-bottom:none}
+  /* funnel table */
+  .funnel-tbl{font-size:12px}
+  .dynamics-tbl{font-size:12px}
+  .geo-grid{grid-template-columns:1fr 1fr !important}
+  .price-solo{flex-direction:column;gap:0}
+  .ps-price{border-right:none !important;border-bottom:1.5px solid var(--bk) !important}
+}
+@media(max-width:600px){
+  .channels{grid-template-columns:repeat(2,1fr) !important}
+  .ch:nth-child(3n){border-right:1.5px solid var(--bk) !important}
+  .ch:nth-child(2n){border-right:none !important}
+  .case-stats{grid-template-columns:1fr}
+  .c-strip{grid-template-columns:1fr}
+  .c-item{border-right:none !important}
+  .c-item:nth-child(2n-1){border-right:none !important}
   .c-item:last-child{border-bottom:none}
-}
-@media(max-width:480px){
+  .geo-grid{grid-template-columns:1fr !important}
+  .formats{grid-template-columns:1fr !important}
   .ft-g{grid-template-columns:1fr}
-  .h-name{font-size:clamp(42px,16vw,72px)}
+  .cta-sec{padding:72px 0}
+  .disp{font-size:clamp(32px,10vw,56px) !important}
+  .h-stats{grid-template-columns:1fr}
+  .hs:nth-child(2n){border-right:none !important}
+  .hs:nth-child(odd){border-right:none !important}
 }
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.h-tag{animation:fadeUp .7s cubic-bezier(.16,1,.3,1) .05s both}
+.h-name{animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .15s both}
+.h-sub{animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .3s both}
+.h-stats{animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .42s both}
+
+/* ── ICONS ── */
+.ic{display:inline-block;width:14px;height:14px;flex-shrink:0;vertical-align:middle}
+.feat-ck,.p-ck,.p3-ck,.fmt-ck{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;flex-shrink:0;margin-top:0px;color:var(--bk)}
+.p-card.feat .p-ck,.fmt:last-child .fmt-ck{color:#fff}
 </style>
 </head>
 <body>
@@ -234,11 +292,11 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
       <h2 class="t1">Прозрачный процесс</h2>
     </div>
     <ul class="feat-list reveal">
-      <li><span class="feat-ck">✓</span><span><strong>Figma перед вёрсткой</strong> — вы принимаете дизайн до начала разработки. Никаких сюрпризов в конце.</span></li>
-      <li><span class="feat-ck">✓</span><span><strong>Предоплата</strong> — лендинг 100%, WordPress 100%, кастом 50% + 50% при сдаче</span></li>
-      <li><span class="feat-ck">✓</span><span><strong>30 дней поддержки</strong> включены в каждый проект — правки, мелкие доработки, консультации</span></li>
-      <li><span class="feat-ck">✓</span><span><strong>Все права на сайт</strong> передаются заказчику — домен, хостинг, код, дизайн</span></li>
-      <li><span class="feat-ck">✓</span><span><strong>Интеграция с аналитикой</strong> — Яндекс.Метрика, цели, UTM-разметка на старте</span></li>
+      <li><span class="feat-ck"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3L12 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Figma перед вёрсткой</strong> — вы принимаете дизайн до начала разработки. Никаких сюрпризов в конце.</span></li>
+      <li><span class="feat-ck"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3L12 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Предоплата</strong> — лендинг 100%, WordPress 100%, кастом 50% + 50% при сдаче</span></li>
+      <li><span class="feat-ck"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3L12 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>30 дней поддержки</strong> включены в каждый проект — правки, мелкие доработки, консультации</span></li>
+      <li><span class="feat-ck"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3L12 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Все права на сайт</strong> передаются заказчику — домен, хостинг, код, дизайн</span></li>
+      <li><span class="feat-ck"><svg class="ic" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3L12 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Интеграция с аналитикой</strong> — Яндекс.Метрика, цели, UTM-разметка на старте</span></li>
     </ul>
   </div>
 </section>
