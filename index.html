@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ДАРЭ — Маркетинговое агентство Владивосток</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ── layout ── */
+.w{max-width:1240px;margin:0 auto;padding:0 40px}
+.sec{padding:100px 0}
+.sec-sm{padding:64px 0}
+
+/* ── nav ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:64px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-in{display:flex;align-items:center;width:100%;max-width:1240px;margin:0 auto;padding:0 40px;gap:32px}
+.logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:900;letter-spacing:.12em;color:#fff;flex-shrink:0}
+.nav-links{display:flex;gap:22px;list-style:none;flex:1}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-btn{background:#fff;color:var(--bk);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;flex-shrink:0;transition:background .2s;font-family:var(--f)}
+.nav-btn:hover{background:#ddd}
+
+/* ── hero ── */
+.hero{background:var(--bk);color:#fff;padding-top:64px;min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.hero-d{position:absolute;right:-60px;bottom:-40px;opacity:.04;pointer-events:none}
+.hc{flex:1;display:flex;flex-direction:column;justify-content:space-between;max-width:1240px;margin:0 auto;padding:80px 40px 60px;width:100%}
+.h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px}
+.h-tag::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
+.h-name{font-size:clamp(88px,14vw,192px);font-weight:900;letter-spacing:-.06em;line-height:.84;color:#fff;margin:36px 0 28px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .05s both}
+.h-sub{font-size:clamp(15px,1.4vw,20px);color:rgba(255,255,255,.35);font-weight:300;letter-spacing:.02em;max-width:560px;line-height:1.65;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .2s both}
+.h-foot{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between;align-items:flex-end;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .35s both}
+.h-stats{display:flex;gap:48px}
+.hs{display:flex;flex-direction:column;gap:4px}
+.hs-v{font-size:28px;font-weight:900;letter-spacing:-.04em;color:#fff}
+.hs-l{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.27)}
+.h-coord{font-size:11px;color:rgba(255,255,255,.14);letter-spacing:.1em;text-align:right;line-height:2}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── section header ── */
+.sh{margin-bottom:60px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
+.t1{font-size:clamp(32px,3.5vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.t2{font-size:clamp(20px,2.2vw,30px);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.t3{font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.sh .lbl{display:block;margin-bottom:18px}
+.sh .t1{border-top:2px solid var(--bk);padding-top:20px}
+
+/* ── services (4-col grid) ── */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--br)}
+.svc-card{background:var(--wh);padding:36px 28px;display:flex;flex-direction:column;gap:10px;border:none;transition:background .15s;position:relative}
+.svc-card:hover{background:var(--bk);color:#fff}
+.svc-card:hover .svc-desc{color:rgba(255,255,255,.45)}
+.svc-card:hover .svc-n{color:rgba(255,255,255,.25)}
+.svc-card:hover .svc-arr{color:#fff}
+.svc-n{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--mu);transition:color .15s}
+.svc-name{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.2;transition:color .15s}
+.svc-desc{font-size:13px;color:var(--mu);line-height:1.5;flex:1;transition:color .15s}
+.svc-arr{position:absolute;right:24px;bottom:28px;font-size:18px;color:var(--mu);transition:color .15s,transform .2s}
+.svc-card:hover .svc-arr{transform:translate(4px,-4px)}
+
+/* ── about ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.about-text{font-size:17px;line-height:1.82;color:#333}
+.about-text+.about-text{margin-top:22px}
+.about-stat{display:flex;flex-direction:column;gap:0;border:1px solid var(--br)}
+.as-item{padding:28px 32px;border-bottom:1px solid var(--br)}
+.as-item:last-child{border-bottom:none}
+.as-v{font-size:clamp(28px,3vw,42px);font-weight:900;letter-spacing:-.05em;line-height:1}
+.as-l{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin-top:6px}
+
+/* ── why ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--br)}
+.wi{padding:40px;border-right:1px solid var(--br);border-bottom:1px solid var(--br)}
+.wi:nth-child(2n){border-right:none}
+.wi:nth-last-child(-n+2){border-bottom:none}
+.wi-num{font-size:44px;font-weight:900;letter-spacing:-.06em;color:var(--br);line-height:1;margin-bottom:14px}
+.wi-title{font-size:17px;font-weight:700;margin-bottom:10px}
+.wi-desc{font-size:14px;color:#666;line-height:1.65}
+
+/* ── bg dark ── */
+.bg-dark{background:var(--bk);color:#fff}
+.bg-off{background:var(--off)}
+.bg-dark .sh .lbl{color:rgba(255,255,255,.3)}
+.bg-dark .sh .t1{color:#fff;border-color:rgba(255,255,255,.15)}
+.bg-dark .why-grid{border-color:rgba(255,255,255,.1)}
+.bg-dark .wi{border-color:rgba(255,255,255,.1)}
+.bg-dark .wi-num{color:rgba(255,255,255,.08)}
+.bg-dark .wi-desc{color:rgba(255,255,255,.5)}
+
+/* ── cta section ── */
+.cta-sec{background:var(--bk);color:#fff;padding:120px 0;text-align:center}
+.disp{font-size:clamp(48px,7vw,96px);font-weight:900;letter-spacing:-.05em;line-height:.9}
+.cta-sec .disp{margin-bottom:32px}
+.cta-sec .sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 40px;line-height:1.65}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ── buttons ── */
+.btn{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;transition:all .2s;cursor:pointer;border:none;font-family:var(--f)}
+.btn-w{background:#fff;color:var(--bk)}
+.btn-w:hover{background:#e0e0e0}
+.btn-wol{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.btn-wol:hover{border-color:#fff}
+.btn-bk{background:var(--bk);color:#fff}
+.btn-bk:hover{background:#222}
+.btn-ol{background:transparent;color:var(--bk);border:1.5px solid var(--bk)}
+.btn-ol:hover{background:var(--bk);color:#fff}
+
+/* ── contacts ── */
+.c-strip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--br)}
+.c-item{padding:28px 32px;border-right:1px solid var(--br)}
+.c-item:last-child{border-right:none}
+.c-lbl{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);margin-bottom:8px}
+.c-val{font-size:16px;font-weight:700}
+.bg-dark .c-strip{border-color:rgba(255,255,255,.1)}
+.bg-dark .c-item{border-color:rgba(255,255,255,.1)}
+.bg-dark .c-lbl{color:rgba(255,255,255,.3)}
+.bg-dark .c-val{color:#fff}
+
+/* ── footer ── */
+footer{background:var(--bk);color:#fff;padding:80px 0 40px}
+.ft-g{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.ft-brand{display:flex;flex-direction:column;gap:16px}
+.ft-brand p{font-size:14px;color:rgba(255,255,255,.35);line-height:1.7;max-width:260px}
+.ft-col h5{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ft-col a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}
+.ft-col a:hover{color:#fff}
+.ft-bot{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between}
+.ft-bot span{font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <svg width="22" height="21" viewBox="0 0 228 219" fill="none"><path d="M118.678 0C178.954 0 227.986 49.0356 227.986 109.315C227.986 169.595 178.954 218.318 118.678 218.318H104.936V0H118.678ZM85.573 218.318H0V0H85.573V218.318Z" fill="white"/></svg>
+      ДАРЭ
+    </a>
+    <ul class="nav-links">
+      <li><a href="direct.html">Директ</a></li>
+      <li><a href="seo.html">SEO</a></li>
+      <li><a href="serm.html">SERM</a></li>
+      <li><a href="sites.html">Сайты</a></li>
+      <li><a href="ai.html">ИИ-Менеджер</a></li>
+      <li><a href="leads.html">Лиды</a></li>
+      <li><a href="farpost.html">Фарпост</a></li>
+      <li><a href="outreach.html">Outreach</a></li>
+    </ul>
+    <a href="tel:+79958702227" class="btn nav-btn">Обсудить проект</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-d">
+    <svg width="700" height="670" viewBox="0 0 228 219" fill="none"><path d="M118.678 0C178.954 0 227.986 49.0356 227.986 109.315C227.986 169.595 178.954 218.318 118.678 218.318H104.936V0H118.678ZM85.573 218.318H0V0H85.573V218.318Z" fill="white"/></svg>
+  </div>
+  <div class="hc">
+    <div class="h-tag">Маркетинговое агентство · Владивосток · 2025</div>
+    <div class="h-main">
+      <div class="h-name">ДАРЭ</div>
+      <p class="h-sub">Системный рост бизнеса — контекст, SEO, репутация, сайты, ИИ-автоматизация и готовые лиды. Всё под ключ.</p>
+    </div>
+    <div class="h-foot">
+      <div class="h-stats">
+        <div class="hs"><div class="hs-v">8</div><div class="hs-l">Направлений</div></div>
+        <div class="hs"><div class="hs-v">24/7</div><div class="hs-l">ИИ-Менеджер</div></div>
+        <div class="hs"><div class="hs-v">0 ₽</div><div class="hs-l">Скрытых доплат</div></div>
+      </div>
+      <div class="h-coord">43°07′N 131°54′E<br>Vladivostok, Russia<br>Since 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Услуги</span>
+      <h2 class="t1 sh-line">Восемь направлений для роста бизнеса</h2>
+    </div>
+    <div class="svc-grid">
+      <a href="direct.html" class="svc-card">
+        <div class="svc-n">01</div>
+        <div class="svc-name">Яндекс.Директ</div>
+        <div class="svc-desc">Контекстная реклама в поиске и РСЯ. CPA 2 000–2 300 ₽. Защита от скликивания.</div>
+        <div class="svc-arr">↗</div>
+      </a>
+      <a href="seo.html" class="svc-card">
+        <div class="svc-n">02</div>
+        <div class="svc-name">SEO-продвижение</div>
+        <div class="svc-desc">Органический трафик и ТОП по целевым запросам. Без рекламного бюджета.</div>
+        <div class="svc-arr">↗</div>
+      </a>
+      <a href="serm.html" class="svc-card">
+        <div class="svc-n">03</div>
+        <div class="svc-name">SERM / ORM</div>
+        <div class="svc-desc">Управление репутацией. Чистая выдача. Работа с негативом.</div>
+        <div class="svc-arr">↗</div>
+      </a>
+      <a href="sites.html" class="svc-card">
+        <div class="svc-n">04</div>
+        <div class="svc-name">Разработка сайтов</div>
+        <div class="svc-desc">Лендинги от 35k. WordPress от 100k. Bitrix от 250k.</div>
+        <div class="svc-arr">↗</div>
+      </a>
+      <a href="ai.html" class="svc-card">
+        <div class="svc-n">05</div>
+        <div class="svc-name">ИИ-Менеджер</div>
+        <div class="svc-desc">Продажи 24/7. Telegram, Авито, WhatsApp, VK. Лиды в CRM автоматически.</div>
+        <div class="svc-arr">↗</div>
+      </a>
+      <a href="leads.html" class="svc-card">
+        <div class="svc-n">06</div>
+        <div class="svc-name">Готовые лиды</div>
+        <div class="svc-desc">Тёплые квалифицированные клиенты. 1 500–3 000 ₽ за лид.</div>
+        <div class="svc-arr">↗</div>
+      </a>
+      <a href="farpost.html" class="svc-card">
+        <div class="svc-n">07</div>
+        <div class="svc-name">Фарпост</div>
+        <div class="svc-desc">Продвижение объявлений на Фарпост. 840 звонков/мес. CPA 1 200 ₽.</div>
+        <div class="svc-arr">↗</div>
+      </a>
+      <a href="outreach.html" class="svc-card">
+        <div class="svc-n">08</div>
+        <div class="svc-name">Email Outreach</div>
+        <div class="svc-desc">Холодные B2B-рассылки напрямую ЛПР. CPA ~1 778 ₽.</div>
+        <div class="svc-arr">↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec bg-off">
+  <div class="w">
+    <div class="g2">
+      <div>
+        <div class="sh">
+          <span class="lbl">О нас</span>
+          <h2 class="t1 sh-line">Честность вместо 10-летней легенды</h2>
+        </div>
+        <p class="about-text">Мы официально открыли агентство в 2025 году. Мы не придумываем себе 10-летнюю историю, чтобы казаться старше и солиднее. Наша сила в другом — в честности, скорости работы и реальном опыте команды.</p>
+        <p class="about-text" style="margin-top:22px">За нашими плечами — сильный бэкграунд: от интернет-маркетинга и дизайна до сложной ИТ-разработки. В портфолио нашей команды есть проекты для лидеров рынка, включая <strong>X5 Group</strong>.</p>
+        <p class="about-text" style="margin-top:22px">Мы понимаем главное: бизнесу нужны не просто модные нейросети или строчки кода, а измеримая прибыль. Мы объединили глубокое понимание воронок продаж с технологиями искусственного интеллекта. Мы не делаем «ботов ради ботов». Мы создаём цифровых сотрудников, которые умеют продавать и приносят деньги.</p>
+      </div>
+      <div>
+        <div class="about-stat">
+          <div class="as-item">
+            <div class="as-v">2025</div>
+            <div class="as-l">Год основания</div>
+          </div>
+          <div class="as-item">
+            <div class="as-v">Владивосток</div>
+            <div class="as-l">Базируемся на ДВ</div>
+          </div>
+          <div class="as-item">
+            <div class="as-v">X5 Group</div>
+            <div class="as-l">Из портфолио команды</div>
+          </div>
+          <div class="as-item">
+            <div class="as-v">0₽</div>
+            <div class="as-l">Скрытых платежей</div>
+          </div>
+          <div class="as-item">
+            <div class="as-v">8</div>
+            <div class="as-l">Направлений работы</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY DARE -->
+<section class="sec bg-dark">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Почему ДАРЭ</span>
+      <h2 class="t1 sh-line" style="color:#fff;border-color:rgba(255,255,255,.15)">Работаем иначе</h2>
+    </div>
+    <div class="why-grid" style="border-color:rgba(255,255,255,.1)">
+      <div class="wi" style="border-color:rgba(255,255,255,.1)">
+        <div class="wi-num">01</div>
+        <div class="wi-title" style="color:#fff">Честность по умолчанию</div>
+        <div class="wi-desc">Говорим что есть. Если ниша не сработает — скажем прямо до старта, не после слива бюджета.</div>
+      </div>
+      <div class="wi" style="border-color:rgba(255,255,255,.1)">
+        <div class="wi-num">02</div>
+        <div class="wi-title" style="color:#fff">Измеримые результаты</div>
+        <div class="wi-desc">Каждый проект — цифры. CPA, ROI, количество лидов. Не «работа была проделана», а «получили 135 лидов».</div>
+      </div>
+      <div class="wi" style="border-color:rgba(255,255,255,.1);border-bottom:none">
+        <div class="wi-num">03</div>
+        <div class="wi-title" style="color:#fff">Технологии + маркетинг</div>
+        <div class="wi-desc">Умеем и в ИИ, и в воронки. Не выбираем между технологией и результатом — строим оба.</div>
+      </div>
+      <div class="wi" style="border-color:rgba(255,255,255,.1);border-bottom:none">
+        <div class="wi-num">04</div>
+        <div class="wi-title" style="color:#fff">Без посредников и лишних звеньев</div>
+        <div class="wi-desc">Небольшая, сильная команда. Вы всегда говорите с тем, кто реально делает работу.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="w">
+    <div class="disp">Обсудим<br>задачу?</div>
+    <p class="sub">Расскажите о бизнесе — подберём направление и посчитаем стоимость. Без обязательств.</p>
+    <div class="btns">
+      <a href="tel:+79958702227" class="btn btn-w">+7 995 870-22-27</a>
+      <a href="https://t.me/coodare" class="btn btn-wol">t.me/coodare →</a>
+    </div>
+    <div style="margin-top:60px">
+      <div class="c-strip bg-dark">
+        <div class="c-item"><div class="c-lbl">Телефон</div><div class="c-val">+7 995 870-22-27</div></div>
+        <div class="c-item"><div class="c-lbl">Telegram</div><div class="c-val">t.me/coodare</div></div>
+        <div class="c-item"><div class="c-lbl">Email</div><div class="c-val">cmo@daremarketing.ru</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <div class="ft-g">
+      <div class="ft-brand">
+        <a href="index.html" class="logo" style="font-size:22px">
+          <svg width="24" height="23" viewBox="0 0 228 219" fill="none"><path d="M118.678 0C178.954 0 227.986 49.0356 227.986 109.315C227.986 169.595 178.954 218.318 118.678 218.318H104.936V0H118.678ZM85.573 218.318H0V0H85.573V218.318Z" fill="white"/></svg>
+          ДАРЭ
+        </a>
+        <p>Маркетинговое агентство из Владивостока. Системный рост бизнеса через контекст, SEO, ИИ и готовые лиды.</p>
+      </div>
+      <div class="ft-col">
+        <h5>Услуги</h5>
+        <ul>
+          <li><a href="direct.html">Яндекс.Директ</a></li>
+          <li><a href="seo.html">SEO</a></li>
+          <li><a href="serm.html">SERM / ORM</a></li>
+          <li><a href="sites.html">Разработка сайтов</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h5>Ещё</h5>
+        <ul>
+          <li><a href="ai.html">ИИ-Менеджер</a></li>
+          <li><a href="leads.html">Готовые лиды</a></li>
+          <li><a href="farpost.html">Фарпост</a></li>
+          <li><a href="outreach.html">Email Outreach</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h5>Контакты</h5>
+        <ul>
+          <li><a href="tel:+79958702227">+7 995 870-22-27</a></li>
+          <li><a href="https://t.me/coodare">t.me/coodare</a></li>
+          <li><a href="mailto:cmo@daremarketing.ru">cmo@daremarketing.ru</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2025 Агентство ДАРЭ · Владивосток</span>
+      <span>43°07′N 131°54′E</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

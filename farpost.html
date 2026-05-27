@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Продвижение на Фарпост — ДАРЭ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.w{max-width:1240px;margin:0 auto;padding:0 40px}
+.sec{padding:100px 0}.sec-sm{padding:64px 0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:64px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-in{display:flex;align-items:center;width:100%;max-width:1240px;margin:0 auto;padding:0 40px;gap:32px}
+.logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:900;letter-spacing:.12em;color:#fff;flex-shrink:0}
+.nav-links{display:flex;gap:22px;list-style:none;flex:1}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .2s}
+.nav-links a:hover,.nav-links a.act{color:#fff}
+.nav-btn{background:#fff;color:var(--bk);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;flex-shrink:0;transition:background .2s;font-family:var(--f)}
+.nav-btn:hover{background:#ddd}
+.hero{background:var(--bk);color:#fff;padding-top:64px;min-height:68vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.hc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;max-width:1240px;margin:0 auto;padding:80px 40px 60px;width:100%}
+.h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.h-tag::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
+.h-name{font-size:clamp(52px,8vw,110px);font-weight:900;letter-spacing:-.05em;line-height:.88;color:#fff;margin-bottom:28px}
+.h-sub{font-size:clamp(15px,1.3vw,19px);color:rgba(255,255,255,.38);font-weight:300;letter-spacing:.02em;max-width:600px;line-height:1.65;margin-bottom:40px}
+.h-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.1)}
+.hs{padding:20px 32px;border-right:1px solid rgba(255,255,255,.08)}
+.hs:last-child{border-right:none}
+.hs-v{font-size:clamp(20px,2.2vw,30px);font-weight:900;letter-spacing:-.04em;color:#fff;line-height:1}
+.hs-l{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.27);margin-top:5px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
+.t1{font-size:clamp(30px,3.2vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.sh{margin-bottom:52px}
+.sh .lbl{display:block;margin-bottom:18px}
+.sh .t1{border-top:2px solid var(--bk);padding-top:20px}
+.bg-dark{background:var(--bk);color:#fff}
+.bg-off{background:var(--off)}
+.bg-dark .sh .lbl{color:rgba(255,255,255,.3)}
+.bg-dark .sh .t1{color:#fff;border-color:rgba(255,255,255,.15)}
+.feat-list{list-style:none}
+.feat-list li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--br);font-size:16px;color:#333;line-height:1.5;align-items:flex-start}
+.feat-list li:last-child{border-bottom:none}
+.feat-ck{font-weight:900;flex-shrink:0;font-size:13px;margin-top:2px}
+.geo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1.5px solid var(--bk)}
+.geo{padding:28px 24px;border-right:1.5px solid var(--bk)}
+.geo:last-child{border-right:none}
+.geo-city{font-size:15px;font-weight:700;margin-bottom:4px}
+.geo-note{font-size:12px;color:var(--mu)}
+.case-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1.5px solid rgba(255,255,255,.15)}
+.cs-box{padding:32px 28px;border-right:1.5px solid rgba(255,255,255,.1)}
+.cs-box:last-child{border-right:none}
+.cs-v{font-size:clamp(24px,2.8vw,38px);font-weight:900;letter-spacing:-.05em;line-height:1;margin-bottom:6px;color:#fff}
+.cs-l{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.price-solo{border:1.5px solid var(--bk);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.ps-price{font-size:clamp(44px,5vw,68px);font-weight:900;letter-spacing:-.06em;line-height:1}
+.ps-per{font-size:15px;color:var(--mu);margin-top:8px}
+.ps-feats{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ps-feats li{font-size:14px;color:#444;display:flex;gap:10px;line-height:1.4}
+.ps-ck{flex-shrink:0;font-weight:900;font-size:13px}
+.cta-sec{background:var(--bk);color:#fff;padding:120px 0;text-align:center}
+.disp{font-size:clamp(40px,6vw,80px);font-weight:900;letter-spacing:-.05em;line-height:.92}
+.cta-sec .disp{margin-bottom:28px}
+.cta-sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 36px;line-height:1.65}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;transition:all .2s;cursor:pointer;border:none;font-family:var(--f)}
+.btn-w{background:#fff;color:var(--bk)}.btn-w:hover{background:#e0e0e0}
+.btn-wol{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}.btn-wol:hover{border-color:#fff}
+footer{background:var(--bk);color:#fff;padding:80px 0 40px}
+.ft-g{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.ft-brand{display:flex;flex-direction:column;gap:16px}
+.ft-brand p{font-size:14px;color:rgba(255,255,255,.35);line-height:1.7;max-width:260px}
+.ft-col h5{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ft-col a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}
+.ft-col a:hover{color:#fff}
+.ft-bot{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between}
+.ft-bot span{font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.05em}
+.free-tag{display:inline-block;background:var(--bk);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;margin-top:24px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo"><svg width="22" height="21" viewBox="0 0 228 219" fill="none"><path d="M118.678 0C178.954 0 227.986 49.0356 227.986 109.315C227.986 169.595 178.954 218.318 118.678 218.318H104.936V0H118.678ZM85.573 218.318H0V0H85.573V218.318Z" fill="white"/></svg>ДАРЭ</a>
+    <ul class="nav-links">
+      <li><a href="direct.html">Директ</a></li>
+      <li><a href="seo.html">SEO</a></li><li><a href="serm.html">SERM</a></li>
+      <li><a href="sites.html">Сайты</a></li><li><a href="ai.html">ИИ-Менеджер</a></li>
+      <li><a href="leads.html">Лиды</a></li><li><a href="farpost.html" class="act">Фарпост</a></li>
+      <li><a href="outreach.html">Outreach</a></li>
+    </ul>
+    <a href="tel:+79958702227" class="btn nav-btn">Обсудить проект</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hc">
+    <div class="h-tag">ДАРЭ · Услуга 07</div>
+    <div class="h-name">ФАРПОСТ<br>ПРОДВИЖЕНИЕ</div>
+    <p class="h-sub">Площадка №1 на Дальнем Востоке. Оптимизация объявлений, управление поднятиями, автозагрузка каталога, аналитика звонков.</p>
+    <div class="h-stats">
+      <div class="hs"><div class="hs-v">6+ млн</div><div class="hs-l">Посетителей в месяц</div></div>
+      <div class="hs"><div class="hs-v">1 200 ₽</div><div class="hs-l">CPA в авто-кейсе</div></div>
+      <div class="hs"><div class="hs-v">×3.4</div><div class="hs-l">Рост просмотров</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ПОЧЕМУ ФАРПОСТ -->
+<section class="sec">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Почему Фарпост</span>
+      <h2 class="t1">Дальний Восток — отдельный рынок</h2>
+    </div>
+    <div class="geo-grid" style="margin-bottom:60px">
+      <div class="geo"><div class="geo-city">Владивосток</div><div class="geo-note">Ядро аудитории</div></div>
+      <div class="geo"><div class="geo-city">Хабаровск</div><div class="geo-note">Второй по объёму</div></div>
+      <div class="geo"><div class="geo-city">Уссурийск</div><div class="geo-note">Активный рынок авто</div></div>
+      <div class="geo"><div class="geo-city">Вся ДВ-аудитория</div><div class="geo-note">Находка, Арсеньев и др.</div></div>
+    </div>
+    <div class="g2">
+      <div>
+        <div class="sh">
+          <span class="lbl">Что мы делаем</span>
+          <h2 class="t1">Комплексное ведение аккаунта</h2>
+        </div>
+        <ul class="feat-list">
+          <li><span class="feat-ck">✓</span><span>Оптимизация объявлений — заголовки, фото, ключевые слова</span></li>
+          <li><span class="feat-ck">✓</span><span>Управление продвижением: поднятия, XL-объявления, ТОП-размещения</span></li>
+          <li><span class="feat-ck">✓</span><span>Автозагрузка каталога через XML/CSV интеграцию</span></li>
+          <li><span class="feat-ck">✓</span><span>Аналитика звонков и отслеживание CPA</span></li>
+          <li><span class="feat-ck">✓</span><span>Анализ конкурентов и корректировка стратегии</span></li>
+          <li><span class="feat-ck">✓</span><span>Ежемесячная отчётность по просмотрам и звонкам</span></li>
+        </ul>
+        <div class="free-tag">Бесплатный аудит аккаунта</div>
+      </div>
+      <div>
+        <div class="sh">
+          <span class="lbl">Ниши</span>
+          <h2 class="t1">Работаем с любым бизнесом</h2>
+        </div>
+        <ul class="feat-list">
+          <li><span class="feat-ck">→</span><span>Автомобили — новые и б/у, автозапчасти, сервисы</span></li>
+          <li><span class="feat-ck">→</span><span>Недвижимость — квартиры, дома, коммерция</span></li>
+          <li><span class="feat-ck">→</span><span>Электроника и бытовая техника</span></li>
+          <li><span class="feat-ck">→</span><span>Услуги — ремонт, строительство, доставка</span></li>
+          <li><span class="feat-ck">→</span><span>Промышленное оборудование</span></li>
+          <li><span class="feat-ck">→</span><span>Рыбная продукция и морепродукты ДВ</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- КЕЙС -->
+<section class="sec-sm bg-dark">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Кейс · Автодилер · Владивосток</span>
+      <h2 class="t1" style="color:#fff;border-color:rgba(255,255,255,.15)">840 звонков в месяц</h2>
+    </div>
+    <div class="case-strip">
+      <div class="cs-box"><div class="cs-v">840</div><div class="cs-l">Звонков в месяц</div></div>
+      <div class="cs-box"><div class="cs-v">1 200 ₽</div><div class="cs-l">CPA за звонок</div></div>
+      <div class="cs-box"><div class="cs-v">×3.4</div><div class="cs-l">Рост просмотров</div></div>
+      <div class="cs-box"><div class="cs-v">XML</div><div class="cs-l">Автозагрузка каталога</div></div>
+    </div>
+    <p style="font-size:14px;color:rgba(255,255,255,.4);margin-top:28px;line-height:1.7">Настроили автозагрузку каталога 350+ автомобилей. Оптимизировали заголовки и фото. Выстроили систему поднятий под пиковые часы. Итог: в 3.4 раза больше просмотров при снижении CPA ниже медианы рынка.</p>
+  </div>
+</section>
+
+<!-- ЦЕНА -->
+<section class="sec">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Стоимость</span>
+      <h2 class="t1">Прозрачное ценообразование</h2>
+    </div>
+    <div class="price-solo">
+      <div>
+        <div class="ps-price">от 25 000 ₽</div>
+        <div class="ps-per">в месяц — ведение аккаунта</div>
+        <p style="font-size:14px;color:var(--mu);margin-top:20px;line-height:1.6">Бюджет Фарпоста (поднятия, XL, ТОП) — оплачивается отдельно по фактическим расходам.</p>
+      </div>
+      <div>
+        <ul class="ps-feats">
+          <li><span class="ps-ck">✓</span><span>Ведение аккаунта и объявлений</span></li>
+          <li><span class="ps-ck">✓</span><span>Оптимизация текстов и фото</span></li>
+          <li><span class="ps-ck">✓</span><span>Управление продвижением</span></li>
+          <li><span class="ps-ck">✓</span><span>Автозагрузка XML/CSV (при наличии)</span></li>
+          <li><span class="ps-ck">✓</span><span>Аналитика звонков</span></li>
+          <li><span class="ps-ck">✓</span><span>Ежемесячный отчёт</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="w">
+    <div class="disp">Дальний Восток<br>ждёт вас</div>
+    <p class="cta-sub">Бесплатный аудит аккаунта на Фарпосте — покажем точки роста за 24 часа.</p>
+    <div class="btns">
+      <a href="tel:+79958702227" class="btn btn-w">Получить аудит</a>
+      <a href="mailto:cmo@daremarketing.ru" class="btn btn-wol">Написать нам</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <div class="ft-g">
+      <div class="ft-brand">
+        <a href="index.html" class="logo"><svg width="22" height="21" viewBox="0 0 228 219" fill="none"><path d="M118.678 0C178.954 0 227.986 49.0356 227.986 109.315C227.986 169.595 178.954 218.318 118.678 218.318H104.936V0H118.678ZM85.573 218.318H0V0H85.573V218.318Z" fill="white"/></svg>ДАРЭ</a>
+        <p>Маркетинговое агентство из Владивостока. Измеримая прибыль — не просто реклама.</p>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+          <a href="tel:+79958702227" style="font-size:14px;color:rgba(255,255,255,.5)">+7 995 870-22-27</a>
+          <a href="mailto:cmo@daremarketing.ru" style="font-size:14px;color:rgba(255,255,255,.5)">cmo@daremarketing.ru</a>
+          <a href="https://t.me/coodare" style="font-size:14px;color:rgba(255,255,255,.5)">t.me/coodare</a>
+        </div>
+      </div>
+      <div class="ft-col"><h5>Услуги</h5><ul>
+        <li><a href="direct.html">Яндекс.Директ</a></li>
+        <li><a href="seo.html">SEO-продвижение</a></li>
+        <li><a href="serm.html">SERM / ORM</a></li>
+        <li><a href="sites.html">Разработка сайтов</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Ещё</h5><ul>
+        <li><a href="ai.html">ИИ-Менеджер</a></li>
+        <li><a href="leads.html">Готовые лиды</a></li>
+        <li><a href="farpost.html">Фарпост</a></li>
+        <li><a href="outreach.html">Email Outreach</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Контакты</h5><ul>
+        <li><a href="tel:+79958702227">+7 995 870-22-27</a></li>
+        <li><a href="mailto:cmo@daremarketing.ru">cmo@daremarketing.ru</a></li>
+        <li><a href="https://t.me/coodare">Telegram</a></li>
+        <li><a href="index.html">О нас</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2025 Агентство ДАРЭ · Владивосток</span>
+      <span>ВСЕ ПРАВА ЗАЩИЩЕНЫ</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

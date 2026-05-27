@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SERM / ORM — Управление репутацией — ДАРЭ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.w{max-width:1240px;margin:0 auto;padding:0 40px}
+.sec{padding:100px 0}.sec-sm{padding:64px 0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:64px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-in{display:flex;align-items:center;width:100%;max-width:1240px;margin:0 auto;padding:0 40px;gap:32px}
+.logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:900;letter-spacing:.12em;color:#fff;flex-shrink:0}
+.nav-links{display:flex;gap:22px;list-style:none;flex:1}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .2s}
+.nav-links a:hover,.nav-links a.act{color:#fff}
+.nav-btn{background:#fff;color:var(--bk);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;flex-shrink:0;transition:background .2s;font-family:var(--f)}
+.nav-btn:hover{background:#ddd}
+.hero{background:var(--bk);color:#fff;padding-top:64px;min-height:68vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.hc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;max-width:1240px;margin:0 auto;padding:80px 40px 60px;width:100%}
+.h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.h-tag::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
+.h-name{font-size:clamp(52px,8vw,110px);font-weight:900;letter-spacing:-.05em;line-height:.88;color:#fff;margin-bottom:28px}
+.h-sub{font-size:clamp(15px,1.3vw,19px);color:rgba(255,255,255,.38);font-weight:300;letter-spacing:.02em;max-width:600px;line-height:1.65;margin-bottom:40px}
+.h-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.1)}
+.hs{padding:20px 32px;border-right:1px solid rgba(255,255,255,.08)}
+.hs:last-child{border-right:none}
+.hs-v{font-size:clamp(20px,2.2vw,30px);font-weight:900;letter-spacing:-.04em;color:#fff;line-height:1}
+.hs-l{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.27);margin-top:5px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
+.t1{font-size:clamp(30px,3.2vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.t3{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.body-t{font-size:17px;line-height:1.78;color:#333}
+.sh{margin-bottom:52px}
+.sh .lbl{display:block;margin-bottom:18px}
+.sh .t1{border-top:2px solid var(--bk);padding-top:20px}
+.bg-dark{background:var(--bk);color:#fff}
+.bg-off{background:var(--off)}
+.bg-dark .sh .lbl{color:rgba(255,255,255,.3)}
+.bg-dark .sh .t1{color:#fff;border-color:rgba(255,255,255,.15)}
+.feat-list{list-style:none}
+.feat-list li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--br);font-size:16px;color:#333;line-height:1.5;align-items:flex-start}
+.feat-list li:last-child{border-bottom:none}
+.feat-ck{font-weight:900;flex-shrink:0;font-size:13px;margin-top:2px}
+.proc{display:flex;flex-direction:column}
+.proc-item{display:grid;grid-template-columns:72px 1fr;border-bottom:1px solid var(--br)}
+.proc-item:last-child{border-bottom:none}
+.proc-n{padding:24px 0;font-size:13px;font-weight:700;color:var(--mu);letter-spacing:.1em}
+.proc-body{padding:24px 0 24px 24px;border-left:1px solid var(--br)}
+.proc-title{font-size:16px;font-weight:700;margin-bottom:5px}
+.proc-desc{font-size:13px;color:var(--mu);line-height:1.6}
+.price-solo{border:1.5px solid var(--bk);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.ps-price{font-size:clamp(44px,5vw,68px);font-weight:900;letter-spacing:-.06em;line-height:1}
+.ps-per{font-size:15px;color:var(--mu);margin-top:8px}
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1.5px solid var(--bk);margin-top:48px}
+.r-item{padding:36px 40px;border-right:1.5px solid var(--bk);border-bottom:1.5px solid var(--bk)}
+.r-item:nth-child(2n){border-right:none}
+.r-item:nth-child(3),.r-item:nth-child(4){border-bottom:none}
+.r-icon{font-size:24px;margin-bottom:16px}
+.r-title{font-size:16px;font-weight:700;margin-bottom:8px}
+.r-desc{font-size:13px;color:var(--mu);line-height:1.6}
+.cta-sec{background:var(--bk);color:#fff;padding:120px 0;text-align:center}
+.disp{font-size:clamp(40px,6vw,80px);font-weight:900;letter-spacing:-.05em;line-height:.92}
+.cta-sec .disp{margin-bottom:28px}
+.cta-sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 36px;line-height:1.65}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;transition:all .2s;cursor:pointer;border:none;font-family:var(--f)}
+.btn-w{background:#fff;color:var(--bk)}.btn-w:hover{background:#e0e0e0}
+.btn-wol{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}.btn-wol:hover{border-color:#fff}
+.btn-ol{background:transparent;color:var(--bk);border:1.5px solid var(--bk)}.btn-ol:hover{background:var(--bk);color:#fff}
+.c-strip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(255,255,255,.1)}
+.c-item{padding:28px 32px;border-right:1px solid rgba(255,255,255,.1)}
+.c-item:last-child{border-right:none}
+.c-lbl{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px}
+.c-val{font-size:16px;font-weight:700;color:#fff}
+footer{background:var(--bk);color:#fff;padding:80px 0 40px}
+.ft-g{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.ft-brand{display:flex;flex-direction:column;gap:16px}
+.ft-brand p{font-size:14px;color:rgba(255,255,255,.35);line-height:1.7;max-width:260px}
+.ft-col h5{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ft-col a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}
+.ft-col a:hover{color:#fff}
+.ft-bot{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between}
+.ft-bot span{font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo"><svg width="22" height="21" viewBox="0 0 228 219" fill="none"><path d="M118.678 0C178.954 0 227.986 49.0356 227.986 109.315C227.986 169.595 178.954 218.318 118.678 218.318H104.936V0H118.678ZM85.573 218.318H0V0H85.573V218.318Z" fill="white"/></svg>ДАРЭ</a>
+    <ul class="nav-links">
+      <li><a href="direct.html">Директ</a></li>
+      <li><a href="seo.html">SEO</a></li><li><a href="serm.html" class="act">SERM</a></li>
+      <li><a href="sites.html">Сайты</a></li><li><a href="ai.html">ИИ-Менеджер</a></li>
+      <li><a href="leads.html">Лиды</a></li><li><a href="farpost.html">Фарпост</a></li>
+      <li><a href="outreach.html">Outreach</a></li>
+    </ul>
+    <a href="tel:+79958702227" class="btn nav-btn">Обсудить проект</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hc">
+    <div class="h-tag">ДАРЭ · Услуга 03</div>
+    <div class="h-name">SERM<br>+ ORM</div>
+    <p class="h-sub">Управление репутацией в поисковой выдаче и интернете. Работа с негативом, чистая выдача, контролируемый образ компании.</p>
+    <div class="h-stats">
+      <div class="hs"><div class="hs-v">70 000 ₽</div><div class="hs-l">В месяц</div></div>
+      <div class="hs"><div class="hs-v">24/7</div><div class="hs-l">Мониторинг упоминаний</div></div>
+      <div class="hs"><div class="hs-v">ТОП-10</div><div class="hs-l">Очищаем выдачу</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ЧТО ДЕЛАЕМ -->
+<section class="sec">
+  <div class="w">
+    <div class="g2">
+      <div>
+        <div class="sh">
+          <span class="lbl">Что мы делаем</span>
+          <h2 class="t1">Полный контроль над образом компании</h2>
+        </div>
+        <ul class="feat-list">
+          <li><span class="feat-ck">✓</span><span>Мониторинг упоминаний бренда по всем площадкам</span></li>
+          <li><span class="feat-ck">✓</span><span>Работа с негативными отзывами: ответы, модерация, удаление</span></li>
+          <li><span class="feat-ck">✓</span><span>Вытеснение негатива из ТОП-10 поисковой выдачи</span></li>
+          <li><span class="feat-ck">✓</span><span>Размещение позитивного контента на авторитетных площадках</span></li>
+          <li><span class="feat-ck">✓</span><span>Работа с отзывами на Яндекс.Картах, 2ГИС, Flamp</span></li>
+          <li><span class="feat-ck">✓</span><span>Формирование экспертного образа через статьи и обзоры</span></li>
+          <li><span class="feat-ck">✓</span><span>Реагирование на форумных угрозах и в социальных сетях</span></li>
+          <li><span class="feat-ck">✓</span><span>Ежемесячный отчёт по состоянию репутации</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="sh">
+          <span class="lbl">Процесс работы</span>
+          <h2 class="t1">Как строится защита репутации</h2>
+        </div>
+        <div class="proc">
+          <div class="proc-item">
+            <div class="proc-n">01</div>
+            <div class="proc-body">
+              <div class="proc-title">Аудит репутации</div>
+              <div class="proc-desc">Анализируем текущее состояние выдачи, собираем все упоминания, классифицируем угрозы</div>
+            </div>
+          </div>
+          <div class="proc-item">
+            <div class="proc-n">02</div>
+            <div class="proc-body">
+              <div class="proc-title">Стратегия работы с негативом</div>
+              <div class="proc-desc">Определяем приоритеты: что удалять, что вытеснять, на что отвечать</div>
+            </div>
+          </div>
+          <div class="proc-item">
+            <div class="proc-n">03</div>
+            <div class="proc-body">
+              <div class="proc-title">Наполнение позитивом</div>
+              <div class="proc-desc">Размещаем статьи, обзоры, отзывы на релевантных площадках с высоким авторитетом</div>
+            </div>
+          </div>
+          <div class="proc-item">
+            <div class="proc-n">04</div>
+            <div class="proc-body">
+              <div class="proc-title">Постоянный мониторинг</div>
+              <div class="proc-desc">Отслеживаем новые упоминания 24/7, реагируем на угрозы в течение 2 часов</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- РЕЗУЛЬТАТ -->
+<section class="sec bg-off">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Результат</span>
+      <h2 class="t1">Что вы получаете</h2>
+    </div>
+    <div class="result-grid">
+      <div class="r-item">
+        <div class="r-icon">🔍</div>
+        <div class="r-title">Чистая поисковая выдача</div>
+        <div class="r-desc">Первые 10 результатов по брендовым запросам — только позитивный и нейтральный контент</div>
+      </div>
+      <div class="r-item">
+        <div class="r-icon">⭐</div>
+        <div class="r-title">Высокий рейтинг на картах</div>
+        <div class="r-desc">Работаем с отзывами на Яндекс.Картах, 2ГИС и других геосервисах — рейтинг растёт</div>
+      </div>
+      <div class="r-item">
+        <div class="r-icon">🛡️</div>
+        <div class="r-title">Защита от атак</div>
+        <div class="r-desc">Быстрое реагирование на волны негатива от конкурентов или недовольных клиентов</div>
+      </div>
+      <div class="r-item">
+        <div class="r-icon">📈</div>
+        <div class="r-title">Рост доверия к бренду</div>
+        <div class="r-desc">Контролируемый образ компании увеличивает конверсию из поиска и снижает отток клиентов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ЦЕНА -->
+<section class="sec-sm bg-dark">
+  <div class="w">
+    <div class="c-strip">
+      <div class="c-item"><div class="c-lbl">Стоимость</div><div class="c-val">70 000 ₽ / мес</div></div>
+      <div class="c-item"><div class="c-lbl">Мониторинг</div><div class="c-val">24 / 7 непрерывно</div></div>
+      <div class="c-item"><div class="c-lbl">Реакция на угрозу</div><div class="c-val">В течение 2 часов</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="w">
+    <div class="disp">Защитите<br>репутацию</div>
+    <p class="cta-sub">Один негативный материал в ТОП-3 стоит дороже, чем год работы по управлению репутацией.</p>
+    <div class="btns">
+      <a href="tel:+79958702227" class="btn btn-w">Обсудить задачу</a>
+      <a href="mailto:cmo@daremarketing.ru" class="btn btn-wol">Написать нам</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <div class="ft-g">
+      <div class="ft-brand">
+        <a href="index.html" class="logo"><svg width="22" height="21" viewBox="0 0 228 219" fill="none"><path d="M118.678 0C178.954 0 227.986 49.0356 227.986 109.315C227.986 169.595 178.954 218.318 118.678 218.318H104.936V0H118.678ZM85.573 218.318H0V0H85.573V218.318Z" fill="white"/></svg>ДАРЭ</a>
+        <p>Маркетинговое агентство из Владивостока. Измеримая прибыль — не просто реклама.</p>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+          <a href="tel:+79958702227" style="font-size:14px;color:rgba(255,255,255,.5)">+7 995 870-22-27</a>
+          <a href="mailto:cmo@daremarketing.ru" style="font-size:14px;color:rgba(255,255,255,.5)">cmo@daremarketing.ru</a>
+          <a href="https://t.me/coodare" style="font-size:14px;color:rgba(255,255,255,.5)">t.me/coodare</a>
+        </div>
+      </div>
+      <div class="ft-col"><h5>Услуги</h5><ul>
+        <li><a href="direct.html">Яндекс.Директ</a></li>
+        <li><a href="seo.html">SEO-продвижение</a></li>
+        <li><a href="serm.html">SERM / ORM</a></li>
+        <li><a href="sites.html">Разработка сайтов</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Ещё</h5><ul>
+        <li><a href="ai.html">ИИ-Менеджер</a></li>
+        <li><a href="leads.html">Готовые лиды</a></li>
+        <li><a href="farpost.html">Фарпост</a></li>
+        <li><a href="outreach.html">Email Outreach</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Контакты</h5><ul>
+        <li><a href="tel:+79958702227">+7 995 870-22-27</a></li>
+        <li><a href="mailto:cmo@daremarketing.ru">cmo@daremarketing.ru</a></li>
+        <li><a href="https://t.me/coodare">Telegram</a></li>
+        <li><a href="index.html">О нас</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2025 Агентство ДАРЭ · Владивосток</span>
+      <span>ВСЕ ПРАВА ЗАЩИЩЕНЫ</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

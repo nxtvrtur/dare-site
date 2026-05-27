@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Разработка сайтов — ДАРЭ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.w{max-width:1240px;margin:0 auto;padding:0 40px}
+.sec{padding:100px 0}.sec-sm{padding:64px 0}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:64px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-in{display:flex;align-items:center;width:100%;max-width:1240px;margin:0 auto;padding:0 40px;gap:32px}
+.logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:900;letter-spacing:.12em;color:#fff;flex-shrink:0}
+.nav-links{display:flex;gap:22px;list-style:none;flex:1}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .2s}
+.nav-links a:hover,.nav-links a.act{color:#fff}
+.nav-btn{background:#fff;color:var(--bk);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;flex-shrink:0;transition:background .2s;font-family:var(--f)}
+.nav-btn:hover{background:#ddd}
+.hero{background:var(--bk);color:#fff;padding-top:64px;min-height:68vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.hc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;max-width:1240px;margin:0 auto;padding:80px 40px 60px;width:100%}
+.h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.h-tag::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
+.h-name{font-size:clamp(52px,8vw,110px);font-weight:900;letter-spacing:-.05em;line-height:.88;color:#fff;margin-bottom:28px}
+.h-sub{font-size:clamp(15px,1.3vw,19px);color:rgba(255,255,255,.38);font-weight:300;letter-spacing:.02em;max-width:600px;line-height:1.65;margin-bottom:40px}
+.h-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.1)}
+.hs{padding:20px 32px;border-right:1px solid rgba(255,255,255,.08)}
+.hs:last-child{border-right:none}
+.hs-v{font-size:clamp(20px,2.2vw,30px);font-weight:900;letter-spacing:-.04em;color:#fff;line-height:1}
+.hs-l{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.27);margin-top:5px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
+.t1{font-size:clamp(30px,3.2vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.sh{margin-bottom:52px}
+.sh .lbl{display:block;margin-bottom:18px}
+.sh .t1{border-top:2px solid var(--bk);padding-top:20px}
+.bg-dark{background:var(--bk);color:#fff}
+.bg-off{background:var(--off)}
+.bg-dark .sh .lbl{color:rgba(255,255,255,.3)}
+.bg-dark .sh .t1{color:#fff;border-color:rgba(255,255,255,.15)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--bk)}
+.pkg{padding:48px 40px;border-right:1.5px solid var(--bk)}
+.pkg:last-child{border-right:none}
+.pkg.feat{background:var(--bk);color:#fff}
+.pkg-tier{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);margin-bottom:16px}
+.pkg.feat .pkg-tier{color:rgba(255,255,255,.4)}
+.pkg-name{font-size:clamp(22px,2.5vw,32px);font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:6px}
+.pkg-price{font-size:clamp(32px,3.8vw,52px);font-weight:900;letter-spacing:-.05em;line-height:1;margin-bottom:4px}
+.pkg-time{font-size:13px;color:var(--mu);margin-bottom:24px}
+.pkg.feat .pkg-time{color:rgba(255,255,255,.4)}
+.pkg-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.pkg-feats li{font-size:13px;color:#444;display:flex;gap:9px;line-height:1.4}
+.pkg.feat .pkg-feats li{color:rgba(255,255,255,.65)}
+.pkg-ck{flex-shrink:0;font-weight:900;font-size:12px}
+.pkg-note{font-size:12px;color:var(--mu);padding:12px 16px;background:#f0f0f0;margin-top:auto}
+.pkg.feat .pkg-note{background:rgba(255,255,255,.08);color:rgba(255,255,255,.45)}
+.feat-list{list-style:none}
+.feat-list li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--br);font-size:16px;color:#333;line-height:1.5;align-items:flex-start}
+.feat-list li:last-child{border-bottom:none}
+.feat-ck{font-weight:900;flex-shrink:0;font-size:13px;margin-top:2px}
+.cta-sec{background:var(--bk);color:#fff;padding:120px 0;text-align:center}
+.disp{font-size:clamp(40px,6vw,80px);font-weight:900;letter-spacing:-.05em;line-height:.92}
+.cta-sec .disp{margin-bottom:28px}
+.cta-sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 36px;line-height:1.65}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;transition:all .2s;cursor:pointer;border:none;font-family:var(--f)}
+.btn-w{background:#fff;color:var(--bk)}.btn-w:hover{background:#e0e0e0}
+.btn-wol{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}.btn-wol:hover{border-color:#fff}
+.c-strip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(255,255,255,.1)}
+.c-item{padding:28px 32px;border-right:1px solid rgba(255,255,255,.1)}
+.c-item:last-child{border-right:none}
+.c-lbl{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px}
+.c-val{font-size:16px;font-weight:700;color:#fff}
+footer{background:var(--bk);color:#fff;padding:80px 0 40px}
+.ft-g{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.ft-brand{display:flex;flex-direction:column;gap:16px}
+.ft-brand p{font-size:14px;color:rgba(255,255,255,.35);line-height:1.7;max-width:260px}
+.ft-col h5{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ft-col a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}
+.ft-col a:hover{color:#fff}
+.ft-bot{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between}
+.ft-bot span{font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo"><svg width="22" height="21" viewBox="0 0 228 219" fill="none"><path d="M118.678 0C178.954 0 227.986 49.0356 227.986 109.315C227.986 169.595 178.954 218.318 118.678 218.318H104.936V0H118.678ZM85.573 218.318H0V0H85.573V218.318Z" fill="white"/></svg>ДАРЭ</a>
+    <ul class="nav-links">
+      <li><a href="direct.html">Директ</a></li>
+      <li><a href="seo.html">SEO</a></li><li><a href="serm.html">SERM</a></li>
+      <li><a href="sites.html" class="act">Сайты</a></li><li><a href="ai.html">ИИ-Менеджер</a></li>
+      <li><a href="leads.html">Лиды</a></li><li><a href="farpost.html">Фарпост</a></li>
+      <li><a href="outreach.html">Outreach</a></li>
+    </ul>
+    <a href="tel:+79958702227" class="btn nav-btn">Обсудить проект</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hc">
+    <div class="h-tag">ДАРЭ · Услуга 04</div>
+    <div class="h-name">РАЗРАБОТКА<br>САЙТОВ</div>
+    <p class="h-sub">От лендинга за 2 недели до корпоративного портала уровня Северсталь. Figma → вёрстка → запуск. Без лишних слов.</p>
+    <div class="h-stats">
+      <div class="hs"><div class="hs-v">от 35 000 ₽</div><div class="hs-l">Лендинг</div></div>
+      <div class="hs"><div class="hs-v">2 нед</div><div class="hs-l">Минимальный срок</div></div>
+      <div class="hs"><div class="hs-v">30 дней</div><div class="hs-l">Поддержка включена</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ПАКЕТЫ -->
+<section class="sec">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Форматы работы</span>
+      <h2 class="t1">Три пакета под любой масштаб</h2>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg">
+        <div class="pkg-tier">Старт</div>
+        <div class="pkg-name">Лендинг</div>
+        <div class="pkg-price">35 000 ₽</div>
+        <div class="pkg-time">Срок: 2 недели · Предоплата 100%</div>
+        <ul class="pkg-feats">
+          <li><span class="pkg-ck">—</span><span>1 страница продаж</span></li>
+          <li><span class="pkg-ck">—</span><span>Адаптивная вёрстка (все устройства)</span></li>
+          <li><span class="pkg-ck">—</span><span>Яндекс.Метрика и цели</span></li>
+          <li><span class="pkg-ck">—</span><span>Форма заявки + CRM-интеграция</span></li>
+          <li><span class="pkg-ck">—</span><span>Figma-макет перед вёрсткой</span></li>
+          <li><span class="pkg-ck">—</span><span>30 дней поддержки</span></li>
+        </ul>
+        <div class="pkg-note">🎁 Директ в подарок: 15 000 ₽ рекламного бюджета</div>
+      </div>
+      <div class="pkg feat">
+        <div class="pkg-tier">Бизнес</div>
+        <div class="pkg-name">WordPress</div>
+        <div class="pkg-price">100 000 ₽</div>
+        <div class="pkg-time">Срок: 4–6 недель · Предоплата 100%</div>
+        <ul class="pkg-feats">
+          <li><span class="pkg-ck">✓</span><span>До 10 страниц контента</span></li>
+          <li><span class="pkg-ck">✓</span><span>Корпоративный уровень (референс: severstal.com)</span></li>
+          <li><span class="pkg-ck">✓</span><span>Кастомный дизайн в Figma</span></li>
+          <li><span class="pkg-ck">✓</span><span>Блог, портфолио, фотогалерея</span></li>
+          <li><span class="pkg-ck">✓</span><span>SEO-оптимизация под запуск</span></li>
+          <li><span class="pkg-ck">✓</span><span>Панель управления контентом</span></li>
+          <li><span class="pkg-ck">✓</span><span>30 дней поддержки</span></li>
+        </ul>
+        <div class="pkg-note">Самый популярный вариант для компаний ДВ</div>
+      </div>
+      <div class="pkg">
+        <div class="pkg-tier">Энтерпрайз</div>
+        <div class="pkg-name">Кастомный / Bitrix</div>
+        <div class="pkg-price">от 250 000 ₽</div>
+        <div class="pkg-time">Срок: индивидуально · Предоплата 50%</div>
+        <ul class="pkg-feats">
+          <li><span class="pkg-ck">—</span><span>Сложные бизнес-процессы</span></li>
+          <li><span class="pkg-ck">—</span><span>Интеграции: CRM, ERP, 1C, API</span></li>
+          <li><span class="pkg-ck">—</span><span>Личные кабинеты, каталоги, маркетплейсы</span></li>
+          <li><span class="pkg-ck">—</span><span>Нагрузочное тестирование</span></li>
+          <li><span class="pkg-ck">—</span><span>Техническое сопровождение</span></li>
+        </ul>
+        <div class="pkg-note">Обсудим задачу и сформируем смету</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- УСЛОВИЯ -->
+<section class="sec-sm bg-off">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Условия работы</span>
+      <h2 class="t1">Прозрачный процесс</h2>
+    </div>
+    <ul class="feat-list">
+      <li><span class="feat-ck">✓</span><span><strong>Figma перед вёрсткой</strong> — вы принимаете дизайн до начала разработки. Никаких сюрпризов в конце.</span></li>
+      <li><span class="feat-ck">✓</span><span><strong>Предоплата</strong> — лендинг 100%, WordPress 100%, кастом 50% + 50% при сдаче</span></li>
+      <li><span class="feat-ck">✓</span><span><strong>30 дней поддержки</strong> включены в каждый проект — правки, мелкие доработки, консультации</span></li>
+      <li><span class="feat-ck">✓</span><span><strong>Все права на сайт</strong> передаются заказчику — домен, хостинг, код, дизайн</span></li>
+      <li><span class="feat-ck">✓</span><span><strong>Интеграция с аналитикой</strong> — Яндекс.Метрика, цели, UTM-разметка на старте</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ПОЛОСА ЦИФР -->
+<section class="sec-sm bg-dark">
+  <div class="w">
+    <div class="c-strip">
+      <div class="c-item"><div class="c-lbl">Минимальный срок</div><div class="c-val">2 недели</div></div>
+      <div class="c-item"><div class="c-lbl">Дизайн в Figma</div><div class="c-val">Всегда перед кодом</div></div>
+      <div class="c-item"><div class="c-lbl">Поддержка после сдачи</div><div class="c-val">30 дней бесплатно</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="w">
+    <div class="disp">Сайт, который<br>продаёт</div>
+    <p class="cta-sub">Расскажите о задаче — сформируем смету и покажем референсы в течение 24 часов.</p>
+    <div class="btns">
+      <a href="tel:+79958702227" class="btn btn-w">Запросить расчёт</a>
+      <a href="mailto:cmo@daremarketing.ru" class="btn btn-wol">Написать нам</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <div class="ft-g">
+      <div class="ft-brand">
+        <a href="index.html" class="logo"><svg width="22" height="21" viewBox="0 0 228 219" fill="none"><path d="M118.678 0C178.954 0 227.986 49.0356 227.986 109.315C227.986 169.595 178.954 218.318 118.678 218.318H104.936V0H118.678ZM85.573 218.318H0V0H85.573V218.318Z" fill="white"/></svg>ДАРЭ</a>
+        <p>Маркетинговое агентство из Владивостока. Измеримая прибыль — не просто реклама.</p>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+          <a href="tel:+79958702227" style="font-size:14px;color:rgba(255,255,255,.5)">+7 995 870-22-27</a>
+          <a href="mailto:cmo@daremarketing.ru" style="font-size:14px;color:rgba(255,255,255,.5)">cmo@daremarketing.ru</a>
+          <a href="https://t.me/coodare" style="font-size:14px;color:rgba(255,255,255,.5)">t.me/coodare</a>
+        </div>
+      </div>
+      <div class="ft-col"><h5>Услуги</h5><ul>
+        <li><a href="direct.html">Яндекс.Директ</a></li>
+        <li><a href="seo.html">SEO-продвижение</a></li>
+        <li><a href="serm.html">SERM / ORM</a></li>
+        <li><a href="sites.html">Разработка сайтов</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Ещё</h5><ul>
+        <li><a href="ai.html">ИИ-Менеджер</a></li>
+        <li><a href="leads.html">Готовые лиды</a></li>
+        <li><a href="farpost.html">Фарпост</a></li>
+        <li><a href="outreach.html">Email Outreach</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Контакты</h5><ul>
+        <li><a href="tel:+79958702227">+7 995 870-22-27</a></li>
+        <li><a href="mailto:cmo@daremarketing.ru">cmo@daremarketing.ru</a></li>
+        <li><a href="https://t.me/coodare">Telegram</a></li>
+        <li><a href="index.html">О нас</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2025 Агентство ДАРЭ · Владивосток</span>
+      <span>ВСЕ ПРАВА ЗАЩИЩЕНЫ</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
