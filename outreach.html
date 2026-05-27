@@ -6,8 +6,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:'AKONY';src:url('./fonts/AKONY.otf') format('opentype'),url('./fonts/AKONY.ttf') format('truetype');font-weight:normal;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif;--fa:'AKONY','Inter',sans-serif}
 html{scroll-behavior:smooth}
 body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6}
 a{color:inherit;text-decoration:none}
@@ -27,7 +28,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .hc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;max-width:1240px;margin:0 auto;padding:80px 40px 60px;width:100%}
 .h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px;margin-bottom:28px}
 .h-tag::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
-.h-name{font-size:clamp(52px,8vw,110px);font-weight:900;letter-spacing:-.05em;line-height:.88;color:#fff;margin-bottom:28px}
+.h-name{font-family:var(--fa);font-size:clamp(52px,8vw,110px);font-weight:normal;letter-spacing:-.01em;line-height:.92;color:#fff;margin-bottom:28px}
 .h-sub{font-size:clamp(15px,1.3vw,19px);color:rgba(255,255,255,.38);font-weight:300;letter-spacing:.02em;max-width:600px;line-height:1.65;margin-bottom:40px}
 .h-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.1)}
 .hs{padding:20px 32px;border-right:1px solid rgba(255,255,255,.08)}
@@ -54,6 +55,45 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .tl-b{padding:24px 0 24px 24px;border-left:1px solid var(--br)}
 .tl-t{font-size:16px;font-weight:700;margin-bottom:4px}
 .tl-d{font-size:13px;color:var(--mu);line-height:1.5}
+/* МЕХАНИКА */
+.mech-grid{display:flex;flex-direction:column;gap:0;border:1.5px solid var(--bk)}
+.mech-item{display:grid;grid-template-columns:64px 1fr;border-bottom:1.5px solid var(--bk)}
+.mech-item:last-child{border-bottom:none}
+.mech-n{background:var(--bk);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.mech-body{padding:28px 32px}
+.mech-title{font-size:16px;font-weight:700;margin-bottom:6px}
+.mech-desc{font-size:13px;color:var(--mu);line-height:1.6}
+/* ВОРОНКА */
+.funnel-table{width:100%;border:1.5px solid var(--bk);border-collapse:collapse}
+.funnel-table th{padding:14px 20px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-align:left;border-bottom:1.5px solid var(--bk);border-right:1.5px solid var(--bk)}
+.funnel-table th:last-child{border-right:none}
+.funnel-table td{padding:14px 20px;font-size:14px;border-bottom:1px solid var(--br);border-right:1.5px solid var(--bk)}
+.funnel-table td:last-child{border-right:none}
+.funnel-table tr:last-child td{border-bottom:none}
+.funnel-table .real{font-weight:700;color:var(--bk)}
+.funnel-table .total-row td{background:var(--bk);color:#fff;font-weight:700;border-color:rgba(255,255,255,.1)}
+.funnel-table .total-row .real{color:#fff}
+/* CPL */
+.cpl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--bk);margin-top:40px}
+.cpl-card{padding:36px 32px;border-right:1.5px solid var(--bk)}
+.cpl-card:last-child{border-right:none}
+.cpl-card.real-card{background:var(--bk);color:#fff}
+.cpl-scenario{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin-bottom:12px}
+.cpl-card.real-card .cpl-scenario{color:rgba(255,255,255,.4)}
+.cpl-leads{font-size:clamp(32px,3.5vw,48px);font-weight:900;letter-spacing:-.05em;line-height:1;margin-bottom:4px}
+.cpl-price{font-size:18px;font-weight:700;margin-top:8px}
+.cpl-card.real-card .cpl-price{color:#fff}
+.cpl-note{font-size:12px;color:var(--mu);margin-top:8px}
+.cpl-card.real-card .cpl-note{color:rgba(255,255,255,.4)}
+/* МЕСЯЧНАЯ ДИНАМИКА */
+.dyn-table{width:100%;border:1.5px solid rgba(255,255,255,.15);border-collapse:collapse;margin-top:32px}
+.dyn-table th{padding:12px 20px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);text-align:left;border-bottom:1px solid rgba(255,255,255,.1);border-right:1px solid rgba(255,255,255,.1)}
+.dyn-table th:last-child{border-right:none}
+.dyn-table td{padding:14px 20px;font-size:14px;color:rgba(255,255,255,.65);border-bottom:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08)}
+.dyn-table td:last-child{border-right:none}
+.dyn-table tr:last-child td{border-bottom:none;font-weight:700;color:#fff}
+.dyn-table .highlight{color:#fff;font-weight:700}
+/* БЮДЖЕТ */
 .budget-table{border:1.5px solid var(--bk);width:100%}
 .bt-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1.5px solid var(--bk)}
 .bt-row:last-child{border-bottom:none}
@@ -66,7 +106,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .bt-total .bt-cell{font-weight:700}
 .note-box{padding:24px 28px;background:var(--off);border-left:3px solid var(--bk);font-size:14px;color:#555;line-height:1.7;margin-top:32px}
 .cta-sec{background:var(--bk);color:#fff;padding:120px 0;text-align:center}
-.disp{font-size:clamp(40px,6vw,80px);font-weight:900;letter-spacing:-.05em;line-height:.92}
+.disp{font-family:var(--fa);font-size:clamp(40px,6vw,80px);font-weight:normal;letter-spacing:0;line-height:.95}
 .cta-sec .disp{margin-bottom:28px}
 .cta-sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 36px;line-height:1.65}
 .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -110,34 +150,174 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
   <div class="hc">
     <div class="h-tag">ДАРЭ · Услуга 08</div>
     <div class="h-name">EMAIL<br>OUTREACH</div>
-    <p class="h-sub">Холодные B2B-рассылки напрямую ЛПР. Не массовый спам — точечный аутрич с персонализацией, прогретыми доменами и цепочками касаний.</p>
+    <p class="h-sub">Холодные B2B-рассылки напрямую ЛПР. Точечный аутрич с персонализацией, прогретыми доменами и цепочками касаний — не массовый спам.</p>
     <div class="h-stats">
       <div class="hs"><div class="hs-v">~80 000 ₽</div><div class="hs-l">За 3 месяца всё включено</div></div>
-      <div class="hs"><div class="hs-v">~1 778 ₽</div><div class="hs-l">Реалистичный CPA</div></div>
-      <div class="hs"><div class="hs-v">45 лидов</div><div class="hs-l">За 3 месяца кампании</div></div>
+      <div class="hs"><div class="hs-v">~1 778 ₽</div><div class="hs-l">Реалистичный CPL</div></div>
+      <div class="hs"><div class="hs-v">45 лидов</div><div class="hs-l">Реалист. прогноз / 3 мес</div></div>
     </div>
   </div>
 </section>
 
-<!-- КАК РАБОТАЕТ -->
+<!-- ЧТО ТАКОЕ OUTREACH -->
 <section class="sec">
   <div class="w">
     <div class="g2">
+      <div>
+        <div class="sh">
+          <span class="lbl">Что это</span>
+          <h2 class="t1">Прямые B2B-продажи через почту</h2>
+        </div>
+        <p style="font-size:17px;line-height:1.78;color:#333;margin-bottom:24px">
+          Email Outreach — канал прямых B2B-продаж через персонализированные холодные письма на корпоративные адреса ЛПР. В отличие от массовых рассылок, аутрич строится на точечной сегментации базы, индивидуальном обращении к каждой организации и последовательной цепочке из 3–4 касаний.
+        </p>
+        <p style="font-size:15px;line-height:1.7;color:#555">
+          Канал особенно эффективен в узких B2B-нишах с высоким чеком, где ЛПР не ищет вас через контекстную рекламу, но готов рассмотреть предложение напрямую.
+        </p>
+        <div style="margin-top:32px;padding:20px 24px;background:var(--off);border-left:3px solid var(--bk)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin-bottom:8px">Среднее число контактов на организацию</div>
+          <div style="font-size:16px;font-weight:700">3–5 человек (ЛПР, зам, закупщик, инженер)</div>
+        </div>
+      </div>
       <div>
         <div class="sh">
           <span class="lbl">Что включено</span>
           <h2 class="t1">Точечный аутрич, не спам</h2>
         </div>
         <ul class="feat-list">
-          <li><span class="feat-ck">✓</span><span>Сбор целевой базы ЛПР под вашу нишу и ICP</span></li>
-          <li><span class="feat-ck">✓</span><span>Прогрев доменов — репутация перед отправкой</span></li>
-          <li><span class="feat-ck">✓</span><span>Написание персонализированных цепочек писем</span></li>
-          <li><span class="feat-ck">✓</span><span>Настройка SPF, DKIM, DMARC для доставляемости</span></li>
-          <li><span class="feat-ck">✓</span><span>A/B тесты тем и текстов</span></li>
-          <li><span class="feat-ck">✓</span><span>Автоматические follow-up цепочки</span></li>
-          <li><span class="feat-ck">✓</span><span>Аналитика: открытия, клики, ответы, лиды</span></li>
+          <li><span class="feat-ck">✓</span><span>Сбор целевой базы ЛПР по ИНН, ОКВЭД, доменам, выставкам</span></li>
+          <li><span class="feat-ck">✓</span><span>Прогрев доменов — репутация перед первой отправкой</span></li>
+          <li><span class="feat-ck">✓</span><span>Персонализированные цепочки из 3–4 писем на организацию</span></li>
+          <li><span class="feat-ck">✓</span><span>Настройка SPF, DKIM, DMARC для максимальной доставляемости</span></li>
+          <li><span class="feat-ck">✓</span><span>Контроль негатива: при негативной реакции домен блокируется</span></li>
+          <li><span class="feat-ck">✓</span><span>Тёплые ответы — моментально в ваш отдел продаж</span></li>
+          <li><span class="feat-ck">✓</span><span>Аналитика: открытия, ответы, лиды, сделки</span></li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- МЕХАНИКА -->
+<section class="sec bg-off">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Механика работы</span>
+      <h2 class="t1">Автоматизированная система коммуникации</h2>
+    </div>
+    <div class="mech-grid">
+      <div class="mech-item">
+        <div class="mech-n">01</div>
+        <div class="mech-body">
+          <div class="mech-title">Сбор целевой базы</div>
+          <div class="mech-desc">Выкачиваем и верифицируем базу контактов организаций по ИНН, ОКВЭД, доменам, спискам участников выставок. Набираем от 3 до 10 адресов под разные отделы и роли внутри компании.</div>
+        </div>
+      </div>
+      <div class="mech-item">
+        <div class="mech-n">02</div>
+        <div class="mech-body">
+          <div class="mech-title">Сегментация и цепочка касаний</div>
+          <div class="mech-desc">Разбиваем базу по профилю деятельности и региону. Пишем персонализированную цепочку из 3–4 писем (от вводного вопроса до предметного КП). Раз в несколько дней система делает следующее касание автоматически.</div>
+        </div>
+      </div>
+      <div class="mech-item">
+        <div class="mech-n">03</div>
+        <div class="mech-body">
+          <div class="mech-title">Контроль негатива и передача лидов</div>
+          <div class="mech-desc">При негативной реакции весь домен компании немедленно исключается из автоматической рассылки. Все тёплые ответы (заинтересованность) моментально передаются в ваш отдел продаж — без задержек.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ВОРОНКА -->
+<section class="sec bg-dark">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">Прогнозная воронка · 3 месяца</span>
+      <h2 class="t1">Три сценария — честный прогноз</h2>
+    </div>
+    <table class="funnel-table">
+      <thead>
+        <tr>
+          <th>Этап воронки</th>
+          <th>Пессимист.</th>
+          <th class="real">Реалист.</th>
+          <th>Оптимист.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>База контактов</td><td>9 000</td><td class="real">9 000</td><td>9 000</td></tr>
+        <tr><td>Open Rate</td><td>75%</td><td class="real">80%</td><td>85%</td></tr>
+        <tr><td>Открыто писем</td><td>6 750</td><td class="real">7 200</td><td>7 650</td></tr>
+        <tr><td>Reply Rate (от базы)</td><td>3,5%</td><td class="real">4,5%</td><td>6,0%</td></tr>
+        <tr><td>Получено ответов</td><td>315</td><td class="real">405</td><td>540</td></tr>
+        <tr><td>Конверсия в лид</td><td>8%</td><td class="real">11%</td><td>13%</td></tr>
+        <tr class="total-row"><td>ИТОГО ЛИДОВ</td><td>25</td><td class="real">45</td><td>70</td></tr>
+        <tr class="total-row" style="background:rgba(255,255,255,.05)"><td style="color:rgba(255,255,255,.7)">Конверсия в сделку</td><td style="color:rgba(255,255,255,.5)">15%</td><td class="real">18%</td><td style="color:rgba(255,255,255,.5)">22%</td></tr>
+        <tr class="total-row"><td>СДЕЛОК</td><td>4</td><td class="real">8</td><td>15</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:rgba(255,255,255,.35);margin-top:20px;line-height:1.6">* Первый месяц — период прогрева почтовых доменов и тестирования писем. Основной приток сделок приходится на 2–3 месяц по мере накопления базы и «дожима» повторными письмами.</p>
+  </div>
+</section>
+
+<!-- СТОИМОСТЬ ЛИДА + ДИНАМИКА -->
+<section class="sec bg-dark" style="padding-top:0">
+  <div class="w">
+    <div class="sh">
+      <span class="lbl">CPL по сценариям</span>
+      <h2 class="t1">Стоимость лида</h2>
+    </div>
+    <div class="cpl-grid">
+      <div class="cpl-card">
+        <div class="cpl-scenario">Пессимистичный</div>
+        <div class="cpl-leads">25 лидов</div>
+        <div class="cpl-price">~3 200 ₽ / лид</div>
+        <div class="cpl-note">4 сделки за 3 месяца</div>
+      </div>
+      <div class="cpl-card real-card">
+        <div class="cpl-scenario">Реалистичный</div>
+        <div class="cpl-leads">45 лидов</div>
+        <div class="cpl-price">~1 778 ₽ / лид</div>
+        <div class="cpl-note">8 сделок за 3 месяца</div>
+      </div>
+      <div class="cpl-card">
+        <div class="cpl-scenario">Оптимистичный</div>
+        <div class="cpl-leads">70 лидов</div>
+        <div class="cpl-price">~1 143 ₽ / лид</div>
+        <div class="cpl-note">15 сделок за 3 месяца</div>
+      </div>
+    </div>
+    <div class="sh" style="margin-top:64px;margin-bottom:24px">
+      <span class="lbl">Помесячная динамика</span>
+      <h2 class="t1">Реалистичный сценарий</h2>
+    </div>
+    <table class="dyn-table">
+      <thead>
+        <tr>
+          <th>Показатель</th>
+          <th>Мес. 1</th>
+          <th>Мес. 2</th>
+          <th>Мес. 3</th>
+          <th>Итого</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>База рассылки</td><td>3 000</td><td>3 000</td><td>3 000</td><td>9 000</td></tr>
+        <tr><td>Ответов</td><td>105</td><td>135</td><td>165</td><td class="highlight">405</td></tr>
+        <tr><td>Лидов</td><td>10</td><td>15</td><td>20</td><td class="highlight">45</td></tr>
+        <tr><td>Сделок</td><td>0–1</td><td>2–3</td><td>5–6</td><td class="highlight">~8</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ГРАФИК -->
+<section class="sec">
+  <div class="w">
+    <div class="g2">
       <div>
         <div class="sh">
           <span class="lbl">График работы</span>
@@ -148,71 +328,67 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
             <div class="tl-p">Месяц 1</div>
             <div class="tl-b">
               <div class="tl-t">Прогрев доменов</div>
-              <div class="tl-d">Регистрируем домены, прогреваем репутацию, собираем базу, пишем тексты — запуск рассылки в конце месяца</div>
+              <div class="tl-d">Регистрируем домены, прогреваем репутацию SPF/DKIM/DMARC, собираем базу — 3 000 контактов. Запуск в конце месяца, первые 10 лидов.</div>
             </div>
           </div>
           <div class="tl-item">
             <div class="tl-p">Месяц 2</div>
             <div class="tl-b">
-              <div class="tl-t">Первые лиды</div>
-              <div class="tl-d">Активная рассылка, A/B тесты, оптимизация тем. Первые ответы и назначенные встречи</div>
+              <div class="tl-t">Активная рассылка</div>
+              <div class="tl-d">Полный объём 3 000 / мес. Follow-up по тёплым контактам, A/B тесты тем. +15 лидов, 2–3 сделки.</div>
             </div>
           </div>
           <div class="tl-item">
             <div class="tl-p">Месяц 3</div>
             <div class="tl-b">
               <div class="tl-t">Масштабирование</div>
-              <div class="tl-d">Расширяем базу, запускаем второй поток, follow-up по тёплым контактам. Выход на целевые показатели</div>
+              <div class="tl-d">Расширение базы, второй поток, «дожим» повторными письмами. +20 лидов, 5–6 сделок.</div>
             </div>
           </div>
+        </div>
+      </div>
+      <div>
+        <div class="sh">
+          <span class="lbl">Инвестиции</span>
+          <h2 class="t1">Прозрачная структура затрат</h2>
+        </div>
+        <div class="budget-table">
+          <div class="bt-row head">
+            <div class="bt-cell">Статья</div>
+            <div class="bt-cell">Тип</div>
+            <div class="bt-cell">Сумма</div>
+          </div>
+          <div class="bt-row">
+            <div class="bt-cell">Настройка и запуск</div>
+            <div class="bt-cell">Разово</div>
+            <div class="bt-cell num">40 000 ₽</div>
+          </div>
+          <div class="bt-row">
+            <div class="bt-cell">Расходная часть (софт, серверы, верификация)</div>
+            <div class="bt-cell">За 3 мес</div>
+            <div class="bt-cell num">~40 000 ₽</div>
+          </div>
+          <div class="bt-row bt-total">
+            <div class="bt-cell">Итого за 3 месяца</div>
+            <div class="bt-cell">Под ключ</div>
+            <div class="bt-cell num">~80 000 ₽</div>
+          </div>
+        </div>
+        <div class="note-box">
+          При 45 лидах за 3 месяца — <strong>CPL ~1 778 ₽</strong>. При 8 сделках и среднем чеке от 300 тыс ₽ — ROI кампании x30+.
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- БЮДЖЕТ -->
-<section class="sec bg-off">
-  <div class="w">
-    <div class="sh">
-      <span class="lbl">Инвестиции</span>
-      <h2 class="t1">Прозрачная структура затрат</h2>
-    </div>
-    <div class="budget-table">
-      <div class="bt-row head">
-        <div class="bt-cell">Статья</div>
-        <div class="bt-cell">Тип</div>
-        <div class="bt-cell">Сумма</div>
-      </div>
-      <div class="bt-row">
-        <div class="bt-cell">Настройка и запуск</div>
-        <div class="bt-cell">Разовый платёж</div>
-        <div class="bt-cell num">40 000 ₽</div>
-      </div>
-      <div class="bt-row">
-        <div class="bt-cell">Расходная часть (софт, серверы, верификация)</div>
-        <div class="bt-cell">За 3 месяца</div>
-        <div class="bt-cell num">~40 000 ₽</div>
-      </div>
-      <div class="bt-row bt-total">
-        <div class="bt-cell">Итого за 3 месяца</div>
-        <div class="bt-cell">Под ключ</div>
-        <div class="bt-cell num">~80 000 ₽</div>
-      </div>
-    </div>
-    <div class="note-box">
-      При 45 квалифицированных лидах за 3 месяца — <strong>CPA составит около 1 778 ₽ за лид</strong>. Реалистичный прогноз для B2B-сегмента при точном ICP и качественной базе.
-    </div>
-  </div>
-</section>
-
-<!-- ЦИФРЫ -->
+<!-- МЕТРИКИ -->
 <section class="sec-sm bg-dark">
   <div class="w">
     <div class="c-strip">
-      <div class="c-item"><div class="c-lbl">Тип трафика</div><div class="c-val">Прямые ЛПР, не агрегаторы</div></div>
       <div class="c-item"><div class="c-lbl">Подход</div><div class="c-val">Персонализация, не спам</div></div>
       <div class="c-item"><div class="c-lbl">Первые лиды</div><div class="c-val">Со 2-го месяца</div></div>
+      <div class="c-item"><div class="c-lbl">Цикл выхода</div><div class="c-val">6–8 недель</div></div>
     </div>
   </div>
 </section>
@@ -266,6 +442,5 @@ footer{background:var(--bk);color:#fff;padding:80px 0 40px}
     </div>
   </div>
 </footer>
-
 </body>
 </html>
