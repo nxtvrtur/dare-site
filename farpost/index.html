@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Продвижение на Фарпост — ДАРЭ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'AKONY';src:url('../fonts/AKONY.otf') format('opentype'),url('../fonts/AKONY.ttf') format('truetype');font-weight:normal;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif;--fa:'AKONY','Inter',sans-serif}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Onest',sans-serif;--fa:'AKONY','Onest',sans-serif}
 html{scroll-behavior:smooth}
 body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6}
 a{color:inherit;text-decoration:none}
@@ -212,6 +212,84 @@ html,body{overflow-x:hidden}
   transform: translateY(-4px);
   box-shadow: 0 12px 32px rgba(0,0,0,.12);
 }
+
+/* ── FLOATING CHAT WIDGET ── */
+.chat-bubble{position:fixed;bottom:28px;right:28px;z-index:999;font-family:var(--f)}
+.chat-btn{width:54px;height:54px;border-radius:50%;background:var(--bk);border:1.5px solid rgba(255,255,255,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s,box-shadow .25s;position:relative;z-index:2;box-shadow:0 4px 24px rgba(0,0,0,.45)}
+.chat-btn:hover{transform:scale(1.07);box-shadow:0 6px 32px rgba(0,0,0,.55)}
+.chat-ico{position:absolute;transition:opacity .22s,transform .22s}
+.chat-ico-msg{opacity:1;transform:scale(1)}
+.chat-ico-x{opacity:0;transform:scale(.6) rotate(-90deg)}
+.chat-bubble.open .chat-ico-msg{opacity:0;transform:scale(.6) rotate(90deg)}
+.chat-bubble.open .chat-ico-x{opacity:1;transform:scale(1) rotate(0)}
+.chat-pulse{position:absolute;top:0;right:0;width:13px;height:13px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:cpulse 2.2s ease-out infinite}
+@keyframes cpulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}60%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
+.chat-bubble.open .chat-pulse{display:none}
+.chat-menu{position:absolute;bottom:66px;right:0;width:264px;background:var(--bk);border:1px solid rgba(255,255,255,.1);overflow:hidden;transform:scale(.85) translateY(16px);transform-origin:bottom right;opacity:0;pointer-events:none;transition:all .28s cubic-bezier(.16,1,.3,1)}
+.chat-bubble.open .chat-menu{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.chat-hd{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.07);font-size:11px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:8px;letter-spacing:.08em;text-transform:uppercase}
+.chat-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:cdot 2s ease-in-out infinite}
+@keyframes cdot{0%,100%{opacity:1}50%{opacity:.4}}
+.chat-opt{display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid rgba(255,255,255,.06);transition:background .15s;text-decoration:none}
+.chat-opt:last-child{border-bottom:none}
+.chat-opt:hover{background:rgba(255,255,255,.05)}
+.chat-opt-ic{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chat-opt.tg .chat-opt-ic{background:#229ED9}
+.chat-opt.wa .chat-opt-ic{background:#25D366}
+.chat-opt.ph .chat-opt-ic{background:rgba(255,255,255,.1)}
+.chat-opt-tx{display:flex;flex-direction:column;gap:2px}
+.chat-opt-tx b{font-size:13.5px;font-weight:600;color:#fff}
+.chat-opt-tx small{font-size:11px;color:rgba(255,255,255,.38)}
+@media(max-width:480px){.chat-bubble{bottom:18px;right:18px}}
+
+/* ── PRICING REDESIGN ── */
+.price-deck{display:grid;grid-template-columns:repeat(3,1fr);position:relative}
+.pdeck-card{padding:44px 36px 36px;display:flex;flex-direction:column;position:relative;border:1.5px solid var(--bk);margin-right:-1.5px;margin-bottom:-1.5px;transition:z-index 0s,transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.pdeck-card:hover{z-index:3;transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.18)}
+.pdeck-card.feat{background:var(--bk);color:#fff;z-index:2}
+.pdeck-card.feat:hover{transform:translateY(-8px)}
+.pdeck-topline{position:absolute;top:0;left:0;right:0;height:3px;background:transparent}
+.pdeck-card.feat .pdeck-topline{background:#fff;opacity:.25}
+.pdeck-badge{position:absolute;top:20px;right:20px;font-size:8.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:4px 9px;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.5)}
+.pdeck-tier{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--mu);margin-bottom:22px}
+.pdeck-card.feat .pdeck-tier{color:rgba(255,255,255,.38)}
+.pdeck-price{font-family:var(--fa);font-size:clamp(44px,4.8vw,68px);font-weight:normal;letter-spacing:-.03em;line-height:1;color:var(--bk)}
+.pdeck-card.feat .pdeck-price{color:#fff}
+.pdeck-per{font-family:var(--f);font-size:14px;font-weight:400;opacity:.38;letter-spacing:.02em;margin-left:2px}
+.pdeck-note{font-size:12px;color:var(--mu);margin:14px 0 28px;padding:11px 14px;border-left:2px solid var(--br);background:rgba(0,0,0,.028);line-height:1.45}
+.pdeck-card.feat .pdeck-note{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.42)}
+.pdeck-feats{list-style:none;display:flex;flex-direction:column;gap:11px;flex:1;margin-bottom:32px}
+.pdeck-feats li{font-size:13.5px;color:var(--bk);display:flex;gap:11px;align-items:flex-start;line-height:1.42}
+.pdeck-card.feat .pdeck-feats li{color:rgba(255,255,255,.6)}
+.pdeck-ck{flex-shrink:0;margin-top:2px;color:var(--mu)}
+.pdeck-card.feat .pdeck-ck{color:rgba(255,255,255,.45)}
+.pdeck-cta{display:block;text-align:center;padding:14px 20px;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;background:transparent;border:1.5px solid var(--bk);color:var(--bk);transition:all .22s;margin-top:auto;font-family:var(--f)}
+.pdeck-cta:hover{background:var(--bk);color:#fff}
+.pdeck-card.feat .pdeck-cta{border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.8);background:rgba(255,255,255,.06)}
+.pdeck-card.feat .pdeck-cta:hover{background:#fff;color:var(--bk)}
+@media(max-width:860px){.price-deck{grid-template-columns:1fr;gap:0}.pdeck-card{margin-right:0}}
+
+/* ── HERO ANIMATION ── */
+@keyframes hTagIn{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+@keyframes hNameIn{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
+@keyframes hSubIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes hStatsIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.h-tag{animation:hTagIn .7s cubic-bezier(.16,1,.3,1) .05s both}
+.h-name{animation:hNameIn .85s cubic-bezier(.16,1,.3,1) .15s both}
+.h-sub{animation:hSubIn .7s cubic-bezier(.16,1,.3,1) .32s both}
+.h-stats{animation:hStatsIn .7s cubic-bezier(.16,1,.3,1) .45s both}
+/* ── HERO SERVICE ── */
+.hero-svc{min-height:56vh}
+.h-name-svc{font-family:var(--fa);font-size:clamp(44px,6.5vw,100px);font-weight:normal;letter-spacing:-.01em;line-height:.92;color:#fff;margin-bottom:24px}
+/* ── SECTION NUMBERS ── */
+.sec-num{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--mu);margin-bottom:8px;text-transform:uppercase}
+/* ── PRICE HERO BAND ── */
+.price-band{background:var(--bk);color:#fff;padding:60px 0;border-top:1px solid rgba(255,255,255,.06)}
+.pb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,.1)}
+.pb-item{padding:32px 36px;border-right:1px solid rgba(255,255,255,.08)}
+.pb-item:last-child{border-right:none}
+.pb-v{font-family:var(--fa);font-size:clamp(32px,3.5vw,52px);font-weight:normal;letter-spacing:-.03em;line-height:1;color:#fff}
+.pb-l{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:8px}
 </style>
 </head>
 <body>
@@ -456,7 +534,7 @@ document.querySelectorAll('.stagger').forEach(function(el){
 });
 </script>
 
-// ── HERO CANVAS WEBGL ──
+// ── HERO CANVAS WEBGL (ENHANCED) ──
 (function(){
   var canvas=document.getElementById('heroCanvas');
   if(!canvas)return;
@@ -465,29 +543,108 @@ document.querySelectorAll('.stagger').forEach(function(el){
   function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;gl.viewport(0,0,canvas.width,canvas.height);}
   resize();window.addEventListener('resize',resize);
   var vs='attribute vec2 pos;void main(){gl_Position=vec4(pos,0.,1.);}';
-  var fs=['precision mediump float;','uniform float t;','uniform vec2 res;',
+  var fs=[
+    'precision mediump float;uniform float t;uniform vec2 res;',
     'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}',
-    'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
-    'void main(){vec2 uv=gl_FragCoord.xy/res;',
-    'float a=n(uv*2.2+vec2(t*.07,t*.11));float b=n(uv*4.5-vec2(t*.055,t*.085));float c=n(uv*9.+vec2(t*.035,-t*.065));',
-    'float v=a*.5+b*.33+c*.17;',
-    'vec3 c1=vec3(.039,.039,.039);vec3 c2=vec3(.08,.08,.08);vec3 c3=vec3(.14,.14,.14);',
-    'vec3 col=mix(c1,c2,v);col=mix(col,c3,v*v*.55);',
-    'float r=length(uv-.5)*1.5;col=mix(col,c1*.6,r*r);gl_FragColor=vec4(col,1.);}',
-  ].join('\n');
-  function mk(type,src){var s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
-  var prog=gl.createProgram();
-  gl.attachShader(prog,mk(gl.VERTEX_SHADER,vs));
-  gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fs));
-  gl.linkProgram(prog);gl.useProgram(prog);
-  var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-  var aPos=gl.getAttribLocation(prog,'pos');
-  gl.enableVertexAttribArray(aPos);gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
-  var uT=gl.getUniformLocation(prog,'t');var uR=gl.getUniformLocation(prog,'res');
+    'float n(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),u.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),u.x),u.y);}',
+    'float fbm(vec2 p){float v=0.;float a=.52;v+=a*n(p);p=p*2.1+vec2(3.4,1.7);a*=.5;v+=a*n(p);p=p*2.1+vec2(1.9,8.3);a*=.5;v+=a*n(p);return v;}',
+    'void main(){',
+    '  vec2 uv=gl_FragCoord.xy/res;',
+    '  vec2 q=vec2(fbm(uv*1.1+t*.038),fbm(uv*1.1+vec2(5.2,1.3)+t*.032));',
+    '  vec2 r=vec2(fbm(uv*1.4+1.6*q+t*.024),fbm(uv*1.4+1.6*q+vec2(8.3,2.8)+t*.019));',
+    '  float f=fbm(uv*1.1+1.7*r);',
+    '  vec3 dark=vec3(.016,.016,.018);vec3 mid=vec3(.065,.065,.075);vec3 hi=vec3(.12,.12,.13);',
+    '  vec3 col=mix(dark,mid,smoothstep(.18,.62,f));',
+    '  col=mix(col,hi,smoothstep(.5,.88,f)*(.38+.14*sin(t*.25)));',
+    '  col+=n(uv*11.+t*.055)*(.018+.008*sin(t*.4));',
+    '  float vign=1.-length((uv-.5)*vec2(1.4,1.));vign=smoothstep(.1,1.,vign);col*=mix(.38,1.,vign);',
+    '  gl_FragColor=vec4(col,1.);',
+    '}'
+  ].join('
+');
+  function mk(tp,src){var s=gl.createShader(tp);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  var prog=gl.createProgram();gl.attachShader(prog,mk(gl.VERTEX_SHADER,vs));gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);gl.useProgram(prog);
+  var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  var aPos=gl.getAttribLocation(prog,'pos');gl.enableVertexAttribArray(aPos);gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+  var uT=gl.getUniformLocation(prog,'t'),uR=gl.getUniformLocation(prog,'res');
   var t0=performance.now();
   (function loop(){var t=(performance.now()-t0)/1000;gl.uniform1f(uT,t);gl.uniform2f(uR,canvas.width,canvas.height);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(loop);})();
 })();
+
+})();
+
+
+<!-- FLOATING CHAT WIDGET -->
+<div class="chat-bubble" id="chatBubble">
+  <button class="chat-btn" id="chatToggle" aria-label="Связаться">
+    <span class="chat-pulse"></span>
+    <span class="chat-ico chat-ico-msg">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </span>
+    <span class="chat-ico chat-ico-x">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </span>
+  </button>
+  <div class="chat-menu" id="chatMenu">
+    <div class="chat-hd"><span class="chat-dot"></span>Онлайн &middot; ответим быстро</div>
+    <a href="https://t.me/coodare" class="chat-opt tg" target="_blank" rel="noopener">
+      <span class="chat-opt-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.026 9.546c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.393c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.93 14.897l-2.948-.924c-.64-.203-.654-.64.136-.949l11.498-4.433c.533-.194 1.003.13.946.657z"/></svg></span>
+      <span class="chat-opt-tx"><b>Telegram</b><small>t.me/coodare</small></span>
+    </a>
+    <a href="https://wa.me/79958702227" class="chat-opt wa" target="_blank" rel="noopener">
+      <span class="chat-opt-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12.002 0h-.001C5.374 0 0 5.374 0 12c0 2.625.847 5.055 2.284 7.034L.789 23.402l4.481-1.436A11.94 11.94 0 0012 24c6.626 0 12-5.374 12-12S18.628 0 12.002 0zM19 17.005c-.268.754-1.336 1.381-2.182 1.563-.582.124-1.342.222-3.9-.838-3.278-1.349-5.39-4.681-5.553-4.899-.156-.218-1.31-1.745-1.31-3.329s.823-2.357 1.148-2.688c.27-.274.716-.4 1.144-.4.138 0 .263.007.375.013.33.014.495.033.713.552.268.65.919 2.234.999 2.396.082.163.163.382.048.6-.107.225-.2.325-.363.512-.163.188-.318.33-.48.531-.148.175-.315.362-.128.691.188.322.835 1.373 1.793 2.224 1.233 1.096 2.22 1.44 2.578 1.596.27.115.594.086.789-.12.248-.266.554-.708.864-1.143.222-.309.502-.347.797-.238.3.105 1.878.885 2.2 1.046.32.163.533.24.612.374.076.131.076.755-.191 1.508z"/></svg></span>
+      <span class="chat-opt-tx"><b>WhatsApp</b><small>+7 995 870-22-27</small></span>
+    </a>
+    <a href="tel:+79958702227" class="chat-opt ph">
+      <span class="chat-opt-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.47 9.6 19.79 19.79 0 01.36 1a2 2 0 012-2.18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 6.97a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 13.92z"/></svg></span>
+      <span class="chat-opt-tx"><b>Позвонить</b><small>+7 995 870-22-27</small></span>
+    </a>
+  </div>
+</div>
+<script>
+(function(){
+  var bubble=document.getElementById('chatBubble');
+  var toggle=document.getElementById('chatToggle');
+  if(!toggle)return;
+  toggle.addEventListener('click',function(){bubble.classList.toggle('open');});
+  document.addEventListener('click',function(e){
+    if(!bubble.contains(e.target))bubble.classList.remove('open');
+  });
+})();
+</script>
+
+
+<!-- COUNTER ANIMATION -->
+<script>
+(function(){
+  function animateNum(el, target, suffix, decimals){
+    var start=performance.now();
+    var dur=1400;
+    var from=0;
+    function tick(now){
+      var p=Math.min((now-start)/dur,1);
+      var ease=1-Math.pow(1-p,4);
+      var v=from+(target-from)*ease;
+      el.textContent=(decimals?v.toFixed(decimals):Math.round(v))+suffix;
+      if(p<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target;
+      var raw=el.dataset.count;
+      if(!raw)return;
+      io.unobserve(el);
+      var suffix=el.dataset.suffix||'';
+      var dec=parseInt(el.dataset.dec||'0');
+      animateNum(el, parseFloat(raw), suffix, dec);
+    });
+  },{threshold:.3});
+  document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el);});
+})();
+</script>
 
 </body>
 </html>
