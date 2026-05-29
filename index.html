@@ -7,6 +7,8 @@
 <title>ДАРЭ — Маркетинговое агентство Владивосток</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <style>
 @font-face{font-family:'AKONY';src:url('./fonts/AKONY.otf') format('opentype'),url('./fonts/AKONY.ttf') format('truetype');font-weight:normal;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -264,6 +266,60 @@ html,body{overflow-x:hidden}
   .cc{border-right:none!important;border-bottom:1.5px solid var(--bk)}
   .cc:last-child{border-bottom:none}
 }
+
+/* ── CANVAS HERO BACKGROUND ── */
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.7;pointer-events:none}
+.hero-grain{z-index:1;pointer-events:none}
+.hc{z-index:2}
+
+/* ── STORY SLIDES ── */
+.story-slide{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.story-slide-inner{
+  flex:1;display:flex;flex-direction:column;justify-content:space-between;
+  max-width:1240px;margin:0 auto;padding:80px 40px 60px;width:100%;
+  will-change:transform;transform-origin:bottom left;position:relative;z-index:1
+}
+.ss-label{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px}
+.ss-label::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
+.ss-name{font-family:var(--fa);font-size:clamp(72px,13vw,190px);font-weight:normal;
+  letter-spacing:-.02em;line-height:.88;color:#fff;margin:32px 0 0}
+.ss-name.dark{color:var(--bk)}
+.ss-divider{height:1px;background:rgba(255,255,255,.08);margin:32px 0}
+.ss-divider.dark{background:rgba(10,10,10,.12)}
+.ss-body{font-size:clamp(15px,1.4vw,20px);color:rgba(255,255,255,.38);font-weight:300;
+  max-width:520px;line-height:1.65}
+.ss-body.dark{color:rgba(10,10,10,.55)}
+.ss-body p+p{margin-top:16px}
+.ss-foot{display:flex;justify-content:space-between;align-items:flex-end;
+  border-top:1px solid rgba(255,255,255,.07);padding-top:28px}
+.ss-foot.dark{border-top-color:rgba(10,10,10,.1)}
+.ss-stats{display:flex;gap:48px}
+.ss-stat{}
+.ss-v{font-size:clamp(22px,2.8vw,36px);font-weight:900;letter-spacing:-.04em;color:#fff;line-height:1}
+.ss-v.dark{color:var(--bk)}
+.ss-l{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.27);margin-top:4px}
+.ss-l.dark{color:var(--mu)}
+.ss-num-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid rgba(255,255,255,.1)}
+.ss-num-grid.dark{border-color:var(--bk)}
+.sng-item{padding:28px 32px;border-right:1.5px solid rgba(255,255,255,.08);border-bottom:1.5px solid rgba(255,255,255,.08)}
+.ss-num-grid.dark .sng-item{border-color:var(--bk)}
+.sng-item:nth-child(3n){border-right:none}
+.sng-item:nth-last-child(-n+3){border-bottom:none}
+.sng-v{font-family:var(--fa);font-size:clamp(28px,3.5vw,48px);letter-spacing:-.02em;line-height:.9;margin-bottom:10px;color:#fff}
+.ss-num-grid.dark .sng-v{color:var(--bk)}
+.sng-l{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.27)}
+.ss-num-grid.dark .sng-l{color:var(--mu)}
+/* Story slide: hero stays pinned while next rotates in */
+@media(max-width:900px){
+  .story-slide-inner{padding:40px 20px 36px}
+  .ss-stats{gap:24px;flex-wrap:wrap}
+  .ss-num-grid{grid-template-columns:1fr 1fr}
+  .sng-item:nth-child(3n){border-right:1.5px solid rgba(255,255,255,.08)}
+  .ss-num-grid.dark .sng-item:nth-child(3n){border-right:1px solid var(--bk)}
+  .sng-item:nth-child(2n){border-right:none!important}
+}
 </style>
 </head>
 <body>
@@ -317,6 +373,7 @@ html,body{overflow-x:hidden}
 
 <!-- HERO -->
 <section class="hero">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
   <div class="hero-grain"></div>
   <div class="hc">
     <div class="h-tag">Маркетинговое агентство · Владивосток · 2025</div>
@@ -336,6 +393,51 @@ html,body{overflow-x:hidden}
     </div>
   </div>
 </section>
+
+<!-- STORY SLIDE 1: Честность -->
+<section class="story-slide" style="background:var(--bk)">
+  <div class="hero-grain" style="position:absolute;inset:0;opacity:.2;z-index:0"></div>
+  <div class="story-slide-inner">
+    <div class="ss-label">О нас · Владивосток · 2025</div>
+    <div class="ss-name">ЧЕСТНО</div>
+    <div class="ss-divider"></div>
+    <div class="ss-body">
+      <p>Мы открыли агентство в 2025 году. Не придумываем себе 10-летнюю историю — и не собираемся. Наша сила в реальном опыте команды, скорости работы и честных цифрах.</p>
+      <p>За нашими плечами — интернет-маркетинг, ИТ-разработка, ИИ-автоматизации и проекты для лидеров рынка, включая X5 Group.</p>
+    </div>
+    <div class="ss-foot">
+      <div class="ss-stats">
+        <div class="ss-stat"><div class="ss-v">2025</div><div class="ss-l">Год основания</div></div>
+        <div class="ss-stat"><div class="ss-v">X5 Group</div><div class="ss-l">В портфолио</div></div>
+        <div class="ss-stat"><div class="ss-v">0 ₽</div><div class="ss-l">Скрытых платежей</div></div>
+      </div>
+      <div class="h-coord" style="color:rgba(255,255,255,.14);font-size:11px;letter-spacing:.1em;line-height:2">43°07′N 131°54′E<br>Vladivostok, Russia</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY SLIDE 2: Результаты в цифрах -->
+<section class="story-slide" style="background:var(--off)">
+  <div class="story-slide-inner">
+    <div class="ss-label" style="color:rgba(10,10,10,.35)">Результаты · Кейсы</div>
+    <div class="ss-name dark">ЦИФРЫ</div>
+    <div class="ss-divider dark"></div>
+    <div class="ss-body dark">Не «работа была проделана», а конкретные числа. Вот что получают наши клиенты.</div>
+    <div class="ss-num-grid dark">
+      <div class="sng-item"><div class="sng-v" style="color:var(--bk)">135</div><div class="sng-l" style="color:var(--mu)">лидов за месяц</div></div>
+      <div class="sng-item"><div class="sng-v" style="color:var(--bk)">9</div><div class="sng-l" style="color:var(--mu)">закрытых договоров</div></div>
+      <div class="sng-item"><div class="sng-v" style="color:var(--bk)">6.7%</div><div class="sng-l" style="color:var(--mu)">конверсия в сделку</div></div>
+      <div class="sng-item"><div class="sng-v" style="color:var(--bk)">840</div><div class="sng-l" style="color:var(--mu)">звонков/мес Фарпост</div></div>
+      <div class="sng-item"><div class="sng-v" style="color:var(--bk)">1 200 ₽</div><div class="sng-l" style="color:var(--mu)">CPA звонка</div></div>
+      <div class="sng-item"><div class="sng-v" style="color:var(--bk)">×3.4</div><div class="sng-l" style="color:var(--mu)">рост просмотров</div></div>
+    </div>
+    <div class="ss-foot dark" style="border-top:1px solid rgba(10,10,10,.1);padding-top:28px">
+      <div style="font-size:13px;color:var(--mu);font-weight:500;letter-spacing:.05em">Авто-ниша · Владивосток · реальные данные</div>
+      <a href="cases/" style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bk);border-bottom:1.5px solid var(--bk);padding-bottom:3px">Все кейсы →</a>
+    </div>
+  </div>
+</section>
+
 
 <!-- SERVICES -->
 <section class="sec">
@@ -646,6 +748,131 @@ document.querySelectorAll('.stagger').forEach(function(el){
   var r = el.getBoundingClientRect();
   if(r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
 });
+
+
+// ── HERO CANVAS WEBGL SHADER ──
+(function() {
+  var canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) { canvas.style.display='none'; return; }
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var vs = [
+    'attribute vec2 pos;',
+    'void main(){gl_Position=vec4(pos,0.,1.);}',
+  ].join('\n');
+
+  var fs = [
+    'precision mediump float;',
+    'uniform float t;',
+    'uniform vec2 res;',
+    'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}',
+    'float n(vec2 p){',
+    '  vec2 i=floor(p),f=fract(p);',
+    '  f=f*f*(3.-2.*f);',
+    '  return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);',
+    '}',
+    'void main(){',
+    '  vec2 uv=gl_FragCoord.xy/res;',
+    '  float a=n(uv*2.2+vec2(t*.07,t*.11));',
+    '  float b=n(uv*4.5-vec2(t*.055,t*.085));',
+    '  float c=n(uv*9.+vec2(t*.035,-t*.065));',
+    '  float v=a*.5+b*.33+c*.17;',
+    '  vec3 c1=vec3(.039,.039,.039);',  // #0a0a0a
+    '  vec3 c2=vec3(.08,.08,.08);',     // ~#141414
+    '  vec3 c3=vec3(.14,.14,.14);',     // ~#232323
+    '  vec3 col=mix(c1,c2,v);',
+    '  col=mix(col,c3,v*v*.55);',
+    '  float r=length(uv-.5)*1.5;',
+    '  col=mix(col,c1*.6,r*r);',
+    '  gl_FragColor=vec4(col,1.);',
+    '}',
+  ].join('\n');
+
+  function mk(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src); gl.compileShader(s); return s;
+  }
+  var prog = gl.createProgram();
+  gl.attachShader(prog, mk(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, mk(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog); gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uT = gl.getUniformLocation(prog, 't');
+  var uR = gl.getUniformLocation(prog, 'res');
+  var t0 = performance.now();
+
+  (function loop() {
+    var t = (performance.now() - t0) / 1000;
+    gl.uniform1f(uT, t);
+    gl.uniform2f(uR, canvas.width, canvas.height);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(loop);
+  })();
+})();
+
+// ── GSAP STORY SCROLL ──
+window.addEventListener('load', function() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  if (window.innerWidth < 900) return; // desktop only
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  var slides = Array.from(document.querySelectorAll('.hero, .story-slide'));
+  if (slides.length < 2) return;
+
+  slides.forEach(function(slide, i) {
+    gsap.set(slide, { zIndex: i + 1, position: 'relative' });
+
+    var inner = slide.querySelector('.hc, .story-slide-inner');
+    if (!inner) return;
+
+    // Each non-first slide rotates in from 30deg
+    if (i > 0) {
+      gsap.set(inner, { rotation: 30, transformOrigin: 'bottom left' });
+      gsap.to(inner, {
+        rotation: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: slide,
+          start: 'top bottom',
+          end: 'top 22%',
+          scrub: true,
+        }
+      });
+    }
+
+    // Pin all but last story slide
+    if (i < slides.length - 1) {
+      ScrollTrigger.create({
+        trigger: slide,
+        start: 'bottom bottom',
+        end: 'bottom top',
+        pin: true,
+        pinSpacing: false,
+      });
+    }
+  });
+
+  ScrollTrigger.refresh();
+});
+
 </script>
 </body>
 </html>
