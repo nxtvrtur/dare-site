@@ -2,12 +2,13 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Андрей — Co-founder агентства ДАРЭ. Владивосток. Стратегия, маркетинг, проекты для X5 Group.">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Андрей — ДАРЭ</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'AKONY';src:url('../../fonts/AKONY.otf') format('opentype'),url('../../fonts/AKONY.ttf') format('truetype');font-weight:normal;font-style:normal;font-display:swap}
-:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--gr:#888;--br:#e8e8e8;--f:'Inter',sans-serif;--fa:'AKONY',sans-serif}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--gr:#888;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif;--fa:'AKONY',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--f);background:var(--off);color:var(--bk);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
@@ -40,15 +41,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .w{max-width:1240px;margin:0 auto;padding:0 40px}
 .profile-grid{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
 .profile-photo{position:relative}
-.photo-box{width:100%;aspect-ratio:3/4;background:var(--bk);overflow:hidden;display:flex;align-items:center;justify-content:center}
-.photo-initials{font-family:var(--fa);font-size:clamp(60px,8vw,120px);color:rgba(255,255,255,.12);user-select:none}
+.photo-box{width:100%;aspect-ratio:3/4;background:var(--bk);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative}
+.photo-box::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.photo-initials{font-family:var(--fa);font-size:clamp(80px,10vw,140px);color:rgba(255,255,255,.18);user-select:none;position:relative;z-index:1}
 .photo-badge{position:absolute;bottom:0;left:0;right:0;background:rgba(10,10,10,.85);padding:20px 24px;backdrop-filter:blur(8px)}
 .photo-badge-name{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff}
 .photo-badge-role{font-size:12px;color:rgba(255,255,255,.45);margin-top:4px}
 .profile-content{padding:8px 0}
 .sec-label{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gr);margin-bottom:24px;display:flex;align-items:center;gap:12px}
 .sec-label::after{content:'';flex:1;height:1px;background:var(--br)}
-.bio-text{font-size:16px;line-height:1.75;color:#333;margin-bottom:40px}
+.bio-text{font-size:16px;line-height:1.75;color:var(--bk);margin-bottom:40px}
 .bio-text p+p{margin-top:16px}
 .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid var(--bk);margin-bottom:40px}
 .skill-item{padding:20px 24px;border-right:1.5px solid var(--bk);border-bottom:1.5px solid var(--bk)}
@@ -65,7 +67,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .contact-val a{color:var(--bk);transition:opacity .2s}
 .contact-val a:hover{opacity:.6}
 .cta-sec{background:var(--bk);color:#fff;padding:100px 0;text-align:center}
-.disp{font-size:clamp(40px,6vw,80px);font-weight:900;letter-spacing:-.05em;line-height:1.0;padding-bottom:.06em}
+.disp{font-family:var(--fa);font-size:clamp(40px,6vw,80px);font-weight:normal;letter-spacing:-.02em;line-height:1.0;padding-bottom:.06em}
 .cta-sec .disp{margin-bottom:28px}
 .cta-sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 36px;line-height:1.65}
 .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -246,10 +248,10 @@ html,body{overflow-x:hidden}
       <div class="ft-brand">
         <a href="../../">
           <svg height="20" viewBox="0 0 587 326" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M234.03 133.731H60.5611V149.015H0.191045V87.8805H21.588L40.8836 45.2776C54.7661 15.0925 78.2009 0 111.188 0H279.116V87.8805H294.4V149.015H234.03V133.731ZM87.4984 87.8805H218.746V45.8507H126.089C113.353 45.8507 104.31 51.6457 98.9611 63.2358L87.4984 87.8805Z" fill="white" opacity=".4"/>
-            <path d="M586.522 133.731H518.51V0H365.624C331.49 0 307.482 15.0925 293.6 45.2776L274.304 87.8805H294.4V149.015H233.839V133.731H313.122L332.418 91.1282C337.767 79.538 346.81 73.7431 359.546 73.7431H452.776V133.731H453.157V149.015H453.348H452.776H392.406V218.318H586.522V133.731Z" fill="white" opacity=".4"/>
-            <path d="M0 191.045H209.555C209.555 191.045 227.986 219 227.986 252.865C227.986 286.729 209.555 326 209.555 326H0V191.045ZM85.573 281.341H166.52C166.52 281.341 172.796 264.246 172.796 252.288C172.796 240.33 166.52 235.199 166.52 235.199H85.573V281.341Z" fill="white" opacity=".4"/>
-            <path d="M388.84 273.512V239.124H469.978V191.045H279.116V326H586.713V273.512H388.84Z" fill="white" opacity=".4"/>
+            <path d="M234.03 133.731H60.5611V149.015H0.191045V87.8805H21.588L40.8836 45.2776C54.7661 15.0925 78.2009 0 111.188 0H279.116V87.8805H294.4V149.015H234.03V133.731ZM87.4984 87.8805H218.746V45.8507H126.089C113.353 45.8507 104.31 51.6457 98.9611 63.2358L87.4984 87.8805Z" fill="white"/>
+            <path d="M586.522 133.731H518.51V0H365.624C331.49 0 307.482 15.0925 293.6 45.2776L274.304 87.8805H294.4V149.015H233.839V133.731H313.122L332.418 91.1282C337.767 79.538 346.81 73.7431 359.546 73.7431H452.776V133.731H453.157V149.015H453.348H452.776H392.406V218.318H586.522V133.731Z" fill="white"/>
+            <path d="M0 191.045H209.555C209.555 191.045 227.986 219 227.986 252.865C227.986 286.729 209.555 326 209.555 326H0V191.045ZM85.573 281.341H166.52C166.52 281.341 172.796 264.246 172.796 252.288C172.796 240.33 166.52 235.199 166.52 235.199H85.573V281.341Z" fill="white"/>
+            <path d="M388.84 273.512V239.124H469.978V191.045H279.116V326H586.713V273.512H388.84Z" fill="white"/>
           </svg>
         </a>
         <p>Маркетинговое агентство из Владивостока. Работаем честно, быстро и на результат.</p>
@@ -284,7 +286,7 @@ html,body{overflow-x:hidden}
     </div>
     <div class="ft-bot">
       <span>© 2025 Агентство ДАРЭ · Владивосток</span>
-      <span>daremarketing.ru</span>
+      <span>43°07′N 131°54′E</span>
     </div>
   </div>
 </footer>

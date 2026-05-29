@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Маркетинговое агентство ДАРЭ во Владивостоке. Яндекс.Директ, SEO, SERM, разработка сайтов, ИИ-менеджер. Системный рост бизнеса на Дальнем Востоке.">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ДАРЭ — Маркетинговое агентство Владивосток</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -614,7 +615,7 @@ mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 // Scroll reveal
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.12 });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 document.querySelectorAll('.reveal, .reveal-left').forEach(el => {
   // stagger child cards
   if(el.classList.contains('svc-grid')) {
@@ -626,14 +627,24 @@ document.querySelectorAll('.reveal, .reveal-left').forEach(el => {
   }
   io.observe(el);
 });
+// Immediately reveal elements already in viewport on load
+window.addEventListener('load', () => {
+  document.querySelectorAll('.reveal, .reveal-left').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if(r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
+  });
+});
 // Stagger observe
 document.querySelectorAll('.stagger').forEach(function(el){
   var sio = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){ e.target.classList.add('visible'); sio.unobserve(e.target); }
     });
-  },{threshold:.1});
+  },{threshold:.05,rootMargin:'0px 0px -20px 0px'});
   sio.observe(el);
+  // Immediately show if in viewport
+  var r = el.getBoundingClientRect();
+  if(r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
 });
 </script>
 </body>

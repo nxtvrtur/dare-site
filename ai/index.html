@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8"><meta name="description" content="ИИ-менеджер по продажам 24/7 от ДАРЭ. Работает в Telegram, Авито, WhatsApp, VK. Квалификация лидов и передача в CRM. Российский LLM GigaChat.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ИИ-Менеджер по продажам — ДАРЭ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -23,7 +24,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .nav-links a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .2s}
 .nav-links a:hover,.nav-links a.act{color:#fff}
 .nav-btn{background:#fff;color:var(--bk);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;flex-shrink:0;transition:background .2s;font-family:var(--f)}
-.nav-btn:hover{background:#ddd}
+.nav-btn:hover{background:var(--off)}
 .hero{background:var(--bk);color:#fff;padding-top:64px;min-height:52vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
 .hc{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1240px;margin:0 auto;padding:60px 40px 56px;width:100%}
@@ -46,7 +47,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .bg-dark .sh .lbl{color:rgba(255,255,255,.3)}
 .bg-dark .sh .t1{color:#fff;border-color:rgba(255,255,255,.15)}
 .feat-list{list-style:none}
-.feat-list li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--br);font-size:16px;color:#333;line-height:1.5;align-items:flex-start}
+.feat-list li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--br);font-size:16px;color:var(--bk);line-height:1.5;align-items:flex-start}
 .feat-list li:last-child{border-bottom:none}
 .feat-ck{font-weight:900;flex-shrink:0;font-size:13px;margin-top:2px}
 .channels{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1.5px solid var(--bk);margin-top:48px}
@@ -67,7 +68,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .fmt-name{font-size:24px;font-weight:900;letter-spacing:-.02em;margin-bottom:8px}
 .fmt-desc{font-size:14px;color:var(--mu);line-height:1.6;margin-bottom:20px}
 .fmt-feats{list-style:none;display:flex;flex-direction:column;gap:9px}
-.fmt-feats li{font-size:13px;color:#444;display:flex;gap:9px;line-height:1.4}
+.fmt-feats li{font-size:13px;color:var(--bk);display:flex;gap:9px;line-height:1.4}
 .fmt-ck{flex-shrink:0;font-weight:900;font-size:12px}
 /* Case card (light) */
 .case-card-light{border:1.5px solid var(--bk);margin-top:0}
@@ -79,7 +80,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .ccl-stat:last-child{border-right:none}
 .ccl-sv{font-size:clamp(28px,3vw,44px);font-weight:900;letter-spacing:-.05em;line-height:1;margin-bottom:6px}
 .ccl-sl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mu)}
-.ccl-body{padding:32px 40px;border-top:1.5px solid var(--bk);font-size:14px;line-height:1.72;color:#555}
+.ccl-body{padding:32px 40px;border-top:1.5px solid var(--bk);font-size:14px;line-height:1.72;color:var(--mu)}
 /* Chat demo */
 .chat-demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .chat-demo-cta .sh{margin-bottom:24px}
@@ -308,14 +309,14 @@ html,body{overflow-x:hidden}
           <span class="lbl">Кейс — автосалон</span>
           <h2 class="t1">Реальный результат за месяц</h2>
         </div>
-        <div class="case-box" style="border-left-color:#333">
+        <div class="case-box" style="border-left-color:var(--bk)">
           <span class="case-lbl" style="color:var(--mu)">Кейс · Автосалон · 30 дней</span>
           <div class="case-stats">
             <div><div class="cs-v" style="color:var(--bk)">135</div><div class="cs-l">Лидов за месяц</div></div>
             <div><div class="cs-v" style="color:var(--bk)">9</div><div class="cs-l">Закрытых договоров</div></div>
             <div><div class="cs-v" style="color:var(--bk)">6.7%</div><div class="cs-l">Конверсия</div></div>
           </div>
-          <p class="case-t" style="color:#555">ИИ-менеджер обрабатывал входящий трафик из Авито и Telegram. Квалифицировал по параметрам: бюджет, марка, срок покупки. Горячие лиды передавались менеджеру в течение секунды.</p>
+          <p class="case-t" style="color:var(--mu)">ИИ-менеджер обрабатывал входящий трафик из Авито и Telegram. Квалифицировал по параметрам: бюджет, марка, срок покупки. Горячие лиды передавались менеджеру в течение секунды.</p>
         </div>
       </div>
     </div>
@@ -504,7 +505,7 @@ html,body{overflow-x:hidden}
     </div>
     <div class="ft-bot">
       <span>© 2025 Агентство ДАРЭ · Владивосток</span>
-      <span>ВСЕ ПРАВА ЗАЩИЩЕНЫ</span>
+      <span>43°07′N 131°54′E</span>
     </div>
   </div>
 </footer>
