@@ -27,7 +27,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .nav-btn:hover{background:var(--off)}
 .hero{background:var(--bk);color:#fff;padding-top:64px;min-height:52vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
-.hc{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1240px;margin:0 auto;padding:60px 40px 56px;width:100%}
+.hc{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1240px;margin:0 auto;padding:60px 40px 56px;width:100%}
 .h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px;margin-bottom:28px}
 .h-tag::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
 .h-name{font-family:var(--fa);font-size:clamp(44px,5.5vw,88px);font-weight:normal;letter-spacing:-.02em;line-height:.9;color:#fff;margin-bottom:28px}
@@ -255,6 +255,9 @@ html,body{overflow-x:hidden}
 </nav>
 
 <section class="hero">
+  <canvas id="heroCanvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:0"></canvas>
+  <div class="hero-grain" style="position:absolute;inset:0;opacity:.18;z-index:1;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/><feColorMatrix type=%22saturate%22 values=%220%22/></filter><rect width=%22100%%25%22 height=%22100%%25%22 filter=%22url(%23n)%22 opacity=%221%22/></svg>');background-size:200px 200px"></div>
+
   <div class="hc">
     <div class="h-tag">ДАРЭ · Услуга 02</div>
     <div class="h-name">SEO-<br>ПРОДВИЖЕНИЕ</div>
@@ -470,7 +473,7 @@ html,body{overflow-x:hidden}
     window.addEventListener('load',function(){
       revs.forEach(function(r){
         var rect=r.getBoundingClientRect();
-        if(rect.top<window.innerHeight&&rect.bottom>0)r.classList.add('visible');
+        if(rect.top<window.innerHeight*2&&rect.bottom>0)r.classList.add('visible');
       });
     });
   }
@@ -487,5 +490,39 @@ document.querySelectorAll('.stagger').forEach(function(el){
   io.observe(el);
 });
 </script>
+
+// ── HERO CANVAS WEBGL ──
+(function(){
+  var canvas=document.getElementById('heroCanvas');
+  if(!canvas)return;
+  var gl=canvas.getContext('webgl')||canvas.getContext('experimental-webgl');
+  if(!gl){canvas.style.display='none';return;}
+  function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;gl.viewport(0,0,canvas.width,canvas.height);}
+  resize();window.addEventListener('resize',resize);
+  var vs='attribute vec2 pos;void main(){gl_Position=vec4(pos,0.,1.);}';
+  var fs=['precision mediump float;','uniform float t;','uniform vec2 res;',
+    'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}',
+    'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
+    'void main(){vec2 uv=gl_FragCoord.xy/res;',
+    'float a=n(uv*2.2+vec2(t*.07,t*.11));float b=n(uv*4.5-vec2(t*.055,t*.085));float c=n(uv*9.+vec2(t*.035,-t*.065));',
+    'float v=a*.5+b*.33+c*.17;',
+    'vec3 c1=vec3(.039,.039,.039);vec3 c2=vec3(.08,.08,.08);vec3 c3=vec3(.14,.14,.14);',
+    'vec3 col=mix(c1,c2,v);col=mix(col,c3,v*v*.55);',
+    'float r=length(uv-.5)*1.5;col=mix(col,c1*.6,r*r);gl_FragColor=vec4(col,1.);}',
+  ].join('\n');
+  function mk(type,src){var s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  var prog=gl.createProgram();
+  gl.attachShader(prog,mk(gl.VERTEX_SHADER,vs));
+  gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(prog);gl.useProgram(prog);
+  var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  var aPos=gl.getAttribLocation(prog,'pos');
+  gl.enableVertexAttribArray(aPos);gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+  var uT=gl.getUniformLocation(prog,'t');var uR=gl.getUniformLocation(prog,'res');
+  var t0=performance.now();
+  (function loop(){var t=(performance.now()-t0)/1000;gl.uniform1f(uT,t);gl.uniform2f(uR,canvas.width,canvas.height);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(loop);})();
+})();
+
 </body>
 </html>
