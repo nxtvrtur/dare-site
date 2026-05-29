@@ -24,12 +24,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .nav-links a:hover,.nav-links a.act{color:#fff}
 .nav-btn{background:#fff;color:var(--bk);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;flex-shrink:0;transition:background .2s;font-family:var(--f)}
 .nav-btn:hover{background:#ddd}
-.hero{background:var(--bk);color:#fff;padding-top:64px;min-height:68vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero{background:var(--bk);color:#fff;padding-top:64px;min-height:52vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
-.hc{flex:1;display:flex;flex-direction:column;justify-content:flex-end;max-width:1240px;margin:0 auto;padding:80px 40px 60px;width:100%}
+.hc{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1240px;margin:0 auto;padding:60px 40px 56px;width:100%}
 .h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px;margin-bottom:28px}
 .h-tag::before{content:'';width:28px;height:1px;background:rgba(255,255,255,.2);flex-shrink:0}
-.h-name{font-family:var(--fa);font-size:clamp(52px,8vw,120px);font-weight:normal;letter-spacing:-.02em;line-height:.9;color:#fff;margin-bottom:28px}
+.h-name{font-family:var(--fa);font-size:clamp(44px,5.5vw,88px);font-weight:normal;letter-spacing:-.02em;line-height:.9;color:#fff;margin-bottom:28px}
 .h-sub{font-size:clamp(15px,1.3vw,19px);color:rgba(255,255,255,.38);font-weight:300;letter-spacing:.02em;max-width:600px;line-height:1.65;margin-bottom:40px}
 .h-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.1)}
 .hs{padding:20px 32px;border-right:1px solid rgba(255,255,255,.08)}
@@ -69,7 +69,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .r-title{font-size:16px;font-weight:700;margin-bottom:8px}
 .r-desc{font-size:13px;color:var(--mu);line-height:1.6}
 .cta-sec{background:var(--bk);color:#fff;padding:120px 0;text-align:center}
-.disp{font-size:clamp(40px,6vw,80px);font-weight:900;letter-spacing:-.05em;line-height:.92}
+.disp{font-size:clamp(40px,6vw,80px);font-weight:900;letter-spacing:-.05em;line-height:1.0;padding-bottom:.06em}
 .cta-sec .disp{margin-bottom:28px}
 .cta-sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 36px;line-height:1.65}
 .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -444,6 +444,10 @@ html,body{overflow-x:hidden}
         <li><a href="farpost.html">Фарпост</a></li>
         <li><a href="outreach.html">Email Outreach</a></li>
       </ul></div>
+      <div class="ft-col"><h5>Команда</h5><ul>
+        <li><a href="andrey.html">Андрей</a></li>
+        <li><a href="artur.html">Артур</a></li>
+      </ul></div>
       <div class="ft-col"><h5>Контакты</h5><ul>
         <li><a href="tel:+79958702227">+7 995 870-22-27</a></li>
         <li><a href="mailto:cmo@daremarketing.ru">cmo@daremarketing.ru</a></li>
@@ -480,8 +484,15 @@ html,body{overflow-x:hidden}
   if(revs.length){
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
-    },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+    },{threshold:0.05,rootMargin:'0px 0px -20px 0px'});
     revs.forEach(function(r){io.observe(r);});
+    // Immediately show elements already in viewport on load
+    window.addEventListener('load',function(){
+      revs.forEach(function(r){
+        var rect=r.getBoundingClientRect();
+        if(rect.top<window.innerHeight&&rect.bottom>0)r.classList.add('visible');
+      });
+    });
   }
 })();
 </script>

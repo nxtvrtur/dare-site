@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Андрей — ДАРЭ</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'AKONY';src:url('./fonts/AKONY.otf') format('opentype'),url('./fonts/AKONY.ttf') format('truetype');font-weight:normal;font-style:normal;font-display:swap}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--gr:#888;--br:#e8e8e8;--f:'Inter',sans-serif;--fa:'AKONY',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--f);background:var(--off);color:var(--bk);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:64px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-in{display:flex;align-items:center;width:100%;max-width:1240px;margin:0 auto;padding:0 40px;gap:32px}
+.nav-logo{display:flex;align-items:center;flex-shrink:0}
+.nav-links{display:flex;gap:22px;list-style:none;flex:1}
+.nav-links a{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-btn{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 22px;background:#fff;color:var(--bk);transition:all .2s;border:none;cursor:pointer;font-family:var(--f);white-space:nowrap}
+.nav-btn:hover{background:var(--off)}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:300;margin-left:auto}
+.nav-burger span{display:block;width:22px;height:1.5px;background:#fff;transition:transform .3s,opacity .3s}
+.nav-mobile{position:fixed;inset:0;background:var(--bk);z-index:250;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:40px;gap:8px;opacity:0;pointer-events:none;transition:opacity .3s}
+.nav-mobile.open{opacity:1;pointer-events:all}
+.nav-mobile a{font-size:clamp(28px,6vw,44px);font-weight:800;letter-spacing:-.03em;color:rgba(255,255,255,.35);transition:color .2s;display:block;padding:8px 0}
+.nav-mobile a:hover{color:#fff}
+.nav-mobile-close{position:absolute;top:20px;right:20px;background:none;border:none;cursor:pointer;padding:10px}
+.nav-mobile-close span{display:block;width:22px;height:1.5px;background:#fff}
+.nav-mobile-close span:first-child{transform:rotate(45deg) translate(1px,1px)}
+.nav-mobile-close span:last-child{transform:rotate(-45deg) translate(1px,-1px)}
+
+/* HERO */
+.hero{background:var(--bk);color:#fff;padding-top:64px;min-height:52vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.hc{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1240px;margin:0 auto;padding:60px 40px 56px;width:100%;position:relative}
+.h-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.h-tag::before{content:'';display:block;width:32px;height:1px;background:rgba(255,255,255,.2)}
+.h-name{font-family:var(--fa);font-size:clamp(44px,5.5vw,88px);font-weight:normal;letter-spacing:-.02em;line-height:.9;color:#fff;margin-bottom:20px}
+.h-role{font-size:15px;color:rgba(255,255,255,.45);font-weight:400;margin-bottom:36px;letter-spacing:.02em}
+
+/* PROFILE CARD */
+.profile-sec{padding:80px 0}
+.w{max-width:1240px;margin:0 auto;padding:0 40px}
+.profile-grid{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
+.profile-photo{position:relative}
+.photo-box{width:100%;aspect-ratio:3/4;background:var(--bk);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.photo-initials{font-family:var(--fa);font-size:clamp(60px,8vw,120px);color:rgba(255,255,255,.12);user-select:none}
+.photo-badge{position:absolute;bottom:0;left:0;right:0;background:rgba(10,10,10,.85);padding:20px 24px;backdrop-filter:blur(8px)}
+.photo-badge-name{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.photo-badge-role{font-size:12px;color:rgba(255,255,255,.45);margin-top:4px}
+
+.profile-content{padding:8px 0}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gr);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--br)}
+.bio-text{font-size:16px;line-height:1.75;color:#333;margin-bottom:40px}
+.bio-text p+p{margin-top:16px}
+
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid var(--bk);margin-bottom:40px}
+.skill-item{padding:20px 24px;border-right:1.5px solid var(--bk);border-bottom:1.5px solid var(--bk)}
+.skill-item:nth-child(2n){border-right:none}
+.skill-item:nth-last-child(-n+2){border-bottom:none}
+.skill-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gr);margin-bottom:6px}
+.skill-val{font-size:15px;font-weight:600;color:var(--bk)}
+
+/* CONTACTS */
+.contacts-sec{padding:0 0 80px}
+.contact-row{display:flex;gap:0;border:1px solid var(--br);margin-top:32px}
+.contact-item{flex:1;padding:24px 28px;border-right:1px solid var(--br)}
+.contact-item:last-child{border-right:none}
+.contact-lbl{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gr);margin-bottom:8px}
+.contact-val{font-size:15px;font-weight:500;color:var(--bk)}
+.contact-val a{color:var(--bk);transition:opacity .2s}
+.contact-val a:hover{opacity:.6}
+
+/* CTA */
+.cta-sec{background:var(--bk);color:#fff;padding:100px 0;text-align:center}
+.disp{font-size:clamp(40px,6vw,80px);font-weight:900;letter-spacing:-.05em;line-height:1.0;padding-bottom:.06em}
+.cta-sec .disp{margin-bottom:28px}
+.cta-sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 36px;line-height:1.65}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;transition:all .2s;cursor:pointer;border:none;font-family:var(--f)}
+.btn-white{background:#fff;color:var(--bk)}.btn-white:hover{background:var(--off)}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3)}.btn-outline:hover{border-color:#fff}
+
+/* FOOTER */
+footer{background:var(--bk);color:rgba(255,255,255,.4);padding:64px 0 40px}
+.ft-g{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.ft-brand{display:flex;flex-direction:column;gap:16px}
+.ft-brand p{font-size:13px;line-height:1.7;color:rgba(255,255,255,.3);max-width:280px}
+.ft-lbl{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ft-col li a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s}
+.ft-col li a:hover{color:#fff}
+.ft-bot{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between;font-size:12px}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* MOBILE */
+html,body{overflow-x:hidden}
+@media(max-width:900px){
+  .nav-links,.nav-btn{display:none}
+  .nav-burger{display:flex}
+  .w{padding:0 20px}
+  .hc{padding:40px 20px 36px}
+  .profile-grid{grid-template-columns:1fr;gap:32px}
+  .photo-box{aspect-ratio:16/9}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .contact-row{flex-direction:column;border:none;gap:0}
+  .contact-item{border:1px solid var(--br);border-top:none;border-right:1px solid var(--br)}
+  .contact-item:first-child{border-top:1px solid var(--br)}
+  .ft-g{grid-template-columns:1fr 1fr;gap:28px}
+  .ft-bot{flex-direction:column;gap:8px}
+  .disp{font-size:clamp(32px,9vw,56px)!important}
+  .cta-sec{padding:64px 0}
+  .btns{flex-direction:column;align-items:center}
+}
+@media(max-width:480px){
+  .skills-grid{grid-template-columns:1fr}
+  .skill-item{border-right:none!important}
+  .skill-item:nth-last-child(-n+2){border-bottom:1.5px solid var(--bk)!important}
+  .skill-item:last-child{border-bottom:none!important}
+  .ft-g{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <svg height="18" viewBox="0 0 587 326" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M234.03 133.731H60.5611V149.015H0.191045V87.8805H21.588L40.8836 45.2776C54.7661 15.0925 78.2009 0 111.188 0H279.116V87.8805H294.4V149.015H234.03V133.731ZM87.4984 87.8805H218.746V45.8507H126.089C113.353 45.8507 104.31 51.6457 98.9611 63.2358L87.4984 87.8805Z" fill="white"/>
+        <path d="M586.522 133.731H518.51V0H365.624C331.49 0 307.482 15.0925 293.6 45.2776L274.304 87.8805H294.4V149.015H233.839V133.731H313.122L332.418 91.1282C337.767 79.538 346.81 73.7431 359.546 73.7431H452.776V133.731H453.157V149.015H453.348H452.776H392.406V218.318H586.522V133.731Z" fill="white"/>
+        <path d="M0 191.045H209.555C209.555 191.045 227.986 219 227.986 252.865C227.986 286.729 209.555 326 209.555 326H0V191.045ZM85.573 281.341H166.52C166.52 281.341 172.796 264.246 172.796 252.288C172.796 240.33 166.52 235.199 166.52 235.199H85.573V281.341Z" fill="white"/>
+        <path d="M388.84 273.512V239.124H469.978V191.045H279.116V326H586.713V273.512H388.84Z" fill="white"/>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="direct.html">Директ</a></li>
+      <li><a href="seo.html">SEO</a></li>
+      <li><a href="serm.html">SERM</a></li>
+      <li><a href="sites.html">Сайты</a></li>
+      <li><a href="ai.html">ИИ-Менеджер</a></li>
+      <li><a href="leads.html">Лиды</a></li>
+      <li><a href="farpost.html">Фарпост</a></li>
+      <li><a href="outreach.html">Outreach</a></li>
+    </ul>
+    <a href="tel:+79958702227" class="nav-btn">Обсудить проект</a>
+    <button class="nav-burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" id="navClose"><span></span><span></span></button>
+  <a href="direct.html">Директ</a>
+  <a href="seo.html">SEO</a>
+  <a href="serm.html">SERM</a>
+  <a href="sites.html">Сайты</a>
+  <a href="ai.html">ИИ-Менеджер</a>
+  <a href="leads.html">Лиды</a>
+  <a href="farpost.html">Фарпост</a>
+  <a href="outreach.html">Outreach</a>
+  <a href="tel:+79958702227" style="color:#fff;margin-top:16px;font-size:clamp(18px,4vw,24px)">+7 995 870-22-27</a>
+</nav>
+
+<section class="hero">
+  <div class="hc">
+    <div class="h-tag">ДАРЭ · КОМАНДА</div>
+    <div class="h-name">АНДРЕЙ</div>
+    <div class="h-role">Co-founder · Стратегия и разработка</div>
+  </div>
+</section>
+
+<section class="profile-sec">
+  <div class="w">
+    <div class="profile-grid">
+      <div class="profile-photo reveal">
+        <div class="photo-box">
+          <div class="photo-initials">А</div>
+        </div>
+        <div class="photo-badge">
+          <div class="photo-badge-name">Андрей</div>
+          <div class="photo-badge-role">Co-founder, ДАРЭ · Владивосток</div>
+        </div>
+      </div>
+      <div class="profile-content reveal">
+        <div class="sec-label">О себе</div>
+        <div class="bio-text">
+          <p>Занимаюсь интернет-маркетингом и ИТ-разработкой более 7 лет. Работал с проектами федерального масштаба — в портфолио команды есть опыт с X5 Group и рядом крупных региональных игроков.</p>
+          <p>В ДАРЭ отвечаю за технологическую часть, архитектуру продуктов и стратегическое планирование. Убеждён: хороший маркетинг — это система, которую можно измерить и масштабировать.</p>
+          <p>Открыли агентство в 2025 году без легенд про 10-летний опыт. Наша сила — в честности и скорости.</p>
+        </div>
+
+        <div class="sec-label">Экспертиза</div>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-label">Направление</div>
+            <div class="skill-val">ИТ-разработка</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label">Фокус</div>
+            <div class="skill-val">Системы продаж</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label">Технологии</div>
+            <div class="skill-val">ИИ-интеграции</div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label">Рынок</div>
+            <div class="skill-val">Дальний Восток</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contacts-sec">
+  <div class="w">
+    <div class="sec-label reveal">Контакты</div>
+    <div class="contact-row reveal">
+      <div class="contact-item">
+        <div class="contact-lbl">Телефон</div>
+        <div class="contact-val"><a href="tel:+79958702227">+7 995 870-22-27</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-lbl">Email</div>
+        <div class="contact-val"><a href="mailto:cmo@daremarketing.ru">cmo@daremarketing.ru</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-lbl">Telegram</div>
+        <div class="contact-val"><a href="https://t.me/coodare" target="_blank">@coodare</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-lbl">Город</div>
+        <div class="contact-val">Владивосток</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <div class="w">
+    <div class="disp">Обсудим<br>вашу задачу?</div>
+    <p class="cta-sub">Расскажите о проекте — разберём ситуацию и предложим решение.</p>
+    <div class="btns">
+      <a href="tel:+79958702227" class="btn btn-white">Позвонить</a>
+      <a href="https://t.me/coodare" class="btn btn-outline" target="_blank">Написать в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <div class="ft-g">
+      <div class="ft-brand">
+        <a href="index.html">
+          <svg height="20" viewBox="0 0 587 326" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M234.03 133.731H60.5611V149.015H0.191045V87.8805H21.588L40.8836 45.2776C54.7661 15.0925 78.2009 0 111.188 0H279.116V87.8805H294.4V149.015H234.03V133.731ZM87.4984 87.8805H218.746V45.8507H126.089C113.353 45.8507 104.31 51.6457 98.9611 63.2358L87.4984 87.8805Z" fill="white" opacity=".4"/>
+            <path d="M586.522 133.731H518.51V0H365.624C331.49 0 307.482 15.0925 293.6 45.2776L274.304 87.8805H294.4V149.015H233.839V133.731H313.122L332.418 91.1282C337.767 79.538 346.81 73.7431 359.546 73.7431H452.776V133.731H453.157V149.015H453.348H452.776H392.406V218.318H586.522V133.731Z" fill="white" opacity=".4"/>
+            <path d="M0 191.045H209.555C209.555 191.045 227.986 219 227.986 252.865C227.986 286.729 209.555 326 209.555 326H0V191.045ZM85.573 281.341H166.52C166.52 281.341 172.796 264.246 172.796 252.288C172.796 240.33 166.52 235.199 166.52 235.199H85.573V281.341Z" fill="white" opacity=".4"/>
+            <path d="M388.84 273.512V239.124H469.978V191.045H279.116V326H586.713V273.512H388.84Z" fill="white" opacity=".4"/>
+          </svg>
+        </a>
+        <p>Маркетинговое агентство из Владивостока. Работаем честно, быстро и на результат.</p>
+      </div>
+      <div class="ft-col">
+        <div class="ft-lbl">Услуги</div>
+        <ul>
+          <li><a href="direct.html">Яндекс.Директ</a></li>
+          <li><a href="seo.html">SEO-продвижение</a></li>
+          <li><a href="serm.html">SERM / ORM</a></li>
+          <li><a href="sites.html">Разработка сайтов</a></li>
+          <li><a href="ai.html">ИИ-Менеджер</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-lbl">Команда</div>
+        <ul>
+          <li><a href="andrey.html">Андрей</a></li>
+          <li><a href="artur.html">Артур</a></li>
+          <li><a href="index.html">О компании</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-lbl">Контакты</div>
+        <ul>
+          <li><a href="tel:+79958702227">+7 995 870-22-27</a></li>
+          <li><a href="mailto:cmo@daremarketing.ru">cmo@daremarketing.ru</a></li>
+          <li><a href="https://t.me/coodare" target="_blank">t.me/coodare</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2025 Агентство ДАРЭ · Владивосток</span>
+      <span>daremarketing.ru</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger=document.querySelector('.nav-burger');
+  var mob=document.getElementById('navMobile');
+  var close=document.getElementById('navClose');
+  if(burger&&mob){
+    burger.addEventListener('click',function(){mob.classList.add('open');document.body.style.overflow='hidden';});
+    close.addEventListener('click',function(){mob.classList.remove('open');document.body.style.overflow='';});
+    mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('open');document.body.style.overflow='';});});
+  }
+  var revs=document.querySelectorAll('.reveal');
+  if(revs.length){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});
+    revs.forEach(function(r){io.observe(r);});
+    window.addEventListener('load',function(){revs.forEach(function(r){var rect=r.getBoundingClientRect();if(rect.top<window.innerHeight&&rect.bottom>0)r.classList.add('visible');});});
+  }
+})();
+</script>
+</body>
+</html>
