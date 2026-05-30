@@ -5,12 +5,30 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Портфолио — ДАРЭ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="canonical" href="http://150.241.89.89/cases/">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ДАРЭ">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Портфолио — ДАРЭ">
+<meta property="og:description" content="Портфолио ДАРЭ — кейсы маркетингового агентства. Реальные проекты: Lada Express Avto, Atletauto, KDS Дезинсекция.">
+<meta property="og:url" content="http://150.241.89.89/cases/">
+<meta property="og:image" content="http://150.241.89.89/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Портфолио — ДАРЭ">
+<meta name="twitter:description" content="Портфолио ДАРЭ — кейсы маркетингового агентства. Реальные проекты: Lada Express Avto, Atletauto, KDS Дезинсекция.">
+<meta name="twitter:image" content="http://150.241.89.89/og-image.png">
+<link rel="preload" as="font" type="font/otf" href="../fonts/AKONY.otf" crossorigin>
+<link rel="stylesheet" href="../motion.css">
 <style>
 @font-face{font-family:'AKONY';src:url('../fonts/AKONY.otf') format('opentype'),url('../fonts/AKONY.ttf') format('truetype');font-weight:normal;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif;--fa:'AKONY','Inter',sans-serif}
-html{scroll-behavior:smooth}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Mulish',sans-serif;--fa:'AKONY','Mulish',sans-serif}
 body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6}
 a{color:inherit;text-decoration:none}
 .w{max-width:1240px;margin:0 auto;padding:0 40px}
@@ -73,7 +91,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .cta-sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 36px;line-height:1.65}
 .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;transition:all .2s;cursor:pointer;border:none;font-family:var(--f)}
-.btn-w{background:#fff;color:var(--bk)}.btn-w:hover{background:#e0e0e0}
+.btn-w{background:#fff;color:var(--bk)}.btn-w:hover{background:var(--br)}
 .btn-wol{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}.btn-wol:hover{border-color:#fff}
 footer{background:var(--bk);color:#fff;padding:80px 0 40px}
 .ft-g{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
@@ -123,7 +141,7 @@ html,body{overflow-x:hidden}
   <div class="nm-contact">+7 995 870-22-27<br>cmo@daremarketing.ru<br>t.me/coodare</div>
 </div>
 
-<nav>
+<nav aria-label="Основная навигация">
   <div class="nav-in">
     <a href="../" class="nav-logo">
       <svg height="18" viewBox="0 0 587 326" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -304,37 +322,9 @@ html,body{overflow-x:hidden}
   </div>
 </footer>
 
-<script>
-(function(){
-  var burger=document.getElementById('burger');
-  var mob=document.getElementById('navMobile');
-  if(!burger||!mob)return;
-  burger.addEventListener('click',function(){
-    burger.classList.toggle('open');
-    mob.classList.toggle('open');
-    document.body.style.overflow=mob.classList.contains('open')?'hidden':'';
-  });
-  mob.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      burger.classList.remove('open');
-      mob.classList.remove('open');
-      document.body.style.overflow='';
-    });
-  });
-  var revs=document.querySelectorAll('.reveal,.reveal-left');
-  if(revs.length){
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
-    },{threshold:0.05,rootMargin:'0px 0px -20px 0px'});
-    revs.forEach(function(r){io.observe(r);});
-    window.addEventListener('load',function(){
-      revs.forEach(function(r){
-        var rect=r.getBoundingClientRect();
-        if(rect.top<window.innerHeight&&rect.bottom>0)r.classList.add('visible');
-      });
-    });
-  }
-})();
-</script>
+<script defer src="../vendor/gsap.min.js"></script>
+<script defer src="../vendor/ScrollTrigger.min.js"></script>
+<script defer src="../vendor/lenis.min.js"></script>
+<script defer src="../motion.js"></script>
 </body>
 </html>

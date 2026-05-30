@@ -7,12 +7,30 @@
 <title>ДАРЭ — Маркетинговое агентство Владивосток</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="canonical" href="http://150.241.89.89/">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ДАРЭ">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="ДАРЭ — Маркетинговое агентство Владивосток">
+<meta property="og:description" content="Маркетинговое агентство ДАРЭ во Владивостоке. Яндекс.Директ, SEO, SERM, разработка сайтов, ИИ-менеджер. Системный рост бизнеса на Дальнем Востоке.">
+<meta property="og:url" content="http://150.241.89.89/">
+<meta property="og:image" content="http://150.241.89.89/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ДАРЭ — Маркетинговое агентство Владивосток">
+<meta name="twitter:description" content="Маркетинговое агентство ДАРЭ во Владивостоке. Яндекс.Директ, SEO, SERM, разработка сайтов, ИИ-менеджер. Системный рост бизнеса на Дальнем Востоке.">
+<meta name="twitter:image" content="http://150.241.89.89/og-image.png">
+<link rel="preload" as="font" type="font/otf" href="fonts/AKONY.otf" crossorigin>
+<link rel="stylesheet" href="motion.css">
 <style>
 @font-face{font-family:'AKONY';src:url('./fonts/AKONY.otf') format('opentype'),url('./fonts/AKONY.ttf') format('truetype');font-weight:normal;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Mulish',sans-serif;--fa:'AKONY','Mulish',sans-serif}
-html{scroll-behavior:smooth}
-body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6;cursor:none}
+body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6}
 @media(hover:none){body{cursor:auto}}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -30,13 +48,13 @@ body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring{width:52px;h
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:64px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.05);transition:background .3s}
 .nav-in{display:flex;align-items:center;width:100%;max-width:1240px;margin:0 auto;padding:0 40px;gap:32px}
-.nav-logo{display:flex;align-items:center;flex-shrink:0;cursor:none}
+.nav-logo{display:flex;align-items:center;flex-shrink:0;cursor:pointer}
 .nav-logo svg{height:18px;width:auto}
 .nav-links{display:flex;gap:22px;list-style:none;flex:1}
-.nav-links a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .2s;cursor:none}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .2s;cursor:pointer}
 .nav-links a:hover{color:#fff}
-.nav-btn{background:#fff;color:var(--bk);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;flex-shrink:0;transition:background .2s;font-family:var(--f);cursor:none}
-.nav-btn:hover{background:#ddd}
+.nav-btn{background:#fff;color:var(--bk);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;flex-shrink:0;transition:background .2s;font-family:var(--f);cursor:pointer}
+.nav-btn:hover{background:var(--br)}
 /* hamburger */
 .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:300}
 .nav-burger span{display:block;width:22px;height:1.5px;background:#fff;transition:transform .3s,opacity .3s}
@@ -86,7 +104,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 
 /* ── SERVICES ── */
 .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--br)}
-.svc-card{background:var(--wh);padding:36px 28px;display:flex;flex-direction:column;gap:10px;border:none;transition:background .2s,color .2s,transform .2s;position:relative;cursor:none;overflow:hidden}
+.svc-card{background:var(--wh);padding:36px 28px;display:flex;flex-direction:column;gap:10px;border:none;transition:background .2s,color .2s,transform .2s;position:relative;cursor:pointer;overflow:hidden}
 .svc-card::after{content:'';position:absolute;inset:0;background:var(--bk);transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.16,1,.3,1);z-index:0}
 .svc-card:hover::after{transform:scaleY(1)}
 .svc-card:hover{color:#fff}
@@ -147,8 +165,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .cta-sec .disp span{display:block;animation:none}
 .cta-sec .sub{font-size:16px;color:rgba(255,255,255,.38);max-width:480px;margin:0 auto 40px;line-height:1.65}
 .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;transition:all .2s;cursor:none;border:none;font-family:var(--f)}
-.btn-w{background:#fff;color:var(--bk)}.btn-w:hover{background:#e0e0e0}
+.btn{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;transition:all .2s;cursor:pointer;border:none;font-family:var(--f)}
+.btn-w{background:#fff;color:var(--bk)}.btn-w:hover{background:var(--br)}
 .btn-wol{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}.btn-wol:hover{border-color:#fff;background:rgba(255,255,255,.05)}
 .btn-ol{background:transparent;color:var(--bk);border:1.5px solid var(--bk)}.btn-ol:hover{background:var(--bk);color:#fff}
 
@@ -271,61 +289,6 @@ html,body{overflow-x:hidden}
 .hc{z-index:2}
 
 
-/* ── FLOATING CHAT WIDGET ── */
-.chat-bubble{position:fixed;bottom:28px;right:28px;z-index:999;font-family:var(--f)}
-.chat-btn{width:54px;height:54px;border-radius:50%;background:var(--bk);border:1.5px solid rgba(255,255,255,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s,box-shadow .25s;position:relative;z-index:2;box-shadow:0 4px 24px rgba(0,0,0,.45)}
-.chat-btn:hover{transform:scale(1.07);box-shadow:0 6px 32px rgba(0,0,0,.55)}
-.chat-ico{position:absolute;transition:opacity .22s,transform .22s}
-.chat-ico-msg{opacity:1;transform:scale(1)}
-.chat-ico-x{opacity:0;transform:scale(.6) rotate(-90deg)}
-.chat-bubble.open .chat-ico-msg{opacity:0;transform:scale(.6) rotate(90deg)}
-.chat-bubble.open .chat-ico-x{opacity:1;transform:scale(1) rotate(0)}
-.chat-pulse{position:absolute;top:0;right:0;width:13px;height:13px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:cpulse 2.2s ease-out infinite}
-@keyframes cpulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}60%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
-.chat-bubble.open .chat-pulse{display:none}
-.chat-menu{position:absolute;bottom:66px;right:0;width:264px;background:var(--bk);border:1px solid rgba(255,255,255,.1);overflow:hidden;transform:scale(.85) translateY(16px);transform-origin:bottom right;opacity:0;pointer-events:none;transition:all .28s cubic-bezier(.16,1,.3,1)}
-.chat-bubble.open .chat-menu{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
-.chat-hd{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.07);font-size:11px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:8px;letter-spacing:.08em;text-transform:uppercase}
-.chat-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:cdot 2s ease-in-out infinite}
-@keyframes cdot{0%,100%{opacity:1}50%{opacity:.4}}
-.chat-opt{display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid rgba(255,255,255,.06);transition:background .15s;text-decoration:none}
-.chat-opt:last-child{border-bottom:none}
-.chat-opt:hover{background:rgba(255,255,255,.05)}
-.chat-opt-ic{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.chat-opt.tg .chat-opt-ic{background:#229ED9}
-.chat-opt.wa .chat-opt-ic{background:#25D366}
-.chat-opt.ph .chat-opt-ic{background:rgba(255,255,255,.1)}
-.chat-opt-tx{display:flex;flex-direction:column;gap:2px}
-.chat-opt-tx b{font-size:13.5px;font-weight:600;color:#fff}
-.chat-opt-tx small{font-size:11px;color:rgba(255,255,255,.38)}
-@media(max-width:480px){.chat-bubble{bottom:18px;right:18px}}
-
-/* ── AI CHAT WIDGET ── */
-.aichat{position:fixed;bottom:28px;left:28px;z-index:998;font-family:var(--f);width:360px}
-.aichat-dock{height:44px;background:var(--bk);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:10px;padding:0 14px;cursor:pointer;transition:border-color .2s;user-select:none}
-.aichat-dock:hover{border-color:rgba(255,255,255,.28)}
-.aichat-orb{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:conic-gradient(from 0deg,#141414,#2a2a2a,#141414);animation:orbspin 8s linear infinite}
-@keyframes orbspin{to{filter:hue-rotate(360deg)}}
-.aichat-dock-label{font-size:12px;color:rgba(255,255,255,.65);flex:1;letter-spacing:.04em}
-.aichat-dock-hint{font-size:10px;color:rgba(255,255,255,.22);letter-spacing:.04em}
-.aichat-panel{background:var(--bk);border:1px solid rgba(255,255,255,.12);border-bottom:none;overflow:hidden;max-height:0;transition:max-height .35s cubic-bezier(.16,1,.3,1),opacity .25s;opacity:0;pointer-events:none}
-.aichat.open .aichat-panel{max-height:260px;opacity:1;pointer-events:all}
-.aichat-head{padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:8px}
-.aichat-head-orb{width:18px;height:18px;border-radius:50%;background:conic-gradient(from 45deg,#111,#222,#111);animation:orbspin 6s linear infinite;flex-shrink:0}
-.aichat-title{font-size:12px;font-weight:600;color:#fff;letter-spacing:.04em}
-.aichat-status{font-size:10px;color:#22c55e;margin-left:auto;display:flex;align-items:center;gap:5px}
-.aichat-status::before{content:"";width:5px;height:5px;border-radius:50%;background:#22c55e;animation:cdot 2s ease-in-out infinite;flex-shrink:0}
-.aichat-body{padding:12px 16px;min-height:80px;display:flex;flex-direction:column;gap:8px;max-height:140px;overflow-y:auto}
-.aichat-msg{font-size:13px;line-height:1.55;color:rgba(255,255,255,.55);padding:10px 12px;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.12)}
-.aichat-form{padding:10px 16px 14px;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:8px}
-.aichat-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:var(--f);font-size:13px;padding:9px 12px;height:38px;outline:none;transition:border-color .2s}
-.aichat-input::placeholder{color:rgba(255,255,255,.28)}
-.aichat-input:focus{border-color:rgba(255,255,255,.25)}
-.aichat-send{width:38px;height:38px;background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
-.aichat-send:hover{background:#e8e8e8}
-.aichat-send svg{width:16px;height:16px}
-@media(max-width:600px){.aichat{right:8px;width:calc(100vw - 16px);bottom:80px}}
-
 /* ── COMBINED CHAT ── */
 .chat-bubble{position:fixed;bottom:28px;right:28px;z-index:999;font-family:var(--f)}
 .chat-btn{width:56px;height:56px;border-radius:50%;background:var(--bk);border:1.5px solid rgba(255,255,255,.22);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s,box-shadow .25s;position:relative;z-index:2;box-shadow:0 4px 28px rgba(0,0,0,.55)}
@@ -358,7 +321,7 @@ html,body{overflow-x:hidden}
 .cp-input::placeholder{color:rgba(255,255,255,.28)}
 .cp-input:focus{border-color:rgba(255,255,255,.3)}
 .cp-send{width:36px;height:36px;background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .18s;color:var(--bk)}
-.cp-send:hover{background:#ddd}
+.cp-send:hover{background:var(--br)}
 .cp-send svg{width:14px;height:14px}
 .cp-links{border-top:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:repeat(3,1fr)}
 .cpl{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 4px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.36);transition:color .18s,background .18s;text-decoration:none;border-right:1px solid rgba(255,255,255,.06)}
@@ -398,10 +361,6 @@ html,body{overflow-x:hidden}
 </head>
 <body>
 
-<!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <!-- MOBILE NAV -->
 <div class="nav-mobile" id="navMobile">
   <a href="direct/">Директ</a>
@@ -416,7 +375,7 @@ html,body{overflow-x:hidden}
   <div class="nm-contact">+7 995 870-22-27<br>cmo@daremarketing.ru<br>t.me/coodare</div>
 </div>
 
-<nav>
+<nav aria-label="Основная навигация">
   <div class="nav-in">
     <a href="./" class="nav-logo">
       <!-- Compact DARE wordmark -->
@@ -721,119 +680,6 @@ html,body{overflow-x:hidden}
   </div>
 </footer>
 
-<script>
-// Cursor
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
-(function animRing(){rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing);})();
-// Hide cursor on mobile
-if('ontouchstart' in window){ cur.style.display='none'; ring.style.display='none'; }
-
-// Hamburger
-const burger = document.getElementById('burger');
-const mob = document.getElementById('navMobile');
-burger.addEventListener('click', () => {
-  burger.classList.toggle('open');
-  mob.classList.toggle('open');
-  document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
-});
-mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  burger.classList.remove('open'); mob.classList.remove('open'); document.body.style.overflow='';
-}));
-
-// Scroll reveal
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-document.querySelectorAll('.reveal, .reveal-left').forEach(el => {
-  // stagger child cards
-  if(el.classList.contains('svc-grid')) {
-    el.querySelectorAll('.svc-card').forEach((c,i) => {
-      c.style.transitionDelay = (i*0.05)+'s';
-      c.classList.add('reveal');
-      io.observe(c);
-    });
-  }
-  io.observe(el);
-});
-// Immediately reveal elements already in viewport on load
-window.addEventListener('load', () => {
-  document.querySelectorAll('.reveal, .reveal-left').forEach(el => {
-    const r = el.getBoundingClientRect();
-    if(r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
-  });
-});
-// Stagger observe
-document.querySelectorAll('.stagger').forEach(function(el){
-  var sio = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('visible'); sio.unobserve(e.target); }
-    });
-  },{threshold:.05,rootMargin:'0px 0px -20px 0px'});
-  sio.observe(el);
-  // Immediately show if in viewport
-  var r = el.getBoundingClientRect();
-  if(r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
-});
-
-</script>
-<script>
-// ── HERO CANVAS: MESH-GRADIENT ──
-(function(){
-  var canvas=document.getElementById('heroCanvas');
-  if(!canvas)return;
-  var gl=canvas.getContext('webgl')||canvas.getContext('experimental-webgl');
-  if(!gl){canvas.style.display='none';return;}
-  function resize(){canvas.width=canvas.offsetWidth*devicePixelRatio;canvas.height=canvas.offsetHeight*devicePixelRatio;gl.viewport(0,0,canvas.width,canvas.height);}
-  resize();window.addEventListener('resize',resize);
-  var vs='attribute vec2 pos;void main(){gl_Position=vec4(pos,0.,1.);}';
-  var fs=[
-    'precision highp float;',
-    'uniform float t;uniform vec2 res;',
-    'const vec3 C0=vec3(0.,0.,0.);',
-    'const vec3 C1=vec3(.05,.05,.06);',
-    'const vec3 C2=vec3(.12,.12,.13);',
-    'const vec3 C3=vec3(1.,1.,1.);',
-    'void main(){',
-    '  vec2 uv=gl_FragCoord.xy/res;uv.y=1.-uv.y;',
-    '  float s=t*.16;',
-    '  vec2 p0=vec2(.5+.42*cos(s*.73),.5+.42*sin(s*.51));',
-    '  vec2 p1=vec2(.5+.42*cos(s*.41+2.09),.5+.42*sin(s*.63+2.09));',
-    '  vec2 p2=vec2(.5+.38*cos(s*.52+4.19),.5+.38*sin(s*.34+4.19));',
-    '  vec2 p3=vec2(.5+.36*cos(s*.61+1.05),.5+.36*sin(s*.47+3.49));',
-    '  float e=2.5e-4;',
-    '  float d0=1./(dot(uv-p0,uv-p0)+e);',
-    '  float d1=1./(dot(uv-p1,uv-p1)+e);',
-    '  float d2=1./(dot(uv-p2,uv-p2)+e);',
-    '  float d3=1./(dot(uv-p3,uv-p3)+e);',
-    '  float wt=d0+d1+d2+d3;',
-    '  vec3 col=(C0*d0+C1*d1+C2*d2+C3*d3)/wt;',
-    '  gl_FragColor=vec4(col,1.);',
-    '}'
-  ].join('\n');
-  function mk(tp,src){var s=gl.createShader(tp);gl.shaderSource(s,src);gl.compileShader(s);return s;}
-  var prog=gl.createProgram();gl.attachShader(prog,mk(gl.VERTEX_SHADER,vs));gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);gl.useProgram(prog);
-  var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-  var aPos=gl.getAttribLocation(prog,'pos');gl.enableVertexAttribArray(aPos);gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
-  var uT=gl.getUniformLocation(prog,'t'),uR=gl.getUniformLocation(prog,'res');
-  var t0=performance.now();
-  (function loop(){var t=(performance.now()-t0)/1000;gl.uniform1f(uT,t);gl.uniform2f(uR,canvas.width,canvas.height);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(loop);})();
-})();
-
-</script>
-
-
-
-<script>
-// Bulletproof reveal fallback
-setTimeout(function(){
-  document.querySelectorAll('.reveal,.reveal-left,.stagger').forEach(function(el){
-    el.classList.add('visible');
-  });
-},100);
-</script>
 <!-- CHAT WIDGET -->
 <div class="chat-bubble" id="chatBubble">
   <button class="chat-btn" id="chatToggle" aria-label="Написать нам">
@@ -853,7 +699,7 @@ setTimeout(function(){
       <div class="cp-msg">Привет! Я ИИ-менеджер агентства ДАРЭ. Задайте вопрос об услугах или расскажите о задаче.</div>
     </div>
     <div class="cp-form">
-      <input class="cp-input" id="cpInput" placeholder="Напишите вопрос..." type="text">
+      <input class="cp-input" id="cpInput" aria-label="Сообщение ИИ-менеджеру" placeholder="Напишите вопрос..." type="text">
       <button class="cp-send" id="cpSend" aria-label="Отправить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
     </div>
     <div class="cp-links">
@@ -863,23 +709,9 @@ setTimeout(function(){
     </div>
   </div>
 </div>
-<script>
-(function(){
-  var bubble=document.getElementById('chatBubble');
-  var toggle=document.getElementById('chatToggle');
-  if(!toggle)return;
-  toggle.addEventListener('click',function(){
-    bubble.classList.toggle('open');
-    if(bubble.classList.contains('open')){var i=document.getElementById('cpInput');if(i)setTimeout(function(){i.focus();},320);}
-  });
-  document.addEventListener('click',function(e){if(bubble&&!bubble.contains(e.target))bubble.classList.remove('open');});
-  var REPLIES=['Расскажите подробнее о вашем бизнесе — тогда смогу точнее подобрать услугу.','Хороший вопрос! Наш менеджер свяжется с вами в ближайшее время.','Для точного расчёта нам нужно знать вашу нишу и регион. Напишите в Telegram: t.me/coodare','Мы работаем с бизнесом по всему Дальнему Востоку. Расскажите о задаче!'];
-  var ri=0,body=document.getElementById('cpBody'),inp=document.getElementById('cpInput'),send=document.getElementById('cpSend');
-  function addMsg(t,u){if(!body)return;var e=document.createElement('div');e.className='cp-msg'+(u?' user':'');e.textContent=t;body.appendChild(e);body.scrollTop=body.scrollHeight;}
-  function submit(){var v=inp?inp.value.trim():'';if(!v)return;addMsg(v,true);inp.value='';setTimeout(function(){addMsg(REPLIES[ri%REPLIES.length],false);ri++;},900);}
-  if(send)send.addEventListener('click',submit);
-  if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')submit();});
-})();
-</script>
+<script defer src="vendor/gsap.min.js"></script>
+<script defer src="vendor/ScrollTrigger.min.js"></script>
+<script defer src="vendor/lenis.min.js"></script>
+<script defer src="motion.js"></script>
 </body>
 </html>

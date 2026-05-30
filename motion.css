@@ -1,0 +1,97 @@
+/* ══════════════════════════════════════════════════════════════════
+   ДАРЭ · motion.css — shared motion layer (loaded on all 13 pages)
+   Backbone reveals/keyframes live in each page's inline <style>.
+   This file adds: the easing token, the .js-motion gate, the new
+   signature-motion primitives, and the prefers-reduced-motion contract.
+   ══════════════════════════════════════════════════════════════════ */
+
+:root{ --ease:cubic-bezier(.16,1,.3,1); }
+
+/* Native scroll-behavior fights Lenis; motion.js routes anchors instead. */
+html.js-motion{ scroll-behavior:auto; }
+
+/* Lenis smooth-scroll runtime requirements */
+html.lenis,html.lenis body{ height:auto; }
+.lenis.lenis-smooth{ scroll-behavior:auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent]{ overscroll-behavior:contain; }
+.lenis.lenis-stopped{ overflow:hidden; }
+
+/* No-JS / failed-load safety: if motion.js never set .js-motion, show everything */
+html:not(.js-motion) .reveal,
+html:not(.js-motion) .reveal-left,
+html:not(.js-motion) .stagger>*{ opacity:1 !important; transform:none !important; }
+
+/* ── Split-text hero (non-index heroes get char-wrapped by motion.js) ──
+   Words stay nowrap so lines break BETWEEN words (never mid-word);
+   chars fade-rise with a stagger. No vertical clip → safe on wrapping. */
+.mo-split{ min-width:0; max-width:100%; } /* flex-item must not grow to an unbreakable word's width */
+.mo-word{ display:inline-block; white-space:nowrap; }
+.mo-char{ display:inline-block; will-change:transform,opacity; transform:translateY(48%); opacity:0; }
+.js-motion .mo-split.mo-in .mo-char{ transform:none; opacity:1; transition:transform .85s var(--ease), opacity .55s var(--ease); transition-delay:var(--d,0s); }
+
+/* ── Clip-wipe headline texture (applied to section headers / .t1) ── */
+.js-motion .mo-wipe{ clip-path:inset(0 0 100% 0); opacity:0; }
+.js-motion .mo-wipe.mo-in{ clip-path:inset(0 0 0 0); opacity:1; transition:clip-path 1s var(--ease), opacity .8s var(--ease); }
+
+/* ── Perspective lift for card grids (pure CSS, gated on .js-motion) ── */
+.js-motion .mo-lift{ perspective:1400px; }
+.js-motion .mo-lift > *{ opacity:0; transform:translateY(26px) rotateX(7deg); transform-origin:50% 0; }
+.js-motion .mo-lift.mo-in > *{ opacity:1; transform:none; transition:opacity .7s var(--ease), transform .8s var(--ease); transition-delay:calc(var(--li,0)*.06s); }
+
+/* ── Magnetic CTA inner label wrapper ── */
+.mo-mag{ display:inline-flex; align-items:center; gap:inherit; will-change:transform; }
+
+/* ── Marquee edge mask + velocity skew hook ── */
+.marquee-wrap{ -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent); mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent); }
+.marquee-track{ will-change:transform; }
+.marquee-wrap.mo-spot .m-logo{ opacity:.28 !important; transition:opacity .25s; }
+.marquee-wrap.mo-spot .m-logo:hover{ opacity:1 !important; }
+
+/* ── Page-transition fade (progressive; View Transitions where supported) ── */
+.js-motion.mo-leaving #wrap, .js-motion.mo-leaving > body{ /* no-op placeholder */ }
+.mo-fade-out{ opacity:0 !important; transform:translateY(-8px); transition:opacity .32s var(--ease), transform .32s var(--ease); }
+@media(prefers-reduced-motion:no-preference){
+  ::view-transition-old(root){ animation:mo-vt-out .3s var(--ease) both; }
+  ::view-transition-new(root){ animation:mo-vt-in .42s var(--ease) both; }
+}
+@keyframes mo-vt-out{ to{ opacity:0; transform:translateY(-10px); } }
+@keyframes mo-vt-in{ from{ opacity:0; transform:translateY(12px); } }
+
+/* ── Burger overlay link stagger (upgrades the opacity-only fade) ── */
+.js-motion .nav-mobile a{ transform:translateY(26px); opacity:0; transition:transform .55s var(--ease), opacity .4s var(--ease), color .2s; }
+.js-motion .nav-mobile.open a{ transform:none; opacity:1; }
+.js-motion .nav-mobile.open a:nth-child(1){ transition-delay:.06s }
+.js-motion .nav-mobile.open a:nth-child(2){ transition-delay:.11s }
+.js-motion .nav-mobile.open a:nth-child(3){ transition-delay:.16s }
+.js-motion .nav-mobile.open a:nth-child(4){ transition-delay:.21s }
+.js-motion .nav-mobile.open a:nth-child(5){ transition-delay:.26s }
+.js-motion .nav-mobile.open a:nth-child(6){ transition-delay:.31s }
+.js-motion .nav-mobile.open a:nth-child(7){ transition-delay:.36s }
+.js-motion .nav-mobile.open a:nth-child(8){ transition-delay:.41s }
+.js-motion .nav-mobile.open a:nth-child(9){ transition-delay:.46s }
+
+/* ══════════════════════════════════════════════════════════════════
+   REDUCED MOTION / LOW-POWER CONTRACT  (single source of truth)
+   motion.js mirrors this in JS (no Lenis/GSAP/WebGL-RAF when reduced).
+   ══════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  html{ scroll-behavior:auto !important; }
+  /* Everything fully present & static */
+  .reveal,.reveal-left,.stagger>*,.disp span,.h-letter,.mo-char,.mo-wipe,.mo-lift>*{
+    opacity:1 !important; transform:none !important; clip-path:none !important;
+  }
+  .marquee-track{ animation:none !important; }
+  .chat-pulse,.chat-dot,.cp-stat::before,.aichat-status::before{ animation:none !important; }
+  .aichat-orb,.aichat-head-orb,.cp-head-orb,.chat-orb-ic{ animation:none !important; }
+}
+
+/* Low-power "lite" mode set by motion.js (deviceMemory<4 / Save-Data / low FPS):
+   keep reveals but kill the continuous/expensive bits. */
+html.mo-lite .marquee-track{ animation-play-state:running; }
+html.mo-lite .aichat-orb,html.mo-lite .chat-orb-ic,html.mo-lite .cp-head-orb,html.mo-lite .aichat-head-orb{ animation:none; }

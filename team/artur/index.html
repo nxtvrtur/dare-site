@@ -5,10 +5,29 @@
 <meta name="description" content="Артур — Lead Developer и ИИ-инженер агентства ДАРЭ. Уфа. Автоматизации на LLM, собственный SaaS, интеграции.">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Артур — ДАРЭ</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="canonical" href="http://150.241.89.89/team/artur/">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ДАРЭ">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Артур — ДАРЭ">
+<meta property="og:description" content="Артур — Lead Developer и ИИ-инженер агентства ДАРЭ. Уфа. Автоматизации на LLM, собственный SaaS, интеграции.">
+<meta property="og:url" content="http://150.241.89.89/team/artur/">
+<meta property="og:image" content="http://150.241.89.89/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Артур — ДАРЭ">
+<meta name="twitter:description" content="Артур — Lead Developer и ИИ-инженер агентства ДАРЭ. Уфа. Автоматизации на LLM, собственный SaaS, интеграции.">
+<meta name="twitter:image" content="http://150.241.89.89/og-image.png">
+<link rel="preload" as="font" type="font/otf" href="../../fonts/AKONY.otf" crossorigin>
+<link rel="stylesheet" href="../../motion.css">
 <style>
 @font-face{font-family:'AKONY';src:url('../../fonts/AKONY.otf') format('opentype'),url('../../fonts/AKONY.ttf') format('truetype');font-weight:normal;font-style:normal;font-display:swap}
-:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--gr:#888;--br:#e0e0e0;--mu:#888;--f:'Inter',sans-serif;--fa:'AKONY',sans-serif}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Mulish',sans-serif;--fa:'AKONY',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--f);background:var(--off);color:var(--bk);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
@@ -43,7 +62,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .profile-photo{position:relative}
 .photo-box{width:100%;aspect-ratio:3/4;background:var(--bk);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative}
 .photo-box::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
-.photo-initials{font-family:var(--fa);font-size:clamp(80px,10vw,140px);color:rgba(255,255,255,.18);user-select:none;position:relative;z-index:1}
+.photo-img{width:100%;height:100%;object-fit:cover;object-position:center 28%;position:relative;filter:grayscale(10%) contrast(1.02)}
 .photo-badge{position:absolute;bottom:0;left:0;right:0;background:rgba(10,10,10,.85);padding:20px 24px;backdrop-filter:blur(8px)}
 .photo-badge-name{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff}
 .photo-badge-role{font-size:12px;color:rgba(255,255,255,.45);margin-top:4px}
@@ -123,7 +142,7 @@ html,body{overflow-x:hidden}
 </head>
 <body>
 
-<nav>
+<nav aria-label="Основная навигация">
   <div class="nav-in">
     <a href="../../" class="nav-logo">
       <svg height="18" viewBox="0 0 587 326" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,7 +197,7 @@ html,body{overflow-x:hidden}
     <div class="profile-grid">
       <div class="profile-photo reveal">
         <div class="photo-box">
-          <div class="photo-initials">А</div>
+          <img class="photo-img" src="artur.jpg" alt="Артур — сооснователь агентства ДАРЭ" width="864" height="924" loading="lazy">
         </div>
         <div class="photo-badge">
           <div class="photo-badge-name">Артур</div>
@@ -300,23 +319,9 @@ html,body{overflow-x:hidden}
   </div>
 </footer>
 
-<script>
-(function(){
-  var burger=document.getElementById('burger');
-  var mob=document.getElementById('navMobile');
-  var close=document.getElementById('navClose');
-  if(burger&&mob){
-    burger.addEventListener('click',function(){mob.classList.add('open');document.body.style.overflow='hidden';});
-    close.addEventListener('click',function(){mob.classList.remove('open');document.body.style.overflow='';});
-    mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mob.classList.remove('open');document.body.style.overflow='';});});
-  }
-  var revs=document.querySelectorAll('.reveal');
-  if(revs.length){
-    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});
-    revs.forEach(function(r){io.observe(r);});
-    window.addEventListener('load',function(){revs.forEach(function(r){var rect=r.getBoundingClientRect();if(rect.top<window.innerHeight&&rect.bottom>0)r.classList.add('visible');});});
-  }
-})();
-</script>
+<script defer src="../../vendor/gsap.min.js"></script>
+<script defer src="../../vendor/ScrollTrigger.min.js"></script>
+<script defer src="../../vendor/lenis.min.js"></script>
+<script defer src="../../motion.js"></script>
 </body>
 </html>
