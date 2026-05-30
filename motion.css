@@ -123,3 +123,36 @@ html:not(.js-motion) .stagger>*{ opacity:1 !important; transform:none !important
    keep reveals but kill the continuous/expensive bits. */
 html.mo-lite .marquee-track{ animation-play-state:running; }
 html.mo-lite .aichat-orb,html.mo-lite .chat-orb-ic,html.mo-lite .cp-head-orb,html.mo-lite .aichat-head-orb{ animation:none; }
+
+/* ══════════════════════════════════════════════════════════════════
+   LEAD MODAL (overlay application form) + chat typing indicator
+   ══════════════════════════════════════════════════════════════════ */
+.lead-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.lead-modal.open{opacity:1;pointer-events:auto}
+.lm-backdrop{position:absolute;inset:0;background:rgba(10,10,10,.74);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.lm-card{position:relative;z-index:1;width:100%;max-width:440px;background:#fff;color:#0a0a0a;padding:40px 36px 30px;border:1px solid var(--br);box-shadow:0 30px 80px rgba(0,0,0,.4);transform:translateY(20px) scale(.98);transition:transform .35s var(--ease);max-height:92vh;overflow:auto}
+.lead-modal.open .lm-card{transform:none}
+.lm-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:26px;line-height:1;color:#999;cursor:pointer;padding:6px}
+.lm-close:hover{color:#0a0a0a}
+.lm-title{font-family:var(--fa);font-size:clamp(26px,4vw,32px);line-height:1;margin-bottom:10px}
+.lm-sub{font-size:14px;color:#666;line-height:1.55;margin-bottom:22px}
+.lm-form{display:flex;flex-direction:column;gap:11px}
+.lm-input{width:100%;padding:13px 15px;border:1px solid var(--br);background:#fafafa;font-family:var(--f);font-size:15px;color:#0a0a0a;outline:none;transition:border-color .2s,background .2s}
+.lm-input:focus{border-color:#0a0a0a;background:#fff}
+textarea.lm-input{resize:vertical;min-height:62px}
+.lm-submit{margin-top:6px;padding:15px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-family:var(--f);border:none}
+.lm-submit:disabled{opacity:.6;cursor:default}
+.lm-status{font-size:13px;text-align:center;min-height:18px;margin-top:4px;line-height:1.4}
+.lm-status.ok{color:#16893a}
+.lm-status.err{color:#d33}
+.lm-ok{text-align:center;padding:16px 0}
+.lm-ok-ic{font-size:40px;margin-bottom:10px}
+.lm-ok-t{font-family:var(--fa);font-size:26px;margin-bottom:8px}
+.lm-ok-s{font-size:14px;color:#666;line-height:1.55}
+
+/* chat typing dots */
+.cp-typing{display:flex;gap:4px;padding:10px 12px;align-items:center}
+.cp-typing span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45);animation:cpTyp 1s infinite ease-in-out}
+.cp-typing span:nth-child(2){animation-delay:.15s}
+.cp-typing span:nth-child(3){animation-delay:.3s}
+@keyframes cpTyp{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}

@@ -96,15 +96,23 @@
     });
     document.addEventListener('click', function (e) { if (bubble && !bubble.contains(e.target)) bubble.classList.remove('open'); });
     var body = $('#cpBody'), inp = $('#cpInput'), send = $('#cpSend');
-    var REPLIES = [
-      'Расскажите подробнее о вашем бизнесе — тогда смогу точнее подобрать услугу.',
-      'Хороший вопрос! Наш менеджер свяжется с вами в ближайшее время.',
-      'Для точного расчёта нам нужно знать вашу нишу и регион. Напишите в Telegram: t.me/coodare',
-      'Мы работаем с бизнесом по всему Дальнему Востоку. Расскажите о задаче!'
-    ];
-    var ri = 0;
-    function addMsg(t, u) { if (!body) return; var el = document.createElement('div'); el.className = 'cp-msg' + (u ? ' user' : ''); el.textContent = t; body.appendChild(el); body.scrollTop = body.scrollHeight; }
-    function submit() { var v = inp ? inp.value.trim() : ''; if (!v) return; addMsg(v, true); inp.value = ''; setTimeout(function () { addMsg(REPLIES[ri % REPLIES.length], false); ri++; }, 900); }
+    var history = [], busy = false;
+    function addMsg(t, u) { if (!body) return null; var el = document.createElement('div'); el.className = 'cp-msg' + (u ? ' user' : ''); el.textContent = t; body.appendChild(el); body.scrollTop = body.scrollHeight; return el; }
+    function typing() { if (!body) return null; var el = document.createElement('div'); el.className = 'cp-typing'; el.innerHTML = '<span></span><span></span><span></span>'; body.appendChild(el); body.scrollTop = body.scrollHeight; return el; }
+    function submit() {
+      if (busy) return;
+      var v = inp ? inp.value.trim() : ''; if (!v) return;
+      addMsg(v, true); inp.value = ''; history.push({ role: 'user', content: v });
+      busy = true; var t = typing();
+      fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: v, history: history.slice(-20) }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (t) t.remove();
+          var reply = (d && d.ok && d.reply) ? d.reply : ((d && d.error) || 'Не получилось ответить. Напишите в Telegram: t.me/coodare');
+          addMsg(reply, false); history.push({ role: 'assistant', content: reply }); busy = false;
+        })
+        .catch(function () { if (t) t.remove(); addMsg('Сеть недоступна. Напишите нам в Telegram: t.me/coodare', false); busy = false; });
+    }
     if (send) send.addEventListener('click', submit);
     if (inp) inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
   }
@@ -339,6 +347,69 @@
     window.addEventListener('pageshow', function (ev) { if (ev.persisted) document.body.classList.remove('mo-fade-out'); });
   }
 
+  /* ─────────────── LEAD MODAL (overlay form -> /api/send) ─────────────── */
+  function initLeadForm() {
+    if ($('#leadModal')) return;
+    var m = document.createElement('div');
+    m.className = 'lead-modal'; m.id = 'leadModal';
+    m.setAttribute('role', 'dialog'); m.setAttribute('aria-modal', 'true');
+    m.setAttribute('aria-label', 'Обсудить проект'); m.setAttribute('aria-hidden', 'true');
+    m.innerHTML =
+      '<div class="lm-backdrop" data-lead-close></div>' +
+      '<div class="lm-card">' +
+        '<button class="lm-close" type="button" data-lead-close aria-label="Закрыть">&times;</button>' +
+        '<div class="lm-title">Обсудим проект</div>' +
+        '<div class="lm-sub">Оставьте контакты — перезвоним, подберём направление и посчитаем стоимость. Без обязательств.</div>' +
+        '<form class="lm-form" id="leadForm" novalidate>' +
+          '<input class="lm-input" name="name" placeholder="Ваше имя" autocomplete="name" required>' +
+          '<input class="lm-input" name="phone" type="tel" inputmode="tel" placeholder="Телефон" autocomplete="tel" required>' +
+          '<textarea class="lm-input" name="message" rows="3" placeholder="Кратко о задаче (необязательно)"></textarea>' +
+          '<button class="lm-submit lf-submit" type="submit">Отправить заявку</button>' +
+          '<div class="lm-status" id="lmStatus"></div>' +
+        '</form>' +
+      '</div>';
+    document.body.appendChild(m);
+    var card = m.querySelector('.lm-card');
+    var form = m.querySelector('#leadForm'), status = m.querySelector('#lmStatus');
+    var els = form.elements, lastFocus = null;
+    function open(prefill) {
+      lastFocus = document.activeElement;
+      if (prefill && els['message'] && !els['message'].value) els['message'].value = prefill;
+      m.classList.add('open'); m.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
+      setTimeout(function () { try { els['name'].focus(); } catch (e) {} }, 60);
+    }
+    function close() { m.classList.remove('open'); m.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; if (lastFocus) try { lastFocus.focus(); } catch (e) {} }
+    window.__openLead = open;
+    m.addEventListener('click', function (e) { if (e.target.hasAttribute && e.target.hasAttribute('data-lead-close')) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && m.classList.contains('open')) close(); });
+    // triggers (capture phase so it beats page-transition + magnetic): nav CTA, pricing CTA, [data-lead]
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest && e.target.closest('.nav-btn, .pdeck-cta, [data-lead]');
+      if (!t) return;
+      e.preventDefault(); e.stopPropagation();
+      var pre = '';
+      var pc = t.closest && t.closest('.pdeck-card');
+      if (pc) { var tier = pc.querySelector('.pdeck-tier'); if (tier) pre = 'Интересует тариф «' + tier.textContent.trim() + '»'; }
+      open(pre);
+    }, true);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = (els['name'].value || '').trim(), phone = (els['phone'].value || '').trim(), msg = (els['message'].value || '').trim();
+      if (!name || !phone) { status.className = 'lm-status err'; status.textContent = 'Заполните имя и телефон'; return; }
+      var btn = form.querySelector('.lm-submit'), old = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Отправляем…'; status.className = 'lm-status'; status.textContent = '';
+      fetch('/api/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, phone: phone, message: msg }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.ok) {
+            card.innerHTML = '<button class="lm-close" type="button" data-lead-close aria-label="Закрыть">&times;</button>' +
+              '<div class="lm-ok"><div class="lm-ok-ic">✓</div><div class="lm-ok-t">Заявка отправлена</div><div class="lm-ok-s">Спасибо! Свяжемся с вами в ближайшее время.</div></div>';
+          } else { btn.disabled = false; btn.textContent = old; status.className = 'lm-status err'; status.textContent = (d && d.error) || 'Не отправилось. Позвоните: +7 995 870-22-27'; }
+        })
+        .catch(function () { btn.disabled = false; btn.textContent = old; status.className = 'lm-status err'; status.textContent = 'Сеть недоступна. Позвоните: +7 995 870-22-27'; });
+    });
+  }
+
   /* ─────────────────────────── A11Y: skip link ─────────────────────────── */
   function initSkipLink() {
     if ($('.mo-skip')) return;
@@ -367,6 +438,7 @@
     safe('disp', initDisp);
     safe('marquee', initMarquee);
     safe('pageTransition', initPageTransition);
+    safe('leadForm', initLeadForm);
     safe('skipLink', initSkipLink);
     if (ST) ST.refresh();
   }
