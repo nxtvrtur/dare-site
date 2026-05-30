@@ -315,6 +315,38 @@ html,body{overflow-x:hidden}
 .pb-item:last-child{border-right:none}
 .pb-v{font-family:var(--fa);font-size:clamp(32px,3.5vw,52px);font-weight:normal;letter-spacing:-.03em;line-height:1;color:#fff}
 .pb-l{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:8px}
+
+/* ── AI CHAT WIDGET ── */
+.aichat{position:fixed;bottom:28px;right:96px;z-index:998;font-family:var(--f);width:360px}
+.aichat-dock{height:44px;background:var(--bk);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:10px;padding:0 14px;cursor:pointer;transition:border-color .2s;user-select:none}
+.aichat-dock:hover{border-color:rgba(255,255,255,.28)}
+.aichat-orb{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:conic-gradient(from 0deg,#141414,#2a2a2a,#141414);animation:orbspin 8s linear infinite}
+@keyframes orbspin{to{filter:hue-rotate(360deg)}}
+.aichat-dock-label{font-size:12px;color:rgba(255,255,255,.65);flex:1;letter-spacing:.04em}
+.aichat-dock-hint{font-size:10px;color:rgba(255,255,255,.22);letter-spacing:.04em}
+.aichat-panel{background:var(--bk);border:1px solid rgba(255,255,255,.12);border-bottom:none;overflow:hidden;max-height:0;transition:max-height .35s cubic-bezier(.16,1,.3,1),opacity .25s;opacity:0;pointer-events:none}
+.aichat.open .aichat-panel{max-height:260px;opacity:1;pointer-events:all}
+.aichat-head{padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:8px}
+.aichat-head-orb{width:18px;height:18px;border-radius:50%;background:conic-gradient(from 45deg,#111,#222,#111);animation:orbspin 6s linear infinite;flex-shrink:0}
+.aichat-title{font-size:12px;font-weight:600;color:#fff;letter-spacing:.04em}
+.aichat-status{font-size:10px;color:#22c55e;margin-left:auto;display:flex;align-items:center;gap:5px}
+.aichat-status::before{content:'';width:5px;height:5px;border-radius:50%;background:#22c55e;animation:cdot 2s ease-in-out infinite;flex-shrink:0}
+.aichat-body{padding:12px 16px;min-height:80px;display:flex;flex-direction:column;gap:8px}
+.aichat-msg{font-size:13px;line-height:1.55;color:rgba(255,255,255,.55);padding:10px 12px;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.12)}
+.aichat-form{padding:10px 16px 14px;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:8px}
+.aichat-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:var(--f);font-size:13px;padding:9px 12px;resize:none;height:38px;outline:none;transition:border-color .2s}
+.aichat-input::placeholder{color:rgba(255,255,255,.28)}
+.aichat-input:focus{border-color:rgba(255,255,255,.25)}
+.aichat-send{width:38px;height:38px;background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.aichat-send:hover{background:#e8e8e8}
+.aichat-send svg{width:16px;height:16px}
+@media(max-width:480px){.aichat{right:8px;width:calc(100vw - 16px);bottom:80px}}
+
+/* ── MULISH TYPOGRAPHY ── */
+p,li,.proc-desc,.af-item-desc,.feat-list li span:last-child{font-size:15.5px;line-height:1.78;color:#2a2a2a}
+.bg-dark p,.bg-dark li{color:rgba(255,255,255,.55)}
+.sec-body-text{font-size:16px;line-height:1.8;color:#2a2a2a}
+strong{font-weight:700;color:inherit}
 </style>
 </head>
 <body>
@@ -646,41 +678,6 @@ document.querySelectorAll('.stagger').forEach(function(el){
 });
 </script>
 
-// ── HERO CANVAS WEBGL (ENHANCED) ──
-(function(){
-  var canvas=document.getElementById('heroCanvas');
-  if(!canvas)return;
-  var gl=canvas.getContext('webgl')||canvas.getContext('experimental-webgl');
-  if(!gl){canvas.style.display='none';return;}
-  function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;gl.viewport(0,0,canvas.width,canvas.height);}
-  resize();window.addEventListener('resize',resize);
-  var vs='attribute vec2 pos;void main(){gl_Position=vec4(pos,0.,1.);}';
-  var fs=[
-    'precision mediump float;uniform float t;uniform vec2 res;',
-    'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}',
-    'float n(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),u.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),u.x),u.y);}',
-    'float fbm(vec2 p){float v=0.;float a=.52;v+=a*n(p);p=p*2.1+vec2(3.4,1.7);a*=.5;v+=a*n(p);p=p*2.1+vec2(1.9,8.3);a*=.5;v+=a*n(p);return v;}',
-    'void main(){',
-    '  vec2 uv=gl_FragCoord.xy/res;',
-    '  vec2 q=vec2(fbm(uv*1.1+t*.038),fbm(uv*1.1+vec2(5.2,1.3)+t*.032));',
-    '  vec2 r=vec2(fbm(uv*1.4+1.6*q+t*.024),fbm(uv*1.4+1.6*q+vec2(8.3,2.8)+t*.019));',
-    '  float f=fbm(uv*1.1+1.7*r);',
-    '  vec3 dark=vec3(.016,.016,.018);vec3 mid=vec3(.065,.065,.075);vec3 hi=vec3(.12,.12,.13);',
-    '  vec3 col=mix(dark,mid,smoothstep(.18,.62,f));',
-    '  col=mix(col,hi,smoothstep(.5,.88,f)*(.38+.14*sin(t*.25)));',
-    '  col+=n(uv*11.+t*.055)*(.018+.008*sin(t*.4));',
-    '  float vign=1.-length((uv-.5)*vec2(1.4,1.));vign=smoothstep(.1,1.,vign);col*=mix(.38,1.,vign);',
-    '  gl_FragColor=vec4(col,1.);',
-    '}'
-  ].join('
-');
-  function mk(tp,src){var s=gl.createShader(tp);gl.shaderSource(s,src);gl.compileShader(s);return s;}
-  var prog=gl.createProgram();gl.attachShader(prog,mk(gl.VERTEX_SHADER,vs));gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);gl.useProgram(prog);
-  var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-  var aPos=gl.getAttribLocation(prog,'pos');gl.enableVertexAttribArray(aPos);gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
-  var uT=gl.getUniformLocation(prog,'t'),uR=gl.getUniformLocation(prog,'res');
-  var t0=performance.now();
-  (function loop(){var t=(performance.now()-t0)/1000;gl.uniform1f(uT,t);gl.uniform2f(uR,canvas.width,canvas.height);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(loop);})();
 })();
 
 })();
@@ -726,35 +723,111 @@ document.querySelectorAll('.stagger').forEach(function(el){
 </script>
 
 
-<!-- COUNTER ANIMATION -->
+
+<script>
+// ── HERO CANVAS WEBGL ──
+(function(){
+  var canvas=document.getElementById('heroCanvas');
+  if(!canvas)return;
+  var gl=canvas.getContext('webgl')||canvas.getContext('experimental-webgl');
+  if(!gl){canvas.style.display='none';return;}
+  function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;gl.viewport(0,0,canvas.width,canvas.height);}
+  resize();window.addEventListener('resize',resize);
+  var vs='attribute vec2 pos;void main(){gl_Position=vec4(pos,0.,1.);}';
+  var fs=[
+    'precision mediump float;uniform float t;uniform vec2 res;',
+    'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}',
+    'float n(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),u.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),u.x),u.y);}',
+    'float fbm(vec2 p){float v=0.;float a=.52;v+=a*n(p);p=p*2.1+vec2(3.4,1.7);a*=.5;v+=a*n(p);p=p*2.1+vec2(1.9,8.3);a*=.5;v+=a*n(p);return v;}',
+    'void main(){',
+    '  vec2 uv=gl_FragCoord.xy/res;',
+    '  vec2 q=vec2(fbm(uv*1.1+t*.038),fbm(uv*1.1+vec2(5.2,1.3)+t*.032));',
+    '  vec2 r2=vec2(fbm(uv*1.4+1.6*q+t*.024),fbm(uv*1.4+1.6*q+vec2(8.3,2.8)+t*.019));',
+    '  float f=fbm(uv*1.1+1.7*r2);',
+    '  vec3 dark=vec3(.016,.016,.018);vec3 mid=vec3(.065,.065,.075);vec3 hi=vec3(.12,.12,.13);',
+    '  vec3 col=mix(dark,mid,smoothstep(.18,.62,f));',
+    '  col=mix(col,hi,smoothstep(.5,.88,f)*(.38+.14*sin(t*.25)));',
+    '  col+=n(uv*11.+t*.055)*(.018+.008*sin(t*.4));',
+    '  float vign=1.-length((uv-.5)*vec2(1.4,1.));vign=smoothstep(.1,1.,vign);col*=mix(.38,1.,vign);',
+    '  gl_FragColor=vec4(col,1.);',
+    '}'
+  ].join('\n');
+  function mk(tp,src){var s=gl.createShader(tp);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  var prog=gl.createProgram();gl.attachShader(prog,mk(gl.VERTEX_SHADER,vs));gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);gl.useProgram(prog);
+  var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  var aPos=gl.getAttribLocation(prog,'pos');gl.enableVertexAttribArray(aPos);gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+  var uT=gl.getUniformLocation(prog,'t'),uR=gl.getUniformLocation(prog,'res');
+  var t0=performance.now();
+  (function loop(){var t=(performance.now()-t0)/1000;gl.uniform1f(uT,t);gl.uniform2f(uR,canvas.width,canvas.height);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(loop);})();
+})();
+</script>
+<script>
+// Bulletproof reveal - force-show all hidden elements after 600ms
+setTimeout(function(){
+  document.querySelectorAll('.reveal,.reveal-left,.stagger').forEach(function(el){
+    el.classList.add('visible');
+  });
+},600);
+</script>
+
+<!-- AI CHAT WIDGET -->
+<div class="aichat" id="aiChat">
+  <div class="aichat-panel" id="aiChatPanel">
+    <div class="aichat-head">
+      <div class="aichat-head-orb"></div>
+      <span class="aichat-title">ИИ-Менеджер ДАРЭ</span>
+      <span class="aichat-status">онлайн</span>
+    </div>
+    <div class="aichat-body" id="aiChatBody">
+      <div class="aichat-msg">Привет! Я ИИ-менеджер агентства ДАРЭ. Задайте вопрос об услугах или расскажите о вашей задаче — я помогу.</div>
+    </div>
+    <div class="aichat-form">
+      <input class="aichat-input" id="aiChatInput" placeholder="Напишите вопрос..." type="text">
+      <button class="aichat-send" id="aiChatSend" aria-label="Отправить">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="aichat-dock" id="aiChatDock">
+    <div class="aichat-orb"></div>
+    <span class="aichat-dock-label">Спросить ИИ-менеджера</span>
+    <span class="aichat-dock-hint">Ответим мгновенно</span>
+  </div>
+</div>
 <script>
 (function(){
-  function animateNum(el, target, suffix, decimals){
-    var start=performance.now();
-    var dur=1400;
-    var from=0;
-    function tick(now){
-      var p=Math.min((now-start)/dur,1);
-      var ease=1-Math.pow(1-p,4);
-      var v=from+(target-from)*ease;
-      el.textContent=(decimals?v.toFixed(decimals):Math.round(v))+suffix;
-      if(p<1)requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
+  var widget=document.getElementById('aiChat');
+  var dock=document.getElementById('aiChatDock');
+  var inp=document.getElementById('aiChatInput');
+  var send=document.getElementById('aiChatSend');
+  var body=document.getElementById('aiChatBody');
+  if(!dock)return;
+  var REPLIES=[
+    'Расскажите подробнее о вашем бизнесе — тогда смогу точнее подобрать услугу.',
+    'Хороший вопрос! Наш менеджер свяжется с вами в течение нескольких минут.',
+    'Для точного расчёта стоимости нам нужно знать вашу нишу и регион. Напишите в Telegram: t.me/coodare',
+    'Мы работаем с бизнесом по всему Дальнему Востоку. Расскажите о задаче!'
+  ];
+  var ri=0;
+  dock.addEventListener('click',function(){widget.classList.toggle('open');if(widget.classList.contains('open')&&inp)setTimeout(function(){inp.focus();},350);});
+  document.addEventListener('click',function(e){if(!widget.contains(e.target))widget.classList.remove('open');});
+  function addMsg(text,isUser){
+    var el=document.createElement('div');
+    el.className='aichat-msg';
+    el.style.cssText=isUser?'background:rgba(255,255,255,.09);border-left-color:rgba(255,255,255,.3);color:#fff':'';
+    el.textContent=text;
+    body.appendChild(el);
+    body.scrollTop=body.scrollHeight;
   }
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting)return;
-      var el=e.target;
-      var raw=el.dataset.count;
-      if(!raw)return;
-      io.unobserve(el);
-      var suffix=el.dataset.suffix||'';
-      var dec=parseInt(el.dataset.dec||'0');
-      animateNum(el, parseFloat(raw), suffix, dec);
-    });
-  },{threshold:.3});
-  document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el);});
+  function submit(){
+    var v=inp?inp.value.trim():'';
+    if(!v)return;
+    addMsg(v,true);
+    inp.value='';
+    setTimeout(function(){addMsg(REPLIES[ri%REPLIES.length],false);ri++;},900);
+  }
+  if(send)send.addEventListener('click',submit);
+  if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')submit();});
 })();
 </script>
 

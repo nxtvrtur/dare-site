@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ДАРЭ — Маркетинговое агентство Владивосток</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'AKONY';src:url('./fonts/AKONY.otf') format('opentype'),url('./fonts/AKONY.ttf') format('truetype');font-weight:normal;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Onest',sans-serif;--fa:'AKONY','Onest',sans-serif}
+:root{--bk:#0a0a0a;--wh:#fff;--off:#f7f6f3;--br:#e0e0e0;--mu:#888;--f:'Mulish',sans-serif;--fa:'AKONY','Mulish',sans-serif}
 html{scroll-behavior:smooth}
 body{font-family:var(--f);background:var(--wh);color:var(--bk);-webkit-font-smoothing:antialiased;line-height:1.6;cursor:none}
 @media(hover:none){body{cursor:auto}}
@@ -115,7 +115,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 
 /* ── ABOUT ── */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-.about-text{font-size:17px;line-height:1.82;color:#333}
+.about-text{font-size:16.5px;line-height:1.85;color:#2a2a2a;font-weight:400}.about-text strong{font-weight:700;color:var(--bk)}
 .about-stat{display:flex;flex-direction:column;gap:0;border:1px solid var(--br)}
 .as-item{padding:28px 32px;border-bottom:1px solid var(--br)}
 .as-item:last-child{border-bottom:none}
@@ -299,6 +299,32 @@ html,body{overflow-x:hidden}
 .chat-opt-tx b{font-size:13.5px;font-weight:600;color:#fff}
 .chat-opt-tx small{font-size:11px;color:rgba(255,255,255,.38)}
 @media(max-width:480px){.chat-bubble{bottom:18px;right:18px}}
+
+/* ── AI CHAT WIDGET ── */
+.aichat{position:fixed;bottom:28px;right:96px;z-index:998;font-family:var(--f);width:360px}
+.aichat-dock{height:44px;background:var(--bk);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:10px;padding:0 14px;cursor:pointer;transition:border-color .2s;user-select:none}
+.aichat-dock:hover{border-color:rgba(255,255,255,.28)}
+.aichat-orb{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:conic-gradient(from 0deg,#141414,#2a2a2a,#141414);animation:orbspin 8s linear infinite}
+@keyframes orbspin{to{filter:hue-rotate(360deg)}}
+.aichat-dock-label{font-size:12px;color:rgba(255,255,255,.65);flex:1;letter-spacing:.04em}
+.aichat-dock-hint{font-size:10px;color:rgba(255,255,255,.22);letter-spacing:.04em}
+.aichat-panel{background:var(--bk);border:1px solid rgba(255,255,255,.12);border-bottom:none;overflow:hidden;max-height:0;transition:max-height .35s cubic-bezier(.16,1,.3,1),opacity .25s;opacity:0;pointer-events:none}
+.aichat.open .aichat-panel{max-height:260px;opacity:1;pointer-events:all}
+.aichat-head{padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:8px}
+.aichat-head-orb{width:18px;height:18px;border-radius:50%;background:conic-gradient(from 45deg,#111,#222,#111);animation:orbspin 6s linear infinite;flex-shrink:0}
+.aichat-title{font-size:12px;font-weight:600;color:#fff;letter-spacing:.04em}
+.aichat-status{font-size:10px;color:#22c55e;margin-left:auto;display:flex;align-items:center;gap:5px}
+.aichat-status::before{content:"";width:5px;height:5px;border-radius:50%;background:#22c55e;animation:cdot 2s ease-in-out infinite;flex-shrink:0}
+.aichat-body{padding:12px 16px;min-height:80px;display:flex;flex-direction:column;gap:8px;max-height:140px;overflow-y:auto}
+.aichat-msg{font-size:13px;line-height:1.55;color:rgba(255,255,255,.55);padding:10px 12px;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.12)}
+.aichat-form{padding:10px 16px 14px;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:8px}
+.aichat-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:var(--f);font-size:13px;padding:9px 12px;height:38px;outline:none;transition:border-color .2s}
+.aichat-input::placeholder{color:rgba(255,255,255,.28)}
+.aichat-input:focus{border-color:rgba(255,255,255,.25)}
+.aichat-send{width:38px;height:38px;background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.aichat-send:hover{background:#e8e8e8}
+.aichat-send svg{width:16px;height:16px}
+@media(max-width:600px){.aichat{right:8px;width:calc(100vw - 16px);bottom:80px}}
 </style>
 </head>
 <body>
@@ -476,9 +502,9 @@ html,body{overflow-x:hidden}
           <span class="lbl">О нас</span>
           <h2 class="t1">Честность вместо 10-летней легенды</h2>
         </div>
-        <p class="about-text">Мы официально открыли агентство в 2025 году. Мы не придумываем себе 10-летнюю историю, чтобы казаться старше и солиднее. Наша сила в другом — в честности, скорости работы и реальном опыте команды.</p>
-        <p class="about-text" style="margin-top:22px">За нашими плечами — сильный бэкграунд: от интернет-маркетинга и дизайна до сложной ИТ-разработки. В портфолио нашей команды есть проекты для лидеров рынка, включая <strong>X5 Group</strong>.</p>
-        <p class="about-text" style="margin-top:22px">Мы понимаем главное: бизнесу нужны не просто модные нейросети или строчки кода, а измеримая прибыль. Мы объединили глубокое понимание воронок продаж с технологиями искусственного интеллекта. Не делаем «ботов ради ботов» — создаём цифровых сотрудников, которые умеют продавать.</p>
+        <p class="about-text">Мы официально открыли агентство в <strong>2025 году</strong>. Мы не придумываем себе 10-летнюю историю, чтобы казаться старше и солиднее. Наша сила в другом — в <strong>честности</strong>, скорости работы и <strong>реальном опыте команды</strong>.</p>
+        <p class="about-text" style="margin-top:22px">За нашими плечами — сильный бэкграунд: от <strong>интернет-маркетинга и дизайна</strong> до <strong>сложной ИТ-разработки</strong>. В портфолио нашей команды есть проекты для лидеров рынка, включая <strong>X5 Group</strong>.</p>
+        <p class="about-text" style="margin-top:22px">Мы понимаем главное: бизнесу нужны не просто модные нейросети или строчки кода, а <strong>измеримая прибыль</strong>. Мы объединили глубокое понимание <strong>воронок продаж</strong> с технологиями <strong>искусственного интеллекта</strong>. Не делаем «ботов ради ботов» — создаём <strong>цифровых сотрудников</strong>, которые умеют продавать.</p>
       </div>
       <div class="reveal">
         <div class="about-stat">
@@ -780,5 +806,56 @@ document.querySelectorAll('.stagger').forEach(function(el){
 })();
 </script>
 
+
+<script>
+// Bulletproof reveal fallback
+setTimeout(function(){
+  document.querySelectorAll('.reveal,.reveal-left,.stagger').forEach(function(el){
+    el.classList.add('visible');
+  });
+},600);
+</script>
+<!-- AI CHAT WIDGET -->
+<div class="aichat" id="aiChat">
+  <div class="aichat-panel" id="aiChatPanel">
+    <div class="aichat-head">
+      <div class="aichat-head-orb"></div>
+      <span class="aichat-title">ИИ-Менеджер ДАРЭ</span>
+      <span class="aichat-status">онлайн</span>
+    </div>
+    <div class="aichat-body" id="aiChatBody">
+      <div class="aichat-msg">Привет! Я ИИ-менеджер агентства ДАРЭ. Задайте вопрос об услугах или расскажите о вашей задаче — я помогу.</div>
+    </div>
+    <div class="aichat-form">
+      <input class="aichat-input" id="aiChatInput" placeholder="Напишите вопрос..." type="text">
+      <button class="aichat-send" id="aiChatSend" aria-label="Отправить">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="aichat-dock" id="aiChatDock">
+    <div class="aichat-orb"></div>
+    <span class="aichat-dock-label">Спросить ИИ-менеджера</span>
+    <span class="aichat-dock-hint">Ответим мгновенно</span>
+  </div>
+</div>
+<script>
+(function(){
+  var widget=document.getElementById("aiChat");
+  var dock=document.getElementById("aiChatDock");
+  var inp=document.getElementById("aiChatInput");
+  var send=document.getElementById("aiChatSend");
+  var body=document.getElementById("aiChatBody");
+  if(!dock)return;
+  var REPLIES=["Расскажите подробнее о вашем бизнесе — тогда смогу точнее подобрать услугу.","Хороший вопрос! Наш менеджер свяжется с вами в течение нескольких минут.","Для точного расчёта нам нужно знать вашу нишу и регион. Напишите в Telegram: t.me/coodare","Мы работаем с бизнесом по всему Дальнему Востоку. Расскажите о задаче!"];
+  var ri=0;
+  dock.addEventListener("click",function(){widget.classList.toggle("open");if(widget.classList.contains("open")&&inp)setTimeout(function(){inp.focus();},350);});
+  document.addEventListener("click",function(e){if(!widget.contains(e.target))widget.classList.remove("open");});
+  function addMsg(text,isUser){var el=document.createElement("div");el.className="aichat-msg";el.style.cssText=isUser?"background:rgba(255,255,255,.09);border-left-color:rgba(255,255,255,.3);color:#fff":"";el.textContent=text;body.appendChild(el);body.scrollTop=body.scrollHeight;}
+  function submit(){var v=inp?inp.value.trim():"";if(!v)return;addMsg(v,true);inp.value="";setTimeout(function(){addMsg(REPLIES[ri%REPLIES.length],false);ri++;},900);}
+  if(send)send.addEventListener("click",submit);
+  if(inp)inp.addEventListener("keydown",function(e){if(e.key==="Enter")submit();});
+})();
+</script>
 </body>
 </html>
