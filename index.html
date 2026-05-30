@@ -379,22 +379,19 @@ html,body{overflow-x:hidden}
             letterShim 6s ease-in-out calc(var(--i)*.7s + 1.8s) infinite;
 }
 @keyframes letterShim{0%,100%{background-position:0% 0}50%{background-position:200% 0}}
-/* stress mark ´ above Э */
+/* stress mark — CSS line, no font glyph */
 .h-stress{position:relative}
 .h-stress::after{
-  content:'\B4';
+  content:'';
   position:absolute;
-  top:-.18em;
-  right:.12em;
-  font-size:.28em;
-  font-family:'Mulish',sans-serif;
-  font-weight:200;
-  -webkit-text-fill-color:rgba(255,255,255,.6);
-  color:rgba(255,255,255,.6);
-  background:none;
-  -webkit-background-clip:initial;
-  background-clip:initial;
-  line-height:1;
+  top:-.09em;
+  right:.1em;
+  width:.18em;
+  height:.035em;
+  background:rgba(255,255,255,.52);
+  border-radius:.02em;
+  transform:rotate(-28deg);
+  transform-origin:center;
   pointer-events:none
 }
 </style>
