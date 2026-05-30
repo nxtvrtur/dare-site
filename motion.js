@@ -410,6 +410,19 @@
     });
   }
 
+  /* ─────────────────────────── SCROLL PROGRESS BAR ─────────────────────────── */
+  function initProgress() {
+    if (reduced()) return;
+    var bar = document.createElement('div'); bar.className = 'mo-progress'; document.body.appendChild(bar);
+    function upd() {
+      var st = window.scrollY || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? Math.min(st / h * 100, 100) : 0) + '%';
+    }
+    if (lenis) lenis.on('scroll', upd); else window.addEventListener('scroll', upd, { passive: true });
+    window.addEventListener('resize', upd); upd();
+  }
+
   /* ─────────────────────────── A11Y: skip link ─────────────────────────── */
   function initSkipLink() {
     if ($('.mo-skip')) return;
@@ -439,6 +452,7 @@
     safe('marquee', initMarquee);
     safe('pageTransition', initPageTransition);
     safe('leadForm', initLeadForm);
+    safe('progress', initProgress);
     safe('skipLink', initSkipLink);
     if (ST) ST.refresh();
   }
