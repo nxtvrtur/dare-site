@@ -332,10 +332,9 @@
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       var a = e.target.closest && e.target.closest('a'); if (!isInternal(a)) return;
       if (a.pathname === location.pathname) return; // same page anchor handled by Lenis
-      if (document.startViewTransition) return; // browser handles the cross-doc/MPA fade via CSS
       e.preventDefault();
-      document.body.classList.add('mo-fade-out');
-      setTimeout(function () { window.location.href = a.href; }, 300);
+      document.body.classList.add('mo-fade-out'); // opacity-only fade (keeps fixed nav/logo steady)
+      setTimeout(function () { window.location.href = a.href; }, 280);
     });
     window.addEventListener('pageshow', function (ev) { if (ev.persisted) document.body.classList.remove('mo-fade-out'); });
   }
