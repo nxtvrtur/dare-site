@@ -163,3 +163,6 @@ textarea.lm-input{resize:vertical;min-height:62px}
 /* scroll progress bar (top) */
 .mo-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:1001;background:var(--cta-grad);box-shadow:0 0 10px rgba(0,0,0,.3);transition:width .08s linear;pointer-events:none}
 @media (prefers-reduced-motion: reduce){ .mo-progress{display:none} }
+
+/* CTA display headings must fit narrow phones (AKONY is very wide) */
+@media(max-width:560px){ .disp{ font-size:clamp(26px,8vw,46px) !important; line-height:1.02 !important; } }

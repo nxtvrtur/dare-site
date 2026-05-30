@@ -410,6 +410,29 @@
     });
   }
 
+  /* ─────────────── FIT .disp HEADINGS (AKONY can overflow narrow screens) ─────────────── */
+  function fitDisp() {
+    function run() {
+      $$('.disp').forEach(function (d) {
+        d.style.removeProperty('font-size');
+        var avail = (d.parentElement ? d.parentElement.clientWidth : d.clientWidth) - 36;
+        var g = 0, cs = parseFloat(getComputedStyle(d).fontSize) || 60;
+        while (d.scrollWidth > avail && g < 40) {
+          cs = cs * 0.94;
+          d.style.setProperty('font-size', cs + 'px', 'important'); // beat any !important page rule
+          g++;
+        }
+      });
+    }
+    requestAnimationFrame(run);
+    if (document.fonts && document.fonts.load) {
+      Promise.all([document.fonts.load('1em AKONY'), document.fonts.ready]).then(run).catch(run);
+    }
+    window.addEventListener('load', run);
+    setTimeout(run, 800);
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(run, 200); });
+  }
+
   /* ─────────────────────────── SCROLL PROGRESS BAR ─────────────────────────── */
   function initProgress() {
     if (reduced()) return;
@@ -452,6 +475,7 @@
     safe('marquee', initMarquee);
     safe('pageTransition', initPageTransition);
     safe('leadForm', initLeadForm);
+    safe('fitDisp', fitDisp);
     safe('progress', initProgress);
     safe('skipLink', initSkipLink);
     if (ST) ST.refresh();
