@@ -67,7 +67,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .bg-off{background:var(--off)}
 /* Case cards full */
 .cases-list{display:flex;flex-direction:column;gap:0;border:1.5px solid var(--bk)}
-.case-item{display:grid;grid-template-columns:2fr 1fr;gap:0;border-bottom:1.5px solid var(--bk)}
+.case-item{display:grid;grid-template-columns:1fr 1.25fr;gap:0;border-bottom:1.5px solid var(--bk)}
 .case-item:last-child{border-bottom:none}
 .ci-body{padding:48px 48px 48px;border-right:1.5px solid var(--bk)}
 .ci-num{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);margin-bottom:16px}
@@ -84,6 +84,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--bk);height:
 .ci-stats{display:flex;flex-direction:column;gap:20px}
 .ci-stat-v{font-family:var(--fa);font-size:clamp(28px,3vw,42px);color:var(--bk);line-height:.9;margin-bottom:5px}
 .ci-stat-l{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
+/* live site preview thumbnail */
+.ci-preview{position:relative;display:block;overflow:hidden;background:var(--bk);min-height:320px}
+.ci-preview img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.ci-preview:hover img{transform:scale(1.05)}
+.ci-preview::after{content:'Открыть сайт ↗';position:absolute;left:0;right:0;bottom:0;z-index:2;padding:18px 22px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:linear-gradient(to top,rgba(10,10,10,.9),rgba(10,10,10,0));opacity:0;transform:translateY(10px);transition:opacity .35s cubic-bezier(.16,1,.3,1),transform .35s cubic-bezier(.16,1,.3,1)}
+.ci-preview:hover::after{opacity:1;transform:none}
 /* CTA */
 .cta-sec{background:var(--bk);color:#fff;padding:120px 0;text-align:center}
 .disp{font-family:var(--fa);font-size:clamp(40px,6vw,80px);font-weight:normal;letter-spacing:-.02em;line-height:1.0;padding-bottom:.06em}
@@ -113,9 +119,8 @@ html,body{overflow-x:hidden}
   .hc{padding:40px 20px 36px}
   .sec{padding:56px 0}
   .case-item{grid-template-columns:1fr}
-  .ci-body{border-right:none;border-bottom:1.5px solid var(--bk);padding:28px 24px}
-  .ci-aside{padding:28px 24px}
-  .ci-stats{flex-direction:row;flex-wrap:wrap;gap:16px}
+  .ci-preview{order:-1;min-height:0;aspect-ratio:16/10}
+  .ci-body{border-right:none;border-top:1.5px solid var(--bk);padding:28px 24px}
   .ft-g{grid-template-columns:1fr 1fr;gap:28px}
   .ft-bot{flex-direction:column;gap:8px}
   .cta-sec{padding:64px 0}
@@ -197,18 +202,9 @@ html,body{overflow-x:hidden}
           </div>
           <a href="https://nxtvrtur.github.io/lada-express-avto/" target="_blank" class="ci-link">Смотреть сайт <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
-        <div class="ci-aside">
-          <div class="ci-stats">
-            <div>
-              <div class="ci-stat-v">LADA</div>
-              <div class="ci-stat-l">Официальный дилер</div>
-            </div>
-            <div>
-              <div class="ci-stat-v">Лендинг</div>
-              <div class="ci-stat-l">Тип проекта</div>
-            </div>
-          </div>
-        </div>
+        <a class="ci-preview" href="https://nxtvrtur.github.io/lada-express-avto/" target="_blank" rel="noopener" aria-label="Открыть сайт Lada Express Avto">
+          <img src="prev-lada.jpg" alt="Превью сайта Lada Express Avto — лендинг официального дилера LADA, Кропоткин" width="1000" height="625" loading="lazy">
+        </a>
       </div>
       <div class="case-item">
         <div class="ci-body">
@@ -223,18 +219,9 @@ html,body{overflow-x:hidden}
           </div>
           <a href="https://nxtvrtur.github.io/atletauto/" target="_blank" class="ci-link">Смотреть сайт <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
-        <div class="ci-aside">
-          <div class="ci-stats">
-            <div>
-              <div class="ci-stat-v">500+</div>
-              <div class="ci-stat-l">Авто в каталоге</div>
-            </div>
-            <div>
-              <div class="ci-stat-v">4.9★</div>
-              <div class="ci-stat-l">Яндекс.Карты</div>
-            </div>
-          </div>
-        </div>
+        <a class="ci-preview" href="https://nxtvrtur.github.io/atletauto/" target="_blank" rel="noopener" aria-label="Открыть сайт Атлет-Авто">
+          <img src="prev-atlet.jpg" alt="Превью сайта Атлет-Авто — лендинг по импорту автомобилей, Владивосток" width="1000" height="625" loading="lazy">
+        </a>
       </div>
       <div class="case-item">
         <div class="ci-body">
@@ -249,18 +236,9 @@ html,body{overflow-x:hidden}
           </div>
           <a href="https://nxtvrtur.github.io/kds-dezinsekcia/" target="_blank" class="ci-link">Смотреть сайт <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
-        <div class="ci-aside">
-          <div class="ci-stats">
-            <div>
-              <div class="ci-stat-v">SEO</div>
-              <div class="ci-stat-l">Продвижение</div>
-            </div>
-            <div>
-              <div class="ci-stat-v">Локал</div>
-              <div class="ci-stat-l">Тип трафика</div>
-            </div>
-          </div>
-        </div>
+        <a class="ci-preview" href="https://nxtvrtur.github.io/kds-dezinsekcia/" target="_blank" rel="noopener" aria-label="Открыть сайт КДС Дезинсекция">
+          <img src="prev-kds.jpg" alt="Превью сайта КДС Дезинсекция — сайт службы дезинсекции с SEO, Екатеринбург" width="1000" height="625" loading="lazy">
+        </a>
       </div>
     </div>
   </div>
