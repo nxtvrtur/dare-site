@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>http://150.241.89.89/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>http://150.241.89.89/direct/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/seo/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/serm/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/sites/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/ai/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/leads/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/farpost/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/outreach/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/cases/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/team/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>http://150.241.89.89/team/artur/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>http://150.241.89.89/team/andrey/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+</urlset>
