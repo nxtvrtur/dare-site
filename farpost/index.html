@@ -321,6 +321,47 @@ p,li,.proc-desc,.af-item-desc,.feat-list li span:last-child{font-size:15.5px;lin
 .bg-dark p,.bg-dark li{color:rgba(255,255,255,.55)}
 .sec-body-text{font-size:16px;line-height:1.8;color:#2a2a2a}
 strong{font-weight:700;color:inherit}
+
+/* ── COMBINED CHAT ── */
+.chat-bubble{position:fixed;bottom:28px;right:28px;z-index:999;font-family:var(--f)}
+.chat-btn{width:56px;height:56px;border-radius:50%;background:var(--bk);border:1.5px solid rgba(255,255,255,.22);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s,box-shadow .25s;position:relative;z-index:2;box-shadow:0 4px 28px rgba(0,0,0,.55)}
+.chat-btn:hover{transform:scale(1.06);box-shadow:0 6px 36px rgba(0,0,0,.65)}
+.chat-pulse{position:absolute;top:1px;right:1px;width:13px;height:13px;border-radius:50%;background:#22c55e;border:2px solid #0a0a0a;animation:cpulse 2.2s ease-out infinite}
+@keyframes cpulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}60%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
+.chat-bubble.open .chat-pulse{display:none}
+.chat-ico{position:absolute;transition:opacity .22s,transform .22s;display:flex;align-items:center;justify-content:center;inset:0;border-radius:50%}
+.chat-ico-ai{opacity:1;transform:scale(1)}
+.chat-ico-x{opacity:0;transform:scale(.6) rotate(-90deg);color:#fff;font-size:22px;font-weight:100;line-height:1;letter-spacing:0}
+.chat-bubble.open .chat-ico-ai{opacity:0;transform:scale(.6) rotate(90deg)}
+.chat-bubble.open .chat-ico-x{opacity:1;transform:scale(1) rotate(0)}
+.chat-orb-ic{width:26px;height:26px;border-radius:50%;background:conic-gradient(from 0deg,#444,#bbb,#444);animation:corbspin 9s linear infinite}
+@keyframes corbspin{to{filter:hue-rotate(360deg)}}
+/* ── PANEL ── */
+.chat-panel{position:absolute;bottom:68px;right:0;width:340px;background:var(--bk);border:1px solid rgba(255,255,255,.12);overflow:hidden;transform:scale(.88) translateY(16px);transform-origin:bottom right;opacity:0;pointer-events:none;transition:transform .32s cubic-bezier(.16,1,.3,1),opacity .22s}
+.chat-bubble.open .chat-panel{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.cp-head{padding:14px 18px 12px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:12px}
+.cp-head-orb{width:32px;height:32px;border-radius:50%;background:conic-gradient(from 45deg,#111,#2e2e2e,#111);animation:corbspin 7s linear infinite;flex-shrink:0}
+.cp-name{font-size:13px;font-weight:600;color:#fff;letter-spacing:.02em}
+.cp-stat{font-size:10.5px;color:#22c55e;display:flex;align-items:center;gap:5px;margin-top:3px;letter-spacing:.02em}
+.cp-stat::before{content:'';width:6px;height:6px;border-radius:50%;background:#22c55e;animation:cdot 2s ease-in-out infinite;flex-shrink:0;display:inline-block}
+@keyframes cdot{0%,100%{opacity:1}50%{opacity:.35}}
+.cp-body{padding:12px 16px;min-height:90px;max-height:158px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;scrollbar-width:none}
+.cp-body::-webkit-scrollbar{display:none}
+.cp-msg{font-size:12.5px;line-height:1.52;padding:8px 11px;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.1);color:rgba(255,255,255,.52)}
+.cp-msg.user{background:rgba(255,255,255,.08);border-left-color:rgba(255,255,255,.3);color:rgba(255,255,255,.88)}
+.cp-form{padding:10px 16px;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:8px}
+.cp-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:13px;padding:8px 12px;outline:none;font-family:var(--f);transition:border-color .2s;height:36px}
+.cp-input::placeholder{color:rgba(255,255,255,.28)}
+.cp-input:focus{border-color:rgba(255,255,255,.3)}
+.cp-send{width:36px;height:36px;background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .18s;color:var(--bk)}
+.cp-send:hover{background:#ddd}
+.cp-send svg{width:14px;height:14px}
+.cp-links{border-top:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:repeat(3,1fr)}
+.cpl{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 4px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.36);transition:color .18s,background .18s;text-decoration:none;border-right:1px solid rgba(255,255,255,.06)}
+.cpl:last-child{border-right:none}
+.cpl:hover{color:#fff;background:rgba(255,255,255,.05)}
+.cpl svg{width:16px;height:16px}
+@media(max-width:480px){.chat-bubble{bottom:18px;right:18px}.chat-panel{width:calc(100vw - 36px)}}
 </style>
 </head>
 <body>
@@ -564,44 +605,6 @@ document.querySelectorAll('.stagger').forEach(function(el){
   io.observe(el);
 });
 </script>
-<!-- FLOATING CHAT WIDGET -->
-<div class="chat-bubble" id="chatBubble">
-  <button class="chat-btn" id="chatToggle" aria-label="Связаться">
-    <span class="chat-pulse"></span>
-    <span class="chat-ico chat-ico-msg">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    </span>
-    <span class="chat-ico chat-ico-x">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </span>
-  </button>
-  <div class="chat-menu" id="chatMenu">
-    <div class="chat-hd"><span class="chat-dot"></span>Онлайн &middot; ответим быстро</div>
-    <a href="https://t.me/coodare" class="chat-opt tg" target="_blank" rel="noopener">
-      <span class="chat-opt-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.026 9.546c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.393c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.93 14.897l-2.948-.924c-.64-.203-.654-.64.136-.949l11.498-4.433c.533-.194 1.003.13.946.657z"/></svg></span>
-      <span class="chat-opt-tx"><b>Telegram</b><small>t.me/coodare</small></span>
-    </a>
-    <a href="https://wa.me/79958702227" class="chat-opt wa" target="_blank" rel="noopener">
-      <span class="chat-opt-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12.002 0h-.001C5.374 0 0 5.374 0 12c0 2.625.847 5.055 2.284 7.034L.789 23.402l4.481-1.436A11.94 11.94 0 0012 24c6.626 0 12-5.374 12-12S18.628 0 12.002 0zM19 17.005c-.268.754-1.336 1.381-2.182 1.563-.582.124-1.342.222-3.9-.838-3.278-1.349-5.39-4.681-5.553-4.899-.156-.218-1.31-1.745-1.31-3.329s.823-2.357 1.148-2.688c.27-.274.716-.4 1.144-.4.138 0 .263.007.375.013.33.014.495.033.713.552.268.65.919 2.234.999 2.396.082.163.163.382.048.6-.107.225-.2.325-.363.512-.163.188-.318.33-.48.531-.148.175-.315.362-.128.691.188.322.835 1.373 1.793 2.224 1.233 1.096 2.22 1.44 2.578 1.596.27.115.594.086.789-.12.248-.266.554-.708.864-1.143.222-.309.502-.347.797-.238.3.105 1.878.885 2.2 1.046.32.163.533.24.612.374.076.131.076.755-.191 1.508z"/></svg></span>
-      <span class="chat-opt-tx"><b>WhatsApp</b><small>+7 995 870-22-27</small></span>
-    </a>
-    <a href="tel:+79958702227" class="chat-opt ph">
-      <span class="chat-opt-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.47 9.6 19.79 19.79 0 01.36 1a2 2 0 012-2.18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 6.97a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 13.92z"/></svg></span>
-      <span class="chat-opt-tx"><b>Позвонить</b><small>+7 995 870-22-27</small></span>
-    </a>
-  </div>
-</div>
-<script>
-(function(){
-  var bubble=document.getElementById('chatBubble');
-  var toggle=document.getElementById('chatToggle');
-  if(!toggle)return;
-  toggle.addEventListener('click',function(){bubble.classList.toggle('open');});
-  document.addEventListener('click',function(e){
-    if(!bubble.contains(e.target))bubble.classList.remove('open');
-  });
-})();
-</script>
 
 
 
@@ -658,69 +661,56 @@ setTimeout(function(){
   document.querySelectorAll('.reveal,.reveal-left,.stagger').forEach(function(el){
     el.classList.add('visible');
   });
-},600);
+},100);
 </script>
 
-<!-- AI CHAT WIDGET -->
-<div class="aichat" id="aiChat">
-  <div class="aichat-panel" id="aiChatPanel">
-    <div class="aichat-head">
-      <div class="aichat-head-orb"></div>
-      <span class="aichat-title">ИИ-Менеджер ДАРЭ</span>
-      <span class="aichat-status">онлайн</span>
+
+<!-- CHAT WIDGET -->
+<div class="chat-bubble" id="chatBubble">
+  <button class="chat-btn" id="chatToggle" aria-label="Написать нам">
+    <span class="chat-pulse"></span>
+    <span class="chat-ico chat-ico-ai"><div class="chat-orb-ic"></div></span>
+    <span class="chat-ico chat-ico-x">&#xd7;</span>
+  </button>
+  <div class="chat-panel" id="chatPanel">
+    <div class="cp-head">
+      <div class="cp-head-orb"></div>
+      <div>
+        <div class="cp-name">ИИ-Менеджер ДАРЭ</div>
+        <div class="cp-stat">онлайн &middot; ответим быстро</div>
+      </div>
     </div>
-    <div class="aichat-body" id="aiChatBody">
-      <div class="aichat-msg">Привет! Я ИИ-менеджер агентства ДАРЭ. Задайте вопрос об услугах или расскажите о вашей задаче — я помогу.</div>
+    <div class="cp-body" id="cpBody">
+      <div class="cp-msg">Привет! Я ИИ-менеджер агентства ДАРЭ. Задайте вопрос об услугах или расскажите о задаче.</div>
     </div>
-    <div class="aichat-form">
-      <input class="aichat-input" id="aiChatInput" placeholder="Напишите вопрос..." type="text">
-      <button class="aichat-send" id="aiChatSend" aria-label="Отправить">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      </button>
+    <div class="cp-form">
+      <input class="cp-input" id="cpInput" placeholder="Напишите вопрос..." type="text">
+      <button class="cp-send" id="cpSend" aria-label="Отправить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
     </div>
-  </div>
-  <div class="aichat-dock" id="aiChatDock">
-    <div class="aichat-orb"></div>
-    <span class="aichat-dock-label">Спросить ИИ-менеджера</span>
-    <span class="aichat-dock-hint">Ответим мгновенно</span>
+    <div class="cp-links">
+      <a href="https://t.me/coodare" class="cpl" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.026 9.546c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.393c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L6.93 14.897l-2.948-.924c-.64-.203-.654-.64.136-.949l11.498-4.433c.533-.194 1.003.13.946.657z"/></svg>Telegram</a>
+      <a href="https://wa.me/79958702227" class="cpl" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.002 0h-.001C5.374 0 0 5.374 0 12c0 2.625.847 5.055 2.284 7.034L.789 23.402l4.481-1.436A11.94 11.94 0 0012 24c6.626 0 12-5.374 12-12S18.628 0 12.002 0zM19 17.005c-.268.754-1.336 1.381-2.182 1.563-.582.124-1.342.222-3.9-.838-3.278-1.349-5.39-4.681-5.553-4.899-.156-.218-1.31-1.745-1.31-3.329s.823-2.357 1.148-2.688c.27-.274.716-.4 1.144-.4.138 0 .263.007.375.013.33.014.495.033.713.552.268.65.919 2.234.999 2.396.082.163.163.382.048.6-.107.225-.2.325-.363.512-.163.188-.318.33-.48.531-.148.175-.315.362-.128.691.188.322.835 1.373 1.793 2.224 1.233 1.096 2.22 1.44 2.578 1.596.27.115.594.086.789-.12.248-.266.554-.708.864-1.143.222-.309.502-.347.797-.238.3.105 1.878.885 2.2 1.046.32.163.533.24.612.374.076.131.076.755-.191 1.508z"/></svg>WhatsApp</a>
+      <a href="tel:+79958702227" class="cpl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.47 9.6 19.79 19.79 0 01.36 1a2 2 0 012-2.18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 6.97a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 13.92z"/></svg>Звонок</a>
+    </div>
   </div>
 </div>
 <script>
 (function(){
-  var widget=document.getElementById('aiChat');
-  var dock=document.getElementById('aiChatDock');
-  var inp=document.getElementById('aiChatInput');
-  var send=document.getElementById('aiChatSend');
-  var body=document.getElementById('aiChatBody');
-  if(!dock)return;
-  var REPLIES=[
-    'Расскажите подробнее о вашем бизнесе — тогда смогу точнее подобрать услугу.',
-    'Хороший вопрос! Наш менеджер свяжется с вами в течение нескольких минут.',
-    'Для точного расчёта стоимости нам нужно знать вашу нишу и регион. Напишите в Telegram: t.me/coodare',
-    'Мы работаем с бизнесом по всему Дальнему Востоку. Расскажите о задаче!'
-  ];
-  var ri=0;
-  dock.addEventListener('click',function(){widget.classList.toggle('open');if(widget.classList.contains('open')&&inp)setTimeout(function(){inp.focus();},350);});
-  document.addEventListener('click',function(e){if(!widget.contains(e.target))widget.classList.remove('open');});
-  function addMsg(text,isUser){
-    var el=document.createElement('div');
-    el.className='aichat-msg';
-    el.style.cssText=isUser?'background:rgba(255,255,255,.09);border-left-color:rgba(255,255,255,.3);color:#fff':'';
-    el.textContent=text;
-    body.appendChild(el);
-    body.scrollTop=body.scrollHeight;
-  }
-  function submit(){
-    var v=inp?inp.value.trim():'';
-    if(!v)return;
-    addMsg(v,true);
-    inp.value='';
-    setTimeout(function(){addMsg(REPLIES[ri%REPLIES.length],false);ri++;},900);
-  }
+  var bubble=document.getElementById('chatBubble');
+  var toggle=document.getElementById('chatToggle');
+  if(!toggle)return;
+  toggle.addEventListener('click',function(){
+    bubble.classList.toggle('open');
+    if(bubble.classList.contains('open')){var i=document.getElementById('cpInput');if(i)setTimeout(function(){i.focus();},320);}
+  });
+  document.addEventListener('click',function(e){if(bubble&&!bubble.contains(e.target))bubble.classList.remove('open');});
+  var REPLIES=['Расскажите подробнее о вашем бизнесе — тогда смогу точнее подобрать услугу.','Хороший вопрос! Наш менеджер свяжется с вами в ближайшее время.','Для точного расчёта нам нужно знать вашу нишу и регион. Напишите в Telegram: t.me/coodare','Мы работаем с бизнесом по всему Дальнему Востоку. Расскажите о задаче!'];
+  var ri=0,body=document.getElementById('cpBody'),inp=document.getElementById('cpInput'),send=document.getElementById('cpSend');
+  function addMsg(t,u){if(!body)return;var e=document.createElement('div');e.className='cp-msg'+(u?' user':'');e.textContent=t;body.appendChild(e);body.scrollTop=body.scrollHeight;}
+  function submit(){var v=inp?inp.value.trim():'';if(!v)return;addMsg(v,true);inp.value='';setTimeout(function(){addMsg(REPLIES[ri%REPLIES.length],false);ri++;},900);}
   if(send)send.addEventListener('click',submit);
   if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')submit();});
 })();
 </script>
-
 </body>
 </html>
