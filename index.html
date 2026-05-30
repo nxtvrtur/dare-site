@@ -379,6 +379,24 @@ html,body{overflow-x:hidden}
             letterShim 6s ease-in-out calc(var(--i)*.7s + 1.8s) infinite;
 }
 @keyframes letterShim{0%,100%{background-position:0% 0}50%{background-position:200% 0}}
+/* stress mark ´ above Э */
+.h-stress{position:relative}
+.h-stress::after{
+  content:'\B4';
+  position:absolute;
+  top:-.18em;
+  right:.12em;
+  font-size:.28em;
+  font-family:'Mulish',sans-serif;
+  font-weight:200;
+  -webkit-text-fill-color:rgba(255,255,255,.6);
+  color:rgba(255,255,255,.6);
+  background:none;
+  -webkit-background-clip:initial;
+  background-clip:initial;
+  line-height:1;
+  pointer-events:none
+}
 </style>
 </head>
 <body>
@@ -438,7 +456,7 @@ html,body{overflow-x:hidden}
     <div class="h-tag">Маркетинговое агентство · Владивосток · 2025</div>
     <div>
       <div class="h-name">
-        <span class="h-letter-w"><span class="h-letter" style="--i:0">Д</span></span><span class="h-letter-w"><span class="h-letter" style="--i:1">А</span></span><span class="h-letter-w"><span class="h-letter" style="--i:2">Р</span></span><span class="h-letter-w"><span class="h-letter" style="--i:3">Э&#x301;</span></span>
+        <span class="h-letter-w"><span class="h-letter" style="--i:0">Д</span></span><span class="h-letter-w"><span class="h-letter" style="--i:1">А</span></span><span class="h-letter-w"><span class="h-letter" style="--i:2">Р</span></span><span class="h-letter-w" style="overflow:visible"><span class="h-letter h-stress" style="--i:3">Э</span></span>
       </div>
       <p class="h-sub">Системный рост бизнеса — контекст, SEO, репутация, сайты, ИИ-автоматизация и готовые лиды.</p>
     </div>
