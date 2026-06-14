@@ -309,6 +309,7 @@
   function initLenis() {
     if (reduced() || lowPower || !LenisCtor) return;
     lenis = new LenisCtor({ lerp: 0.09, wheelMultiplier: 1, smoothWheel: true, smoothTouch: false });
+    window.__lenis = lenis;
     if (gsap && gsap.ticker) {
       gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
       gsap.ticker.lagSmoothing(0);
