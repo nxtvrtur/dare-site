@@ -215,7 +215,11 @@ html,body{overflow-x:hidden}
   .ft-bot{flex-direction:column;gap:8px}
   .cta-sec{padding:64px 0}
   .disp{font-size:clamp(32px,9vw,56px)!important}
-  .funnel-tbl,.dynamics-tbl{font-size:11px;overflow-x:auto;display:block}
+  .funnel-table,.dyn-table{font-size:11px;overflow-x:auto;display:block;white-space:nowrap}
+  .funnel-table th,.funnel-table td,.dyn-table th,.dyn-table td{padding:10px 12px}
+  .cpl-grid{grid-template-columns:1fr}
+  .cpl-card{border-right:none;border-bottom:1.5px solid var(--bk)}
+  .cpl-card:last-child{border-bottom:none}
   .geo-grid{grid-template-columns:1fr 1fr!important}
   .price-solo{flex-direction:column;gap:0}
   .ps-price{border-right:none!important;border-bottom:1.5px solid var(--bk)!important}
@@ -315,6 +319,7 @@ html,body{overflow-x:hidden}
 .cpl:hover{color:#fff;background:rgba(255,255,255,.05)}
 .cpl svg{width:16px;height:16px}
 @media(max-width:480px){.chat-bubble{bottom:18px;right:18px}.chat-panel{width:calc(100vw - 36px)}}
+@media(max-width:1180px){.nav-links,.nav-btn{display:none}.nav-burger{display:flex;margin-left:auto}}
 </style>
 </head>
 <body>

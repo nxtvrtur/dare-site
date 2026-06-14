@@ -166,3 +166,5 @@ textarea.lm-input{resize:vertical;min-height:62px}
 
 /* CTA display headings must fit narrow phones (AKONY is very wide) */
 @media(max-width:560px){ .disp{ font-size:clamp(26px,8vw,46px) !important; line-height:1.02 !important; } }
+
+@media(max-width:600px){.h-name .mo-word{white-space:normal}.h-name{overflow-wrap:anywhere}}
